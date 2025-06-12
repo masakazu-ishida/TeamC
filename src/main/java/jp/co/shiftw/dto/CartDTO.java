@@ -1,24 +1,20 @@
 package jp.co.shiftw.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class CartDTO {
-	private int userId;
-	private int itemId;
-	private int amount;
-	private Date bookedDate;
-	
 	public int getUserId() {
 		return userId;
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public int getItemId() {
-		return itemId;
+	public ItemsDTO getItems() {
+		return items;
 	}
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
+	public void setItems(ItemsDTO items) {
+		this.items = items;
 	}
 	public int getAmount() {
 		return amount;
@@ -32,4 +28,15 @@ public class CartDTO {
 	public void setBookedDate(Date bookedDate) {
 		this.bookedDate = bookedDate;
 	}
+	public List<UsersDTO> getList() {
+		return list;
+	}
+	public void setList(List<UsersDTO> list) {
+		this.list = list;
+	}
+	private int userId;
+	private ItemsDTO items;
+	private int amount;
+	private Date bookedDate;
+	private List<UsersDTO> list;
 }
