@@ -1,10 +1,11 @@
 package jp.co.shiftw.dto;
 
+//注文詳細のDTO
 public class PurchaseDetailsDTO {
-	private int purchaseDetailId;
-	private int purchaseId;
-	private int itemId;
-	private int amount;
+	private int purchaseDetailId; //注文詳細ID
+	private int purchaseId; //注文ID
+	private int itemId; //商品ID
+	private int amount; //注文数
 
 	public int getPurchaseDetailId() {
 		return purchaseDetailId;
