@@ -1,6 +1,7 @@
 package jp.co.shiftw.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 // 購入履歴のDTO
 public class PurchasesDTO {
@@ -9,6 +10,7 @@ public class PurchasesDTO {
 	private Date purchasedDate; //注文日
 	private String destination; //配送先
 	private boolean canse; //キャンセル
+	private List<PurchaseDetailsDTO> purchaseDetails; //注文詳細のリスト
 
 	public int getPurchaseId() {
 		return purchaseId;
@@ -50,4 +52,11 @@ public class PurchasesDTO {
 		this.canse = canse;
 	}
 
+	public List<PurchaseDetailsDTO> getPurchaseDetails() {
+		return purchaseDetails;
+	}
+
+	public void setPurchaseDetails(List<PurchaseDetailsDTO> purchaseDetails) {
+		this.purchaseDetails = purchaseDetails;
+	}
 }

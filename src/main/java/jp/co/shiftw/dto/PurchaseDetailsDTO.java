@@ -3,8 +3,8 @@ package jp.co.shiftw.dto;
 //注文詳細のDTO
 public class PurchaseDetailsDTO {
 	private int purchaseDetailId; //注文詳細ID
-	private int purchaseId; //注文ID
-	private int itemId; //商品ID
+	private PurchasesDTO purchase; //注文ID
+	private ItemsDTO item; //商品
 	private int amount; //注文数
 
 	public int getPurchaseDetailId() {
@@ -15,20 +15,20 @@ public class PurchaseDetailsDTO {
 		this.purchaseDetailId = purchaseDetailId;
 	}
 
-	public int getPurchaseId() {
-		return purchaseId;
+	public PurchasesDTO getPurchase() {
+		return purchase;
 	}
 
-	public void setPurchaseId(int purchaseId) {
-		this.purchaseId = purchaseId;
+	public void setPurchase(PurchasesDTO purchase) {
+		this.purchase = purchase;
 	}
 
-	public int getItemId() {
-		return itemId;
+	public ItemsDTO getItem() {
+		return item;
 	}
 
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
+	public void setItem(ItemsDTO item) {
+		this.item = item;
 	}
 
 	public int getAmount() {
