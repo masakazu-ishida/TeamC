@@ -1,7 +1,6 @@
 package jp.co.shiftw.dto;
 
 import java.util.Date;
-import java.util.List;
 
 public class CartDTO {
 	
@@ -9,7 +8,6 @@ public class CartDTO {
 	private ItemsDTO items;
 	private int amount;
 	private Date bookedDate;
-	private List<UsersDTO> list;
 	
 	public int getUserId() {
 		return userId;
@@ -34,12 +32,6 @@ public class CartDTO {
 	}
 	public void setBookedDate(Date bookedDate) {
 		this.bookedDate = bookedDate;
-	}
-	public List<UsersDTO> getList() {
-		return list;
-	}
-	public void setList(List<UsersDTO> list) {
-		this.list = list;
 	}
 	
 }
