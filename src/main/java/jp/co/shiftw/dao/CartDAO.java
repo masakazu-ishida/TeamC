@@ -26,7 +26,7 @@ public class CartDAO extends BaseDAO {
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
-			ps.setString(1, "user1");
+			ps.setString(1, user_id);
 
 			System.out.println("接続完了");
 			ResultSet rs = ps.executeQuery();
