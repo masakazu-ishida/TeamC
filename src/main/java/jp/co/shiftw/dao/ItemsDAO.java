@@ -34,7 +34,7 @@ public class ItemsDAO extends BaseDAO {
 				dto = new ItemsDTO();
 
 				dto.setName(rs.getString("name"));
-				//dto.setCategory(rs.getInt("cate.category"));
+				dto.setCategory(cate);
 			}
 
 		} catch (Exception e) {
