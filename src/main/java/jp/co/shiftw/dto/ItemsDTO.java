@@ -5,7 +5,7 @@ public class ItemsDTO {
 	private int itemId;
 	private String name;
 	private String manufacturer;
-	private CategoriesDTO categoryId;
+	private CategoriesDTO category;
 	private String color;
 	private int price;
 	private int stock;
@@ -35,12 +35,12 @@ public class ItemsDTO {
 		this.manufacturer = manufacturer;
 	}
 
-	public CategoriesDTO getCategoryId() {
-		return categoryId;
+	public CategoriesDTO getCategory() {
+		return category;
 	}
 
-	public void setCategoryId(CategoriesDTO categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(CategoriesDTO category) {
+		this.category = category;
 	}
 
 	public String getColor() {
