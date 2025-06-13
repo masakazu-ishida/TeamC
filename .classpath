@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/postgresql-42.2.11.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/javax.servlet.jsp.jstl-1.2.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/postgresql-42.7.6.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

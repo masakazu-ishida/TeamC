@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.co.shiftw.dto.CartDTO;
+import jp.co.shiftw.dto.ItemsDTO;
 
 public class CartDAO extends BaseDAO {
 
@@ -14,7 +15,7 @@ public class CartDAO extends BaseDAO {
 		super(conn);
 	}
 
-	public List<CartDTO> CartList(String user_id) {
+	public List<CartDTO> CartList(String userId) {
 
 		String sql = "SELECT items.name, items.color, items.manufacturer, items.price, items_in_cart.amount\n"
 				+ "From items_in_cart"
@@ -26,30 +27,23 @@ public class CartDAO extends BaseDAO {
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
-			ps.setString(1, user_id);
+			ps.setString(1, userId);
 
 			System.out.println("接続完了");
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				//				CartDTO cart = new CartDTO();
-				//				ItemsDTO item = new ItemsDTO();
+				CartDTO cart = new CartDTO();
+				ItemsDTO item = new ItemsDTO();
 
-				//				item.setName(rs.getString("name"));
-				//				item.setColor(rs.getString("color"));
-				//				item.setManufacturer(rs.getString("manufacturer"));
-				//				item.setPrice(rs.getInt("price"));
-				//				cart.setAmount(rs.getInt("amount"));
-				//				
-				//				cart.setItems(item);
+				item.setName(rs.getString("name"));
+				item.setColor(rs.getString("color"));
+				item.setManufacturer(rs.getString("manufacturer"));
+				item.setPrice(rs.getInt("price"));
+				cart.setAmount(rs.getInt("amount"));
 
-				System.out.println(rs.getString("name"));
-				System.out.println(rs.getString("color"));
-				System.out.println(rs.getString("manufacturer"));
-				System.out.println(rs.getInt("price"));
-				System.out.println(rs.getInt("amount"));
+				cart.setItems(item);
 
-				//				cart.setItems(item);
 			}
 
 		} catch (Exception e) {
