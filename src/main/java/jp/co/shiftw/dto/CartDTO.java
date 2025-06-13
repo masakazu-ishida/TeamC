@@ -4,6 +4,13 @@ import java.util.Date;
 import java.util.List;
 
 public class CartDTO {
+	
+	private int userId;
+	private ItemsDTO items;
+	private int amount;
+	private Date bookedDate;
+	private List<UsersDTO> list;
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -34,9 +41,5 @@ public class CartDTO {
 	public void setList(List<UsersDTO> list) {
 		this.list = list;
 	}
-	private int userId;
-	private ItemsDTO items;
-	private int amount;
-	private Date bookedDate;
-	private List<UsersDTO> list;
+	
 }
