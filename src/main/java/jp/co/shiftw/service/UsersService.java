@@ -1,13 +1,18 @@
 package jp.co.shiftw.service;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import jp.co.shiftw.dao.UsersDAO;
+import jp.co.shiftw.dto.UsersDTO;
 
 public class UsersService {
 
-	private UsersDAO usersDAO;
+	public static UsersDTO loginUsers(Connection conn, String user_id, String password) throws SQLException {
+		UsersDAO dao = new UsersDAO(conn);
 
-	private UsersService(UsersDAO usersDAO) {
-		this.usersDAO = usersDAO;
+		return dao.Login(user_id, password);
+
 	}
 
 }
