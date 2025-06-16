@@ -5,11 +5,12 @@ import java.util.List;
 
 public class CartDTO {
 
-	private int userId;
-	private List<ItemsDTO> items;
-	private int amount;
-	private Date bookedDate;
+	private int userId; //ユーザーID
+	private List<ItemsDTO> items; //ItemsDTO
+	private int amount; //商品の数量
+	private Date bookedDate; //カート登録日
 
+	//Getter&Setter
 	public int getUserId() {
 		return userId;
 	}

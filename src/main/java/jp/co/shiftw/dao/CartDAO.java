@@ -29,7 +29,7 @@ public class CartDAO extends BaseDAO {
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 			try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
-				ps.setString(1, "user");
+				ps.setString(1, userId);
 
 				System.out.println("接続完了");
 
