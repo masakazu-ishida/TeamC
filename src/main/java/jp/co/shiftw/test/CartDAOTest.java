@@ -90,8 +90,7 @@ class CartDAOTest {
 					}
 
 					}
-
-					i = i++;
+					i = i + 1;
 				}
 
 			} catch (Exception e) {
