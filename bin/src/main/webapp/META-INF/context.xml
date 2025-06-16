@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+  <Resource
+     name="jdbc/ecsite"
+     type="javax.sql.DataSource"
+     driverClassName="org.postgresql.Driver"
+     username="ecsite"
+     password="ecsite"
+     url="jdbc:postgresql://localhost:5432/ecsite"
+     maxIdle="2"
+     maxWait="5000"
+     maxActive="4"/>
+</Context>
