@@ -9,7 +9,6 @@ public class CartDTO {
 	private int amount; //商品の数量
 	private Date bookedDate; //カート登録日
 
-	//Getter&Setter
 	public int getUserId() {
 		return userId;
 	}

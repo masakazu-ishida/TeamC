@@ -3,10 +3,12 @@ package jp.co.shiftw.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import jp.co.shiftw.dto.CartDTO;
 import jp.co.shiftw.dto.ItemsDTO;
-import jp.co.shiftw.util.ConnectionUtil;
 
 public class CartDAO extends BaseDAO {
 
@@ -14,47 +16,37 @@ public class CartDAO extends BaseDAO {
 		super(conn);
 	}
 
-	CartDTO CartList(String userId) {
+	public List<CartDTO> CartList(String userId) throws SQLException {
 
+		List<CartDTO> cartList = new ArrayList<>();
 		String sql = "SELECT items.name, items.color, items.manufacturer, items.price, items_in_cart.amount\n"
 				+ "From items_in_cart \n"
 				+ "INNER JOIN items \n"
 				+ "ON items_in_cart.item_id = items.item_id \n"
 				+ "WHERE user_id = ? ";
 
-		CartDTO cart = null;
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setString(1, userId);
 
-		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
-			try (PreparedStatement ps = conn.prepareStatement(sql)) {
+			ResultSet rs = ps.executeQuery();
 
-				ps.setString(1, userId);
+			while (rs.next()) {
+				ItemsDTO item = new ItemsDTO();
 
-				System.out.println("接続完了");
+				item.setName(rs.getString("name"));
+				item.setColor(rs.getString("color"));
+				item.setManufacturer(rs.getString("manufacturer"));
+				item.setPrice(rs.getInt("price"));
 
-				ResultSet rs = ps.executeQuery();
+				CartDTO cart = new CartDTO();
 
-				while (rs.next()) {
-					ItemsDTO items = new ItemsDTO();
-					ItemsDTO item = new ItemsDTO();
+				cart.setItems(item);
+				cart.setAmount(rs.getInt("amount"));
 
-					items.setName(rs.getString("name"));
-					items.setManufacturer(rs.getString("manufacturer"));
-					items.setColor(rs.getString("color"));
-					items.setPrice(rs.getInt("price"));
-
-					cart.setItems(item);
-					cart.setAmount(rs.getInt("amount"));
-
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
+				cartList.add(cart);
 			}
 
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-
-		return cart;
+		return cartList;
 	}
 }
