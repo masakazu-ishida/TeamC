@@ -17,8 +17,9 @@ public class PurchasesDAO extends BaseDAO {
 		super(conn);
 	}
 
-	public List<PurchasesDTO> findByUserId(String adminId) throws SQLException {
-		List<PurchasesDTO> purchases = new ArrayList<>();
+	// user_id(purchaced_user)をキーにPurchasesテーブルを検索
+	public List<PurchasesDTO> findByUserId(String userId) throws SQLException {
+		List<PurchasesDTO> purchases = new ArrayList<>();//purchase_idごとのpurchasesを格納するリスト
 		String sql = "SELECT purchases.purchase_id, purchased_user, purchases.purchased_date, items.\"name\", items.color, items.manufacturer, items.price, purchase_details.amount, purchases.destination  "
 				+ " FROM purchases\n"
 				+ "	INNER JOIN purchase_details ON purchase_details.purchase_id = purchases.purchase_id\n"
@@ -27,11 +28,13 @@ public class PurchasesDAO extends BaseDAO {
 				+ "	WHERE users.user_id LIKE ? \n"
 				+ "	ORDER BY purchases.purchased_date DESC,"
 				+ "purchases.purchase_id ASC";
-		String pattern = adminId;
-		if (adminId == null) {
-			pattern = "%";
+
+		String pattern = userId;
+		if (userId == null) {
+			pattern = "%"; // 検索欄が空の場合は全件検索する
 		}
 
+		//SQL文の実行
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setString(1, pattern);
 
@@ -43,6 +46,7 @@ public class PurchasesDAO extends BaseDAO {
 
 				boolean flg = true;
 				for (PurchasesDTO dto : purchases) {
+					// 既に作成しているPurchasesDTOがあればそれを使用する
 					if (dto.getPurchaseId() == purchaseId) {
 						purchase = dto;
 						flg = false;
@@ -50,6 +54,7 @@ public class PurchasesDAO extends BaseDAO {
 					}
 				}
 
+				//既に作成しているPurchasesDTOがない場合は新規作成
 				if (flg) {
 					purchase = new PurchasesDTO();
 					purchase.setPurchaseId(purchaseId);
@@ -58,29 +63,30 @@ public class PurchasesDAO extends BaseDAO {
 					purchase.setDestination(rs.getString("destination"));
 				}
 
-				PurchaseDetailsDTO detail = new PurchaseDetailsDTO();
-
+				// Purchasesに格納するPurchaseDetailsのリスト
 				List<PurchaseDetailsDTO> details = purchase.getPurchaseDetails();
 
+				// リストがまだ作られていない場合は新規作成する
 				if (details == null) {
 					details = new ArrayList<>();
 				}
 
-				ItemsDTO item = new ItemsDTO();
+				ItemsDTO item = new ItemsDTO(); // PurchaseDetailsDTOに格納されるItem
 
 				item.setName(rs.getString("name"));
 				item.setColor(rs.getString("color"));
 				item.setManufacturer(rs.getString("manufacturer"));
 				item.setPrice(rs.getInt("price"));
 
-				detail.setItem(item);
+				PurchaseDetailsDTO detail = new PurchaseDetailsDTO();
+
+				detail.setItem(item); // PurchaseDetailsDTOにItemsDTOを格納
 				detail.setAmount(rs.getInt("amount"));
 
-				details.add(detail);
-				purchase.setPurchaseDetails(details);
+				details.add(detail); // List<PurchaseDetailsDTO>にdetailを入れる
+				purchase.setPurchaseDetails(details); // PurchaseDTOにリストを入れる
 
-				purchases.add(purchase);
-
+				purchases.add(purchase); // List<PurchaseDTO>にpurchaseを入れる
 			}
 		}
 
