@@ -38,9 +38,14 @@ public class PurchasesHistoryController extends HttpServlet {
 		String userId = request.getParameter("user_id");
 
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
-			List<PurchasesDTO> daos = PurchasesHistoryService.searchPurchasesByUserId(conn, userId);
+			List<PurchasesDTO> dtos = PurchasesHistoryService.searchPurchasesByUserId(conn, userId);
+
+			request.setAttribute("purchases", dtos);
+
+			request.getRequestDispatcher("WEB-INF/admin/purchases_history.jsp").forward(request, response);
+
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 
 	}
