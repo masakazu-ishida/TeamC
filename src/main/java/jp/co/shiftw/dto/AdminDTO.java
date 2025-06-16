@@ -2,15 +2,15 @@ package jp.co.shiftw.dto;
 
 public class AdminDTO {
 
-	private int adminId;
+	private String adminId;
 	private String password;
 	private String name;
 
-	public int getAdminId() {
+	public String getAdminId() {
 		return adminId;
 	}
 
-	public void setAdminId(int adminId) {
+	public void setAdminId(String adminId) {
 		this.adminId = adminId;
 	}
 
