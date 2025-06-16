@@ -1,6 +1,6 @@
 package jp.co.shiftw.dto;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 // 購入履歴のDTO

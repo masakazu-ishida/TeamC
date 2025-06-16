@@ -1,12 +1,11 @@
 package jp.co.shiftw.dto;
 
 import java.util.Date;
-import java.util.List;
 
 public class CartDTO {
 
 	private int userId; //ユーザーID
-	private List<ItemsDTO> items; //ItemsDTO
+	private ItemsDTO items; //ItemsDTO
 	private int amount; //商品の数量
 	private Date bookedDate; //カート登録日
 
@@ -19,11 +18,11 @@ public class CartDTO {
 		this.userId = userId;
 	}
 
-	public List<ItemsDTO> getItems() {
+	public ItemsDTO getItems() {
 		return items;
 	}
 
-	public void setItems(List<ItemsDTO> items) {
+	public void setItems(ItemsDTO items) {
 		this.items = items;
 	}
 

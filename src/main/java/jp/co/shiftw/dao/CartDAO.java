@@ -3,8 +3,6 @@ package jp.co.shiftw.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 
 import jp.co.shiftw.dto.CartDTO;
 import jp.co.shiftw.dto.ItemsDTO;
@@ -37,14 +35,12 @@ public class CartDAO extends BaseDAO {
 
 				while (rs.next()) {
 					ItemsDTO items = new ItemsDTO();
-					List<ItemsDTO> item = new ArrayList<>();
+					ItemsDTO item = new ItemsDTO();
 
 					items.setName(rs.getString("name"));
 					items.setManufacturer(rs.getString("manufacturer"));
 					items.setColor(rs.getString("color"));
 					items.setPrice(rs.getInt("price"));
-
-					item.add(items);
 
 					cart.setItems(item);
 					cart.setAmount(rs.getInt("amount"));

@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -53,26 +51,17 @@ class CartDAOTest {
 
 				while (rs.next()) {
 					CartDTO cart = new CartDTO();
-					ItemsDTO items = new ItemsDTO();
-					List<ItemsDTO> item = new ArrayList<>();
+					ItemsDTO item = new ItemsDTO();
 
-					items.setName(rs.getString("name"));
-					items.setManufacturer(rs.getString("manufacturer"));
-					items.setColor(rs.getString("color"));
-					items.setPrice(rs.getInt("price"));
-
-					item.add(items);
+					item.setName(rs.getString("name"));
+					item.setManufacturer(rs.getString("manufacturer"));
+					item.setColor(rs.getString("color"));
+					item.setPrice(rs.getInt("price"));
 
 					cart.setItems(item);
 					cart.setAmount(rs.getInt("amount"));
 
-					for (ItemsDTO it : cart.getItems()) {
-						System.out.print(it.getName() + "," +
-								it.getColor() + "," +
-								it.getManufacturer() + "," +
-								it.getPrice());
-					}
-
+					System.out.print(cart.getItems());
 					System.out.println("," + cart.getAmount());
 
 				}
