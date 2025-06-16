@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import jp.co.shiftw.dto.CategoriesDTO;
 import jp.co.shiftw.dto.ItemsDTO;
@@ -15,11 +17,13 @@ public class ItemsDAO extends BaseDAO {
 
 	}
 
-	public void findByCond(int categoryId, String name) throws SQLException {
+	public List<ItemsDTO> findByCond(int categoryId, String name) throws SQLException {
 
 		String sql = "select name, color, manufacturer, price from items where name = ? and category_id = ?";
 
 		ItemsDTO dto = null;
+
+		List<ItemsDTO> list = new ArrayList<>();
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -37,9 +41,10 @@ public class ItemsDAO extends BaseDAO {
 				dto.setCategory(cate);
 			}
 
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			// TODO: handle exception
 		}
+		return list;
 
 	}
 }
