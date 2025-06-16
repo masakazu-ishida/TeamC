@@ -6,7 +6,7 @@ public class UsersService {
 
 	private UsersDAO usersDAO;
 
-	public UsersService(UsersDAO usersDAO) {
+	private UsersService(UsersDAO usersDAO) {
 		this.usersDAO = usersDAO;
 	}
 
