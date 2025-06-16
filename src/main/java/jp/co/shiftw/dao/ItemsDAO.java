@@ -17,9 +17,11 @@ public class ItemsDAO extends BaseDAO {
 
 	}
 
+	//主キー検索を行うメソッド
 	public List<ItemsDTO> findByCond(int categoryId, String name) throws SQLException {
 
-		String sql = "select name, color, manufacturer, price from items where name = ? and category_id = ?";
+		//キーワードとカテゴリを検索するSQL文
+		String sql = "select name, color, manufacturer, price from items where name = ? and category_id = ? or category_id * ? = 0";
 
 		ItemsDTO dto = null;
 
@@ -31,6 +33,7 @@ public class ItemsDAO extends BaseDAO {
 
 			ps.setString(1, name);
 			ps.setInt(2, categoryId);
+			ps.setInt(3, categoryId);
 
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
@@ -41,8 +44,6 @@ public class ItemsDAO extends BaseDAO {
 				dto.setCategory(cate);
 			}
 
-		} catch (SQLException e) {
-			// TODO: handle exception
 		}
 		return list;
 
