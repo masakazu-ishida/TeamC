@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import jp.co.shiftw.dto.ItemsDTO;
@@ -18,7 +17,7 @@ public class PurchasesDAO extends BaseDAO {
 		super(conn);
 	}
 
-	public List<PurchasesDTO> findByCond(String adminId, Date startDate, Date endDate) throws SQLException {
+	public List<PurchasesDTO> findByUserId(String adminId) throws SQLException {
 		List<PurchasesDTO> purchases = new ArrayList<>();
 		String sql = "SELECT purchases.purchase_id, purchased_user, purchases.purchased_date, items.\"name\", items.color, items.manufacturer, items.price, purchase_details.amount, purchases.destination  "
 				+ " FROM purchases\n"
@@ -26,7 +25,6 @@ public class PurchasesDAO extends BaseDAO {
 				+ "	INNER JOIN users ON users.user_id = purchases.purchased_user\n"
 				+ "	INNER JOIN items ON items.item_id = purchase_details.item_id\n"
 				+ "	WHERE users.user_id LIKE ? \n"
-				+ "	OR purchased_date BETWEEN ? AND ? \n"
 				+ "	ORDER BY purchases.purchased_date DESC,"
 				+ "purchases.purchase_id ASC";
 		String pattern = adminId;
@@ -36,18 +34,6 @@ public class PurchasesDAO extends BaseDAO {
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setString(1, pattern);
-
-			if (startDate == null) {
-				ps.setDate(2, null);
-			} else {
-				ps.setDate(2, new java.sql.Date(startDate.getTime()));
-			}
-
-			if (endDate == null) {
-				ps.setDate(3, null);
-			} else {
-				ps.setDate(3, new java.sql.Date(endDate.getTime()));
-			}
 
 			ResultSet rs = ps.executeQuery();
 

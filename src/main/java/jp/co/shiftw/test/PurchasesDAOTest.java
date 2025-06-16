@@ -34,11 +34,11 @@ class PurchasesDAOTest {
 
 	// 何も入力せずに検索を行った場合すべての結果を取得できるかのテスト
 	@Test
-	void testFindByCondButAllIsCorrect() {
+	void testFindByNullId() {
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 			try {
 				PurchasesDAO dao = new PurchasesDAO(conn);
-				List<PurchasesDTO> list = dao.findByCond(null, null, null);
+				List<PurchasesDTO> list = dao.findByUserId(null);
 				assertEquals(2, list.size());
 				PurchasesDTO purchaces = list.get(0);
 				assertEquals(1, purchaces.getPurchaseId());
@@ -67,12 +67,13 @@ class PurchasesDAOTest {
 		}
 	}
 
+	// 対象のUserIdから検索が出来るかのテスト
 	@Test
-	void testFindByCondByOnlyPurchasedUserIsCorrect() {
+	void testFindByUserIdIsCorrect() {
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 			try {
 				PurchasesDAO dao = new PurchasesDAO(conn);
-				List<PurchasesDTO> list = dao.findByCond("user", null, null);
+				List<PurchasesDTO> list = dao.findByUserId("user");
 				assertEquals(1, list.size());
 				PurchasesDTO purchaces = list.get(0);
 				assertEquals(1, purchaces.getPurchaseId());
@@ -101,12 +102,13 @@ class PurchasesDAOTest {
 		}
 	}
 
+	// 存在しないUserIdで検索した場合リストの数が0になるかどうかのテスト
 	@Test
-	void testFindByCondByOnlyPurchasedUserIsNotCorrect() {
+	void testFindByUserIdIsNotCorrect() {
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 			try {
 				PurchasesDAO dao = new PurchasesDAO(conn);
-				List<PurchasesDTO> list = dao.findByCond("一致しないID名", null, null);
+				List<PurchasesDTO> list = dao.findByUserId("一致しないID名");
 				assertEquals(0, list.size());
 			} catch (Exception e) {
 				e.printStackTrace();
