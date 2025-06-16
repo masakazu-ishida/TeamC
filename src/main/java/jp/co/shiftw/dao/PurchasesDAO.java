@@ -20,20 +20,34 @@ public class PurchasesDAO extends BaseDAO {
 
 	public List<PurchasesDTO> findByCond(String adminId, Date startDate, Date endDate) throws SQLException {
 		List<PurchasesDTO> purchases = new ArrayList<>();
-		String sql = "SELECT purchases.purchace_id, purchased_user, purchases.purchased_date, items.\"name\", items.color, items.manufacturer, items.price, purchase_details.amount, purchases.destination  "
+		String sql = "SELECT purchases.purchase_id, purchased_user, purchases.purchased_date, items.\"name\", items.color, items.manufacturer, items.price, purchase_details.amount, purchases.destination  "
 				+ " FROM purchases\n"
 				+ "	INNER JOIN purchase_details ON purchase_details.purchase_id = purchases.purchase_id\n"
-				+ "	INNER JOIN users ON users.\"name\" = purchases.purchased_user\n"
+				+ "	INNER JOIN users ON users.user_id = purchases.purchased_user\n"
 				+ "	INNER JOIN items ON items.item_id = purchase_details.item_id\n"
-				+ "	WHERE purchased_date BETWEEN ? AND ? \n"
-				+ " AND users.user_id Like(?)"
-				+ "ORDER BY purchases.purchased_date DESC;"
-				+ "ORDER BY purchases.purchase_id";
+				+ "	WHERE users.user_id LIKE ? \n"
+				+ "	OR purchased_date BETWEEN ? AND ? \n"
+				+ "	ORDER BY purchases.purchased_date DESC,"
+				+ "purchases.purchase_id ASC";
+		String pattern = adminId;
+		if (adminId == null) {
+			pattern = "%";
+		}
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
-			ps.setDate(1, new java.sql.Date(startDate.getTime()));
-			ps.setDate(2, new java.sql.Date(endDate.getTime()));
-			ps.setString(3, adminId);
+			ps.setString(1, pattern);
+
+			if (startDate == null) {
+				ps.setDate(2, null);
+			} else {
+				ps.setDate(2, new java.sql.Date(startDate.getTime()));
+			}
+
+			if (endDate == null) {
+				ps.setDate(3, null);
+			} else {
+				ps.setDate(3, new java.sql.Date(endDate.getTime()));
+			}
 
 			ResultSet rs = ps.executeQuery();
 
@@ -53,8 +67,9 @@ public class PurchasesDAO extends BaseDAO {
 				if (flg) {
 					purchase = new PurchasesDTO();
 					purchase.setPurchaseId(purchaseId);
-					purchase.setPurchasedUser(rs.getString("user_id"));
+					purchase.setPurchasedUser(rs.getString("purchased_user"));
 					purchase.setPurchasedDate(rs.getDate("purchased_date"));
+					purchase.setDestination(rs.getString("destination"));
 				}
 
 				PurchaseDetailsDTO detail = new PurchaseDetailsDTO();
@@ -77,6 +92,8 @@ public class PurchasesDAO extends BaseDAO {
 
 				details.add(detail);
 				purchase.setPurchaseDetails(details);
+
+				purchases.add(purchase);
 
 			}
 		}
