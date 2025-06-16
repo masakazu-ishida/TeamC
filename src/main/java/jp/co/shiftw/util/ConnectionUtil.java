@@ -1,6 +1,7 @@
 package jp.co.shiftw.util;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import javax.naming.Context;
@@ -21,6 +22,15 @@ public class ConnectionUtil {
 			throw new ServletException(e);
 		}
 
+	}
+	
+	public static Connection getConnectionForJUnit() throws SQLException {
+		
+		String url = "jdbc:postgresql://localhost:5432/ecsite";
+		String user = "ecsite";
+		String pass = "ecsite";
+	
+		return  DriverManager.getConnection(url, user, pass);
 	}
 
 }
