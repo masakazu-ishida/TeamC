@@ -23,10 +23,13 @@ public class ItemsDAO extends BaseDAO {
 		//キーワードとカテゴリを検索するSQL文 「?」の中の数値が一緒であれば正しい範囲のフィールド値が出る
 		String sql = "select * from items where name = ? and category_id = ? or category_id * ? = 0";
 
+		//検索結果を格納する変数の宣言と初期化
 		ItemsDTO dto = null;
 
+		//リストの作成
 		List<ItemsDTO> list = new ArrayList<>();
 
+		//SQL文を実行するオブジェクトの取得
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
 			ps.setString(1, name);
