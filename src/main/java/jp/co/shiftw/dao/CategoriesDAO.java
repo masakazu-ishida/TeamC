@@ -31,7 +31,7 @@ public class CategoriesDAO extends BaseDAO {
 
 				CategoriesDTO dto = new CategoriesDTO();
 
-				dto.setCategoryId(rs.getInt("categoryId"));
+				dto.setCategoryId(rs.getInt("category_id"));
 				dto.setName(rs.getString("name"));
 
 				list.add(dto);
