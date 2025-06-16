@@ -34,6 +34,8 @@ public class UsersDAO extends BaseDAO {
 
 				dto.setUser_id(rs.getString("user_id"));
 				dto.setPassword(rs.getString("password"));
+				dto.setName(rs.getString("name"));
+				dto.setAddress(rs.getString("address"));
 
 			}
 		}
