@@ -4,12 +4,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import jp.co.shiftw.dao.BaseDAO;
+import jp.co.shiftw.dao.CartDAO;
 import jp.co.shiftw.dto.CartDTO;
 import jp.co.shiftw.dto.ItemsDTO;
 import jp.co.shiftw.util.ConnectionUtil;
@@ -43,27 +44,54 @@ class CartDAOTest {
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 			try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
-				ps.setString(1, "user");
+				CartDAO dao = new CartDAO(conn);
+				List<CartDTO> list = dao.CartList("user");
+				assertEquals(3, list.size());
 
-				System.out.println("接続完了");
+				int i = 0;
 
-				ResultSet rs = ps.executeQuery();
+				for (CartDTO cartDTO : list) {
 
-				while (rs.next()) {
-					CartDTO cart = new CartDTO();
-					ItemsDTO item = new ItemsDTO();
+					ItemsDTO item = cartDTO.getItems();
 
-					item.setName(rs.getString("name"));
-					item.setManufacturer(rs.getString("manufacturer"));
-					item.setColor(rs.getString("color"));
-					item.setPrice(rs.getInt("price"));
+					System.out.println(item.getName()
+							+ item.getColor()
+							+ item.getManufacturer()
+							+ item.getPrice()
+							+ cartDTO.getAmount());
+					switch (i) {
+					case 0: {
+						assertEquals("麦わら帽子", item.getName());
+						assertEquals("黄色", item.getColor());
+						assertEquals("日本帽子製造", item.getManufacturer());
+						assertEquals(4980, item.getPrice());
+						assertEquals(5, cartDTO.getAmount());
 
-					cart.setItems(item);
-					cart.setAmount(rs.getInt("amount"));
+						break;
+					}
+					case 1: {
+						assertEquals("ストローハット", item.getName());
+						assertEquals("茶色", item.getColor());
+						assertEquals("(株)ストローハットジャパン", item.getManufacturer());
+						assertEquals(3480, item.getPrice());
+						assertEquals(1, cartDTO.getAmount());
 
-					System.out.print(cart.getItems());
-					System.out.println("," + cart.getAmount());
+						break;
+					}
 
+					case 2: {
+						assertEquals("子ども用麦わら帽子", item.getName());
+						assertEquals("赤色", item.getColor());
+						assertEquals("東京帽子店", item.getManufacturer());
+						assertEquals(2980, item.getPrice());
+						assertEquals(3, cartDTO.getAmount());
+
+						break;
+					}
+
+					}
+
+					i = i++;
 				}
 
 			} catch (Exception e) {
