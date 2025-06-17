@@ -3,6 +3,7 @@ package jp.co.shiftw.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +35,32 @@ public class CartListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		String loginPath = "/WEB-INF/main/login.jsp";
+		String cartListPath = "/WEB-INF/main/cart_list.jsp";
+
+		HttpSession session = request.getSession();
+		session.setAttribute("userId", "user");
+
+		if (session.getAttribute("userId") == null) {
+			session.setAttribute("source", "1");
+
+			RequestDispatcher rd = request.getRequestDispatcher(loginPath);
+			rd.forward(request, response);
+		} else {
+			String userId = (String) session.getAttribute("userId");
+
+			List<CartDTO> cartList = CartListService.CartList(userId);
+			//int totalAmount = CartListService.TotalAmount(cartList);
+
+			request.setAttribute("cartList", cartList);
+			//request.setAttribute("totalAmount", totalAmount);
+
+			RequestDispatcher rd = request.getRequestDispatcher(cartListPath);
+			rd.forward(request, response);
+		}
+
 	}
 
 	/**
@@ -44,16 +70,6 @@ public class CartListController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-
-		String loginPath = "";
-		String cartListPath = "";
-
-		HttpSession session = request.getSession();
-		String userId = (String) session.getAttribute("userId");
-
-		List<CartDTO> cartList = CartListService.CartList(userId);
-
-		request.setAttribute("cartList", cartList);
 
 	}
 

@@ -7,12 +7,13 @@
 <title>メインメニュー</title>
 </head>
 <body>
-	<form action="">
-	キーワード<input type="text">
-	カテゴリ<input type="radio">
+	<form action="/Shift_W/ItemsSerchController" method="post">
+	キーワード<input type="text"><br>
+	カテゴリ<input type="radio"><br>
+	<input type="submit" value="検索">
 	
 	</form>
-	<a href="/TeamC/controller/CartListController">カートを見る</a>
-	<a href="">ログイン</a>
+	<a href="/Shift_W/CartListController">カートを見る</a><br>
+	<a href="/Shift_W/LoginController">ログイン</a>
 </body>
 </html>

@@ -32,7 +32,7 @@ public class Main extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		String path = "/main/main.jsp";
+		String path = "/WEB-INF/main/main.jsp";
 
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);

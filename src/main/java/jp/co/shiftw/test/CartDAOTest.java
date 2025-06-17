@@ -106,7 +106,7 @@ class CartDAOTest {
 		}
 	}
 
-	@Test
+	@Test //存在するIDでリストを表示
 	void CartListServiceTest() {
 
 		List<CartDTO> list = CartListService.CartList("user");
