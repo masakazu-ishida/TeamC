@@ -15,7 +15,7 @@ import jp.co.shiftw.service.PurchasesHistoryService;
 /**
  * Servlet implementation class PurchasesHistoryController
  */
-@WebServlet(name = "purchasesHistory", urlPatterns = { "/purchasesHistory" })
+@WebServlet(name = "purchasesHistory", urlPatterns = { "/admin/purchasesHistory" })
 public class PurchasesHistoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -45,7 +45,7 @@ public class PurchasesHistoryController extends HttpServlet {
 
 		request.setAttribute("purchases", dtos);
 
-		request.getRequestDispatcher("WEB-INF/admin/purchases_history.jsp").forward(request, response);
+		request.getRequestDispatcher("../WEB-INF/admin/purchases_history.jsp").forward(request, response);
 
 	}
 

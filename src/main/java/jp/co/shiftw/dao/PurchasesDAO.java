@@ -86,7 +86,13 @@ public class PurchasesDAO extends BaseDAO {
 				details.add(detail); // List<PurchaseDetailsDTO>にdetailを入れる
 				purchase.setPurchaseDetails(details); // PurchaseDTOにリストを入れる
 
-				purchases.add(purchase); // List<PurchaseDTO>にpurchaseを入れる
+				int index = purchases.indexOf(purchase);
+
+				if (index != -1) {
+					purchases.set(purchases.indexOf(purchase), purchase);
+				} else {
+					purchases.add(purchase); // List<PurchaseDTO>にpurchaseを入れる
+				}
 			}
 		}
 
