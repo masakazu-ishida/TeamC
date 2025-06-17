@@ -28,8 +28,10 @@ class ItemsDAOTest {
 
 				assertNotNull(dtos);
 
+				//リストの最初の要素を取得
 				ItemsDTO dto = dtos.get(0);
 
+				//
 				CategoriesDTO category = dto.getCategory();
 
 				assertEquals(1, category.getCategoryId());

@@ -38,7 +38,7 @@ public class ItemsDAO extends BaseDAO {
 
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-
+				//ItemsDTOに格納されるcate
 				CategoriesDTO cate = new CategoriesDTO();
 
 				cate.setCategoryId(rs.getInt("category_id"));
@@ -49,7 +49,9 @@ public class ItemsDAO extends BaseDAO {
 				dto.setName(rs.getString("name"));
 				dto.setCategory(cate);
 
+				//listにdtoを格納
 				list.add(dto);
+
 			}
 
 		}
