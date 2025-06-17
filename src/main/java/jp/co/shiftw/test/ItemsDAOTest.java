@@ -15,6 +15,7 @@ import jp.co.shiftw.util.ConnectionUtil;
 
 class ItemsDAOTest {
 
+	//検索した値が正しく取得できているか確認するテスト
 	@Test
 	void testFindByCond() {
 

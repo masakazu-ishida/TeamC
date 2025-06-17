@@ -36,11 +36,14 @@ public class ItemsDAO extends BaseDAO {
 			ps.setInt(2, categoryId);
 			ps.setInt(3, categoryId);
 
+			//SQL文の実行結果をResultSetに返す
 			ResultSet rs = ps.executeQuery();
+
 			if (rs.next()) {
 				//ItemsDTOに格納されるcate
 				CategoriesDTO cate = new CategoriesDTO();
 
+				//カーソルの指す行で指定した列名の値を取得
 				cate.setCategoryId(rs.getInt("category_id"));
 				cate.setName(rs.getString("name"));
 
