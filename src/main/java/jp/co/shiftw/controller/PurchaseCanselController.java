@@ -1,7 +1,6 @@
 package jp.co.shiftw.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jp.co.shiftw.dto.PurchasesDTO;
-import jp.co.shiftw.service.PurchasesHistoryService;
-
 /**
- * Servlet implementation class PurchasesHistoryController
+ * Servlet implementation class PurchaseCanselController
  */
-@WebServlet(name = "purchasesHistory", urlPatterns = { "/admin/purchasesHistory" })
-public class PurchasesHistoryController extends HttpServlet {
+@WebServlet(name = "admin/purchaseCansel", urlPatterns = { "/admin/purchaseCansel" })
+public class PurchaseCanselController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public PurchasesHistoryController() {
+	public PurchaseCanselController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -32,18 +28,8 @@ public class PurchasesHistoryController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String userId = request.getParameter("user_id");
-
-		if (userId == "") {
-			userId = null;
-		}
-
-		List<PurchasesDTO> dtos = PurchasesHistoryService.searchPurchasesByUserId(userId);
-
-		request.setAttribute("purchases", dtos);
-
-		request.getRequestDispatcher("../WEB-INF/admin/purchases_history.jsp").forward(request, response);
-
+		int purchaseId = Integer.parseInt(request.getParameter("purchase_id"));
+		response.getWriter().append(purchaseId + "");
 	}
 
 	/**
@@ -51,8 +37,7 @@ public class PurchasesHistoryController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
 	}
 
 }

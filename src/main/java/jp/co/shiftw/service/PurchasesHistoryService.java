@@ -17,17 +17,8 @@ public class PurchasesHistoryService {
 		List<PurchasesDTO> list = new ArrayList<>();
 
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
-			conn.setAutoCommit(false);
-
-			try {
-				PurchasesDAO dao = new PurchasesDAO(conn);
-				list = dao.findByUserId(userId);
-
-				conn.commit();
-			} catch (SQLException e) {
-				conn.rollback();
-				e.printStackTrace();
-			}
+			PurchasesDAO dao = new PurchasesDAO(conn);
+			list = dao.findByUserId(userId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ServletException e) {
