@@ -24,7 +24,7 @@ public class ItemsDAO extends BaseDAO {
 		String sql = "select * from items where name = ? and category_id = ? or category_id * ? = 0";
 
 		//検索結果を格納する変数の宣言と初期化
-		ItemsDTO dto = null;
+		//ItemsDTO dto = null;
 
 		//リストの作成
 		List<ItemsDTO> list = new ArrayList<>();
@@ -39,7 +39,8 @@ public class ItemsDAO extends BaseDAO {
 			//SQL文の実行結果をResultSetに返す
 			ResultSet rs = ps.executeQuery();
 
-			if (rs.next()) {
+			//カーソルを移動させることでレコードを取得
+			while (rs.next()) {
 				//ItemsDTOに格納されるcate
 				CategoriesDTO cate = new CategoriesDTO();
 
@@ -47,10 +48,12 @@ public class ItemsDAO extends BaseDAO {
 				cate.setCategoryId(rs.getInt("category_id"));
 				cate.setName(rs.getString("name"));
 
-				dto = new ItemsDTO();
+				ItemsDTO dto = new ItemsDTO();
 
 				dto.setName(rs.getString("name"));
 				dto.setCategory(cate);
+
+				list.size();
 
 				//listにdtoを格納
 				list.add(dto);
