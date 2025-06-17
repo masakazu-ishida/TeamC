@@ -18,7 +18,7 @@
 			<th>数量</th>
 			<th></th>
 		</tr>
-		<c:forEach var="cart" items="${cartList} }">
+		<c:forEach var="cart" items="${cartList}">
 			<tr>
 				<td>${cart.items.name}</td>
 				<td>${cart.items.color}</td>
@@ -28,7 +28,6 @@
 			</tr>
 		</c:forEach>
 	</table>
-	${totalAmount }
 
 </body>
 </html>
