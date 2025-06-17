@@ -60,6 +60,14 @@ public class ConnectionUtil {
 
 	public static Connection getConnection(String lookupString)
 			throws SQLException, ServletException {
+
+		try {
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
 		try {
 
 			//動作モードによってConnecionの取得方法を変更する。
