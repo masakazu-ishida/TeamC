@@ -14,9 +14,10 @@ import org.junit.jupiter.api.Test;
 import jp.co.shiftw.dao.BaseDAO;
 import jp.co.shiftw.dao.UsersDAO;
 import jp.co.shiftw.dto.UsersDTO;
+import jp.co.shiftw.service.UsersService;
 import jp.co.shiftw.util.ConnectionUtil;
 
-public class UsersDAOTest {
+public class UsersServiseTest {
 
 	@BeforeEach
 	void init() {
@@ -37,12 +38,8 @@ public class UsersDAOTest {
 	@Test
 	void testfindById() {
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
-			UsersDAO dao = new UsersDAO(conn);
-
 			try {
-
-				UsersDTO dto = dao.findById("user");
-
+				UsersDTO dto = UsersService.loginUsers(conn, null, null);
 				assertNotNull(dto);
 
 				assertEquals("user", dto.getUser_id());
@@ -60,7 +57,6 @@ public class UsersDAOTest {
 			fail(e.getMessage());
 
 		}
-
 	}
 
 	@Test
@@ -84,4 +80,5 @@ public class UsersDAOTest {
 			fail(e);
 		}
 	}
+
 }

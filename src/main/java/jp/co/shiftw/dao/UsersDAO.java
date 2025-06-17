@@ -15,16 +15,43 @@ public class UsersDAO extends BaseDAO {
 
 	}
 
-	public UsersDTO Login(String user_id, String password) throws SQLException {
+	//	public UsersDTO Login(String user_id, String password) throws SQLException {
+	//
+	//		String sql = "SELECT * FROM Users WHERE user_id = ? AND password = ? ";
+	//
+	//		UsersDTO dto = null;
+	//
+	//		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+	//
+	//			ps.setString(1, user_id);
+	//			ps.setString(2, password);
+	//
+	//			ResultSet rs = ps.executeQuery();
+	//
+	//			if (rs.next()) {
+	//
+	//				dto = new UsersDTO();
+	//
+	//				dto.setUser_id(rs.getString("user_id"));
+	//				dto.setPassword(rs.getString("password"));
+	//				dto.setName(rs.getString("name"));
+	//				dto.setAddress(rs.getString("address"));
+	//
+	//			}
+	//		}
+	//
+	//		return dto;
+	//	}
 
-		String sql = "SELECT * FROM Users WHERE user_id = ? AND password = ? ";
+	public UsersDTO findById(String user_id) throws SQLException {
+
+		String sql = "SELECT * FROM Users WHERE user_id = ?";
 
 		UsersDTO dto = null;
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
 			ps.setString(1, user_id);
-			ps.setString(2, password);
 
 			ResultSet rs = ps.executeQuery();
 

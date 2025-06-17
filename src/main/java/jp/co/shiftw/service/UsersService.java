@@ -11,7 +11,7 @@ public class UsersService {
 	public static UsersDTO loginUsers(Connection conn, String user_id, String password) throws SQLException {
 		UsersDAO dao = new UsersDAO(conn);
 
-		return dao.Login(user_id, password);
+		return dao.findById(user_id);
 
 	}
 
