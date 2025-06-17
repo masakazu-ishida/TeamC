@@ -51,6 +51,6 @@
 			</c:forEach>
 		</table>
 		<br /><br />
-		<a href='main.html'>管理者メインページ</a>へ<br />
+		<a href='main'>管理者メインページ</a>へ<br />
 	</body>
 </html>
