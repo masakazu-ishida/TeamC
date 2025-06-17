@@ -34,7 +34,7 @@ ALTER TABLE purchase_details ALTER COLUMN "purchase_detail_id" SET DEFAULT nextv
 
 INSERT INTO administrators (admin_id, password, name) VALUES ('admin', 'admin', '管理者');
 INSERT INTO public.users(user_id,password,name,address) VALUES ('user','userpass','鳥取一郎','鳥取県鳥取市河原町６丁目１０７');
-INSERT INTO public.users(user_id,password,name,address) VALUES ('user2','userpass2','鳥取二郎','鳥取県鳥取市瓦町１７２');
+INSERT INTO public.users(user_id,password,name,address) VALUES ('user2','userpass2','鳥取二郎','東京都江東区三好４丁目１−１');
 
 INSERT INTO categories (category_id,name) VALUES (0,'すべて');
 INSERT INTO categories (category_id,name) VALUES (1,'帽子');
@@ -66,9 +66,9 @@ insert into items_in_cart values('user',1,5,'2020/10/20');
 insert into items_in_cart values('user',2,1,'2020/10/20');
 insert into items_in_cart values('user',3,3,'2020/10/20');
 
-INSERT INTO purchases values(1, 'user', '2020/10/20', '東京都', false);
-INSERT INTO purchase_details values(1, 1, 1, 1);
+INSERT INTO purchases (purchased_user, purchased_date, destination, cancel) values('user', '2020/10/20', '東京都', false);
+INSERT INTO purchase_details (purchase_id, item_id, amount) values(1, 1, 1);
 
-INSERT INTO purchases values(2, 'user2', '2018/11/24', '鳥取県', false);
-INSERT INTO purchase_details values(2, 2, 2, 2);
+INSERT INTO purchases (purchased_user, purchased_date, destination, cancel) values('user2', '2018/11/24', '鳥取県', false);
+INSERT INTO purchase_details (purchase_id, item_id, amount) values(2, 2, 2);
 
