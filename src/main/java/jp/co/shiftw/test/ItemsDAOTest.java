@@ -72,7 +72,7 @@ class ItemsDAOTest {
 	}
 
 	@Test
-	//検索した値が正しく取得できているか確認するテスト
+	//検索した値がテーブルになく排除できているか確認するテスト
 	void testNotFindByCond() {
 
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {

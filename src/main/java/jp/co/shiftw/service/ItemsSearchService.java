@@ -14,21 +14,19 @@ public class ItemsSearchService {
 
 	public static List<ItemsDTO> findByCond(int categoryId, String name) {
 
+		//リストの作成
 		List<ItemsDTO> list = new ArrayList<>();
 
+		//CommonConstantsのLOOKUP_NAMEに接続
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
 
-			conn.setAutoCommit(false);
-
+			//トランザクション処理を行う
 			try {
 				ItemsDAO dao = new ItemsDAO(conn);
 				list = dao.findByCond(categoryId, name);
 
-				conn.commit();
-
 			} catch (SQLException e) {
 
-				conn.rollback();
 				e.printStackTrace();
 
 			}
