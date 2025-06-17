@@ -2,15 +2,38 @@ package jp.co.shiftw.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.ServletException;
 
 import jp.co.shiftw.dao.PurchasesDAO;
 import jp.co.shiftw.dto.PurchasesDTO;
+import jp.co.shiftw.util.CommonConstants;
+import jp.co.shiftw.util.ConnectionUtil;
 
 public class PurchasesHistoryService {
-	public static List<PurchasesDTO> searchPurchasesByUserId(Connection conn, String userId) throws SQLException {
-		PurchasesDAO dao = new PurchasesDAO(conn);
+	public static List<PurchasesDTO> searchPurchasesByUserId(String userId) {
+		List<PurchasesDTO> list = new ArrayList<>();
 
-		return dao.findByUserId(userId);
+		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
+			conn.setAutoCommit(false);
+
+			try {
+				PurchasesDAO dao = new PurchasesDAO(conn);
+				list = dao.findByUserId(userId);
+
+				conn.commit();
+			} catch (SQLException e) {
+				conn.rollback();
+				e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ServletException e) {
+			e.printStackTrace();
+		}
+
+		return list;
 	}
 }
