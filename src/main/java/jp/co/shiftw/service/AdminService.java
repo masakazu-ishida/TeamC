@@ -21,6 +21,8 @@ public class AdminService {
 				if (adminDTO.getPassword().equals(password)) {
 
 					return adminDTO;
+				} else {
+					return null;
 				}
 			}
 		} catch (Exception e) {

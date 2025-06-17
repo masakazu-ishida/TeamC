@@ -44,13 +44,21 @@ public class AdminController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 
-		String path = "";
+		String path = "/WEB-INF/admin/main.jsp";
 
 		request.setCharacterEncoding("UFT-8");
 
-		String value = request.getParameter("id");
+		String adminId = request.getParameter("id");
+		String adminPassword = request.getParameter("password");
 
-		AdminDTO dto = AdminService.loginAdmin(value);
+		AdminDTO dto = AdminService.loginAdmin(adminId, adminPassword);
+
+		request.setAttribute("adminDTO", dto);
+
+		if (dto == null) {
+			path = "/WEB-INF/main/Login.jsp";
+
+		}
 
 		//String value = request.setAttribute("value",AdminService.loginAdmin(Connection conn, String adminId, String password))
 
