@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,93 +19,35 @@
 				<th>配送先</th>
 				<th></th>
 			</tr>
-			<tr>
-				<td>someone@example.com</td>
-				<td>2014/3/15</td>
-				<td>
-					<table>
-						<tr>
-							<th>商品名</th>
-							<th>色</th>
-							<th>メーカー</th>
-							<th>単価</th>
-							<th>数量</th>
-						</tr>
-						<tr>
-							<td>麦わら帽子</td>
-							<td>黄色</td>
-							<td>日本帽子製造</td>
-							<td>4980円</td>
-							<td>2 個</td>
-						</tr>
-						<tr>
-							<td>子ども用麦わら帽子</td>
-							<td>赤</td>
-							<td>東京帽子店</td>
-							<td>2980円</td>
-							<td>3 個</td>
-						</tr>
-					</table>
-				</td>
-				<td>自宅</td>
-				<td><a href='deletePurchaseConfirm.html?purchaseId=1234'>キャンセル</a></td>
-			</tr>
-			<tr>
-				<td>otherone@example.net</td>
-				<td>2014/3/12</td>
-				<td>
-					<table>
-						<tr>
-							<th>商品名</th>
-							<th>色</th>
-							<th>メーカー</th>
-							<th>単価</th>
-							<th>数量</th>
-						</tr>
-						<tr>
-							<td>子ども用麦わら帽子</td>
-							<td>赤</td>
-							<td>東京帽子店</td>
-							<td>2980円</td>
-							<td>3 個</td>
-						</tr>
-						<tr>
-							<td>ストローハット</td>
-							<td>茶色</td>
-							<td>(株)ストローハットジャパン</td>
-							<td>3480円</td>
-							<td>10 個</td>
-						</tr>
-					</table>
-				</td>
-				<td>自宅</td>
-				<td><a href='deletePurchaseConfirm.html?purchaseId=2345'>キャンセル</a></td>
-			</tr>
-			<tr>
-				<td>someone@example.com</td>
-				<td>2014/3/9</td>
-				<td>
-					<table>
-						<tr>
-							<th>商品名</th>
-							<th>色</th>
-							<th>メーカー</th>
-							<th>単価</th>
-							<th>数量</th>
-						</tr>
-						<tr>
-							<td>ストローハット</td>
-							<td>茶色</td>
-							<td>(株)ストローハットジャパン</td>
-							<td>3480円</td>
-							<td>8 個</td>
-						</tr>
-					</table>
-				</td>
-				</td>
-				<td>東京都渋谷区３－３－３</td>
-				<td><a href='deletePurchaseConfirm.html?purchaseId=1234'>キャンセル</a></td>
-			</tr>
+			<c:forEach var="pur" items="${purchases}" >
+			
+				<tr>
+					<td>${pur.purchasedUser}</td>
+					<td>${pur.purchasedDate}</td>
+					<td>
+						<table>
+							<tr>
+								<th>商品名</th>
+								<th>色</th>
+								<th>メーカー</th>
+								<th>単価</th>
+								<th>数量</th>
+							</tr>
+							<c:forEach var="det" items="${pur.purchaseDetails}">
+								<tr>
+									<td>${det.item.name}</td>
+									<td>${det.item.color}</td>
+									<td>${det.item.manufacturer}</td>
+									<td>${det.item.price}</td>
+									<td>${det.amount}</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</td>
+					<td>${pur.destination}</td>
+				</tr>
+					
+			</c:forEach>
 		</table>
 		<br /><br />
 		<a href='main.html'>管理者メインページ</a>へ<br />
