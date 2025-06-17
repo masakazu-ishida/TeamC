@@ -15,16 +15,15 @@ public class AdminDAO extends BaseDAO {
 
 	}
 
-	public AdminDTO Login(String adminId, String password) throws SQLException {
+	public AdminDTO findById(String adminId) throws SQLException {
 
-		String sql = "SELECT * FROM administrators WHERE admin_id = ? AND password = ?";
+		String sql = "SELECT * FROM administrators WHERE admin_id = ?";
 
 		AdminDTO dto = null;
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
 			ps.setString(1, adminId);
-			ps.setString(2, password);
 
 			ResultSet rs = ps.executeQuery();
 

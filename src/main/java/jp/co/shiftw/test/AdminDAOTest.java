@@ -32,7 +32,7 @@ class AdminDAOTest {
 	}
 
 	@Test
-	void testLogin() {
+	void testFindById() {
 		//fail("まだ実装されていません");
 
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
@@ -40,7 +40,7 @@ class AdminDAOTest {
 
 			try {
 
-				AdminDTO dto = dao.Login("admin", "admin");
+				AdminDTO dto = dao.findById("admin");
 
 				assertNotNull(dto);
 
@@ -67,7 +67,7 @@ class AdminDAOTest {
 
 			try {
 
-				AdminDTO dto = dao.Login("aaaaaa", "iiiiiiii");
+				AdminDTO dto = dao.findById("aaaaaa");
 
 				assertNull(dto);
 
