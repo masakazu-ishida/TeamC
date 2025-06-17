@@ -18,14 +18,13 @@
 			<th>数量</th>
 			<th></th>
 		</tr>
-		<c:forEach var="item" items="${cartList} }">
+		<c:forEach var="cart" items="${cartList} }">
 			<tr>
-				<td>${item.name }</td>
-				<td>${item.name}</td>
-				<td>${item.color}</td>
-				<td>${item.manufacturer}</td>
-				<td>${item.price}</td>
-				<td>${item.amount}</td>
+				<td>${cart.items.name}</td>
+				<td>${cart.items.color}</td>
+				<td>${cart.items.manufacturer}</td>
+				<td>${cart.items.price}</td>
+				<td>${cart.amount}</td>
 			</tr>
 		</c:forEach>
 	</table>
