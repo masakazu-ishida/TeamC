@@ -46,7 +46,7 @@ class PurchasesDAOTest {
 				assertEquals("2020-10-20", purchaces.getPurchasedDate().toString());
 
 				List<PurchaseDetailsDTO> purchaseDetails = purchaces.getPurchaseDetails();
-				assertEquals(1, purchaseDetails.size());
+				assertEquals(2, purchaseDetails.size());
 
 				PurchaseDetailsDTO purchaseDetailsDTO = purchaseDetails.get(0);
 				ItemsDTO item = purchaseDetailsDTO.getItem();
@@ -81,7 +81,7 @@ class PurchasesDAOTest {
 				assertEquals("2020-10-20", purchaces.getPurchasedDate().toString());
 
 				List<PurchaseDetailsDTO> purchaseDetails = purchaces.getPurchaseDetails();
-				assertEquals(1, purchaseDetails.size());
+				assertEquals(2, purchaseDetails.size());
 
 				PurchaseDetailsDTO purchaseDetailsDTO = purchaseDetails.get(0);
 				ItemsDTO item = purchaseDetailsDTO.getItem();

@@ -6,7 +6,7 @@
 	<head>
 		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 		<title>購入履歴一覧</title>
-		<link rel='stylesheet' type='text/css' href='style.css' />
+		<link rel='stylesheet' type='text/css' href='../style.css' />
 	</head>
 	<body>
 		<h3>購入履歴の一覧</h3>
@@ -25,7 +25,7 @@
 					<td>${pur.purchasedUser}</td>
 					<td>${pur.purchasedDate}</td>
 					<td>
-						<table>
+						<table width="100%">
 							<tr>
 								<th>商品名</th>
 								<th>色</th>
@@ -45,11 +45,12 @@
 						</table>
 					</td>
 					<td>${pur.destination}</td>
+					<td><a href="">キャンセル</a></td>
 				</tr>
 					
 			</c:forEach>
 		</table>
 		<br /><br />
-		<a href='main.html'>管理者メインページ</a>へ<br />
+		<a href='main'>管理者メインページ</a>へ<br />
 	</body>
 </html>

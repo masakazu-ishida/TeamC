@@ -9,7 +9,7 @@
 <body>
 		<h3>管理者メインページ</h3>
 		<h4>購入履歴の検索</h4>
-		<form action='../../Shift_W/purchasesHistory' method='GET'>
+		<form action='../../Shift_W/admin/purchasesHistory' method='GET'>
 			<table>
 				<tr>
 					<th>会員ID</th>
