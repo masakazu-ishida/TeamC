@@ -51,9 +51,13 @@ public class ItemsDAO extends BaseDAO {
 				ItemsDTO dto = new ItemsDTO();
 
 				dto.setName(rs.getString("name"));
+				dto.setItemId(rs.getInt("item_id"));
+				dto.setManufacturer(rs.getString("manufacturer"));
 				dto.setCategory(cate);
-
-				list.size();
+				dto.setColor(rs.getString("color"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setStock(rs.getInt("stock"));
+				dto.setRecommended(false);
 
 				//listにdtoを格納
 				list.add(dto);

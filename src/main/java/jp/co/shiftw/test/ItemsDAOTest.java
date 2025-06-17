@@ -47,6 +47,8 @@ class ItemsDAOTest {
 
 				assertNotNull(dtos);
 
+				assertEquals(1, dtos.size());
+
 				//リストの最初の要素を取得
 				ItemsDTO dto = dtos.get(0);
 
@@ -55,8 +57,6 @@ class ItemsDAOTest {
 
 				assertEquals(1, category.getCategoryId());
 				assertEquals("麦わら帽子", dto.getName());
-
-				dtos.size();
 
 			} catch (Exception e) {
 
@@ -72,7 +72,7 @@ class ItemsDAOTest {
 	}
 
 	@Test
-
+	//検索した値が正しく取得できているか確認するテスト
 	void testNotFindByCond() {
 
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
@@ -85,7 +85,7 @@ class ItemsDAOTest {
 
 				assertNotNull(dtos);
 
-				dtos.size();
+				assertEquals(0, dtos.size());
 
 			} catch (Exception e) {
 
