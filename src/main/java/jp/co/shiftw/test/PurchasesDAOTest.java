@@ -18,8 +18,8 @@ import jp.co.shiftw.util.ConnectionUtil;
 class PurchasesDAOTest {
 	@BeforeEach
 	void init() {
+		ConnectionUtil.mode = ConnectionUtil.MODE.TEST;
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
-
 			BaseDAO dao = new BaseDAO(conn);
 			try {
 				dao.insertBatch("sqlFiles/init.sql");
