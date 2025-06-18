@@ -50,8 +50,8 @@ public class CartListController extends HttpServlet {
 		} else {
 			String userId = (String) session.getAttribute("userId");
 
-			List<CartDTO> cartList = CartListService.CartList(userId);
-			int totalAmount = CartListService.TotalAmount(cartList);
+			List<CartDTO> cartList = CartListService.cartList(userId);
+			int totalAmount = CartListService.totalAmount(cartList);
 
 			request.setAttribute("cartList", cartList);
 			request.setAttribute("totalAmount", totalAmount);

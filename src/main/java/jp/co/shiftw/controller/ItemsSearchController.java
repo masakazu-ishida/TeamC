@@ -2,24 +2,26 @@ package jp.co.shiftw.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jp.co.shiftw.dto.ItemsDTO;
+import jp.co.shiftw.service.ItemsSearchService;
+
 /**
- * Servlet implementation class Main
+ * Servlet implementation class ItemsSearchController
  */
-@WebServlet("/MainController")
-public class MainController extends HttpServlet {
+@WebServlet("/ItemsSearchController")
+public class ItemsSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public MainController() {
+	public ItemsSearchController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -30,13 +32,7 @@ public class MainController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-
-		String path = "/WEB-INF/main/main.jsp";
-
-		RequestDispatcher rd = request.getRequestDispatcher(path);
-		rd.forward(request, response);
-
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -47,10 +43,17 @@ public class MainController extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 
-		String path = "/WEB-INF/main/main.jsp";
+		String path = "/WEB-INF/admin/main.jsp";
 
-		RequestDispatcher rd = request.getRequestDispatcher(path);
-		rd.forward(request, response);
+		request.setCharacterEncoding("UTF-8");
+
+		String categoryId = request.getParameter("categoryId");
+		String name = request.getParameter("name");
+
+		int Id = Integer.parseInt(categoryId);
+
+		ItemsDTO dto = ItemsSearchService.findByCond(categoryId, name);
+
 	}
 
 }

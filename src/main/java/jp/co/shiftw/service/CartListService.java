@@ -11,7 +11,7 @@ import jp.co.shiftw.util.ConnectionUtil;
 
 public class CartListService {
 
-	public static List<CartDTO> CartList(String userId) {
+	public static List<CartDTO> cartList(String userId) {
 
 		List<CartDTO> cartList = null;
 
@@ -27,7 +27,7 @@ public class CartListService {
 		return cartList;
 	}
 
-	public static int TotalAmount(List<CartDTO> cartList) {
+	public static int totalAmount(List<CartDTO> cartList) {
 
 		int amount = 0;
 		int totalAmount = 0;
