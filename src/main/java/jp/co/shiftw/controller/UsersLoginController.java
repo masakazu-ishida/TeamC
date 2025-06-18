@@ -34,7 +34,11 @@ public class UsersLoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		//JSPへフォワード
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/main/UsersLogin.jsp");
+		rd.forward(request, response);
+
 	}
 
 	/**
@@ -44,6 +48,7 @@ public class UsersLoginController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+
 		//ユーザー情報の取得
 		String user_id = request.getParameter("user_id");
 		String password = request.getParameter("password");
@@ -80,15 +85,15 @@ public class UsersLoginController extends HttpServlet {
 				RequestDispatcher req2 = request.getRequestDispatcher(path);
 				req2.forward(request, response);
 
-				//メイン画面へ遷移
-			case 3:
+				break;
 
+			//デフォルトでメイン画面に遷移
+			default:
 				path = "/Shift_W/MainController";
 
 				RequestDispatcher req3 = request.getRequestDispatcher(path);
 				req3.forward(request, response);
 
-			default:
 				break;
 			}
 
