@@ -50,8 +50,6 @@ public class AdminLoginController extends HttpServlet {
 
 		String path = "/WEB-INF/admin/main.jsp";
 
-		request.setCharacterEncoding("UFT-8");
-
 		String adminId = request.getParameter("adminId");
 		String adminPassword = request.getParameter("adminPassword");
 
@@ -60,7 +58,7 @@ public class AdminLoginController extends HttpServlet {
 		request.setAttribute("adminDTO", dto);
 
 		if (dto == null) {
-			path = "/WEB-INF/main/Login.jsp";
+			path = "/WEB-INF/admin/login.jsp";
 
 		}
 
