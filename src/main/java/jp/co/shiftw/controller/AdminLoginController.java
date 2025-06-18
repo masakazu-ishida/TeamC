@@ -16,13 +16,13 @@ import jp.co.shiftw.service.AdminService;
  * Servlet implementation class Admin
  */
 @WebServlet("/Admin")
-public class AdminController extends HttpServlet {
+public class AdminLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AdminController() {
+	public AdminLoginController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -48,8 +48,8 @@ public class AdminController extends HttpServlet {
 
 		request.setCharacterEncoding("UFT-8");
 
-		String adminId = request.getParameter("id");
-		String adminPassword = request.getParameter("password");
+		String adminId = request.getParameter("adminId");
+		String adminPassword = request.getParameter("adminPassword");
 
 		AdminDTO dto = AdminService.loginAdmin(adminId, adminPassword);
 
