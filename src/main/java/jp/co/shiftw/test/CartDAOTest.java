@@ -3,6 +3,9 @@ package jp.co.shiftw.test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -173,4 +176,32 @@ class CartDAOTest {
 			e.printStackTrace();
 		}
 	}
+
+	@Test //カートに追加されているか
+	void CartListAddTest() {
+
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+
+			String strDate = "2020-10-20";
+			java.text.SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			java.util.Date expected = null;
+
+			try {
+				expected = dateFormat.parse(strDate);
+			} catch (ParseException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+				fail();
+			}
+
+			CartDAO dao = new CartDAO(conn);
+			dao.CartCerate("user", 4, 7, expected);
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
+	}
+
 }
