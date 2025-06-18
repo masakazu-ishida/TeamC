@@ -12,7 +12,7 @@ public class AdminService {
 	public static AdminDTO loginAdmin(String adminId, String password) {
 
 		AdminDTO adminDTO = null;
-
+		ConnectionUtil.mode = ConnectionUtil.MODE.TEST;
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
 			AdminDAO dao = new AdminDAO(conn);
 			adminDTO = dao.findById(adminId);
