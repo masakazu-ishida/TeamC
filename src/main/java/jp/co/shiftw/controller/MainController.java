@@ -46,6 +46,11 @@ public class MainController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+
+		String path = "/WEB-INF/main/main.jsp";
+
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
 	}
 
 }
