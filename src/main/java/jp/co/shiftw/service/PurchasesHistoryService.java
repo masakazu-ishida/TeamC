@@ -27,4 +27,20 @@ public class PurchasesHistoryService {
 
 		return list;
 	}
+
+	// purchaseIdで検索
+	public static PurchasesDTO searchPurchasesByPurchaseId(int purchaseId) {
+		PurchasesDTO purchase = null;
+
+		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
+			PurchasesDAO dao = new PurchasesDAO(conn);
+			purchase = dao.findByPurchaseId(purchaseId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ServletException e) {
+			e.printStackTrace();
+		}
+
+		return purchase;
+	}
 }

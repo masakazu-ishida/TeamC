@@ -32,6 +32,7 @@ class PurchasesDAOTest {
 		}
 	}
 
+	// findByItemIdのテスト
 	// 何も入力せずに検索を行った場合すべての結果を取得できるかのテスト
 	@Test
 	void testFindByNullId() {
@@ -120,8 +121,8 @@ class PurchasesDAOTest {
 		}
 	}
 
+	// findByPurchaseIdのテスト
 	// 存在するpurchaseIdで検索した場合正しく結果を取得出来るかのテスト
-	// 対象のUserIdから検索が出来るかのテスト
 	@Test
 	void testFindByPurchaseIdIsCorrect() {
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
@@ -152,6 +153,25 @@ class PurchasesDAOTest {
 
 				assertEquals(1, detail.getAmount());
 				assertEquals("東京都", purchase.getDestination());
+			} catch (Exception e) {
+				e.printStackTrace();
+				fail(e);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+	}
+
+	//存在しないpurchaseIdで検索した場合nullで取得出来るかのテスト
+	@Test
+	void testFindByPurchaseIdIsNotCorrect() {
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+			try {
+				PurchasesDAO dao = new PurchasesDAO(conn); //DAOの初期化
+				PurchasesDTO purchase = dao.findByPurchaseId(99999); //メソッドを実行しDTOを取得
+
+				assertNull(purchase); //DTOがNullで取得出来ているかのテスト
 			} catch (Exception e) {
 				e.printStackTrace();
 				fail(e);
