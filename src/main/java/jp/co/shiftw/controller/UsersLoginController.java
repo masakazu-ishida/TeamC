@@ -70,7 +70,7 @@ public class UsersLoginController extends HttpServlet {
 			//カート一覧へ遷移
 			case 1:
 
-				String path = "/Shift_W/CartListController";
+				String path = "/CartListController";
 
 				RequestDispatcher req1 = request.getRequestDispatcher(path);
 				req1.forward(request, response);
@@ -80,7 +80,7 @@ public class UsersLoginController extends HttpServlet {
 			//カート追加へ遷移
 			case 2:
 
-				path = "/Shift_W/CartAddController";
+				path = "/CartAddController";
 
 				RequestDispatcher req2 = request.getRequestDispatcher(path);
 				req2.forward(request, response);
@@ -89,7 +89,7 @@ public class UsersLoginController extends HttpServlet {
 
 			//デフォルトでメイン画面に遷移
 			default:
-				path = "/Shift_W/MainController";
+				path = "/MainController";
 
 				RequestDispatcher req3 = request.getRequestDispatcher(path);
 				req3.forward(request, response);

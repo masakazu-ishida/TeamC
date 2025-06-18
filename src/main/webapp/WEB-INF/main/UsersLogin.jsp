@@ -12,7 +12,7 @@
 	<body>
 		<h3>ログインしてください。</h3>
 		<br />
-		<form action='/controller/UsersLoginController.java' method='POST'>
+		<form action='/Shift_W/UsersLoginController' method='POST'>
 			<table>
 				<tr>
 					<th>会員ID</th>

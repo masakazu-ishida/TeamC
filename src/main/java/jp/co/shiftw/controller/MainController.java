@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class Main
  */
 @WebServlet("/Main")
-public class Main extends HttpServlet {
+public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Main() {
+	public MainController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
