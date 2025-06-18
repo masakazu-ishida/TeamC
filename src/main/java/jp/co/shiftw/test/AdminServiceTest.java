@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import jp.co.shiftw.dao.BaseDAO;
 import jp.co.shiftw.dto.AdminDTO;
-import jp.co.shiftw.service.AdminService;
+import jp.co.shiftw.service.AdminLoginService;
 import jp.co.shiftw.util.ConnectionUtil;
 
 class AdminServiceTest {
@@ -36,7 +36,7 @@ class AdminServiceTest {
 
 		try {
 
-			AdminDTO dto = AdminService.loginAdmin("admin", "admin");
+			AdminDTO dto = AdminLoginService.loginAdmin("admin", "admin");
 
 			assertNotNull(dto);
 
@@ -52,7 +52,7 @@ class AdminServiceTest {
 	@Test
 	void testLoginIsNot() {
 
-		AdminDTO dto = AdminService.loginAdmin("admin", "admin");
+		AdminDTO dto = AdminLoginService.loginAdmin("admin", "admin");
 
 		assertNull(dto);
 

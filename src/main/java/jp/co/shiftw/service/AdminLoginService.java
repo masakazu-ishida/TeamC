@@ -7,7 +7,7 @@ import jp.co.shiftw.dto.AdminDTO;
 import jp.co.shiftw.util.CommonConstants;
 import jp.co.shiftw.util.ConnectionUtil;
 
-public class AdminService {
+public class AdminLoginService {
 
 	public static AdminDTO loginAdmin(String adminId, String password) {
 
