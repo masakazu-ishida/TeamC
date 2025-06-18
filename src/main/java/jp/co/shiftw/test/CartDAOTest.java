@@ -109,7 +109,7 @@ class CartDAOTest {
 	@Test //存在するIDでリストを表示
 	void CartListServiceTest() {
 
-		List<CartDTO> list = CartListService.CartList("user");
+		List<CartDTO> list = CartListService.cartList("user");
 
 		assertEquals(3, list.size());
 
