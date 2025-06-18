@@ -70,9 +70,10 @@ public class UsersLoginController extends HttpServlet {
 
 				switch (sourse) {
 				case 1:
-					String path = "/CartListController";
-					RequestDispatcher rd = request.getRequestDispatcher(path);
-					rd.forward(request, response);
+					System.out.println("CartAdd");
+					//					String path = "/CartListController";
+					//					RequestDispatcher rd = request.getRequestDispatcher(path);
+					//					rd.forward(request, response);
 					break;
 
 				case 2:
