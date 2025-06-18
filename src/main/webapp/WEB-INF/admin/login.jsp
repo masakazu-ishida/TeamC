@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,7 +11,8 @@
 	<body>
 		<h3>管理者ログイン</h3>
 		<br />
-		<form action='../../Shift_W/Admin' method='POST'>
+		<h4><c:out value="${messeage}"/></h4>
+		<form action='/Shift_W/Admin' method='POST'>
 			<table>
 				<tr>
 					<th>管理者ID</th>

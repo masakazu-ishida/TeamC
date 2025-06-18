@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jp.co.shiftw.dto.AdminDTO;
-import jp.co.shiftw.service.AdminService;
+import jp.co.shiftw.service.AdminLoginService;
 
 /**
  * Servlet implementation class Admin
@@ -53,12 +53,14 @@ public class AdminLoginController extends HttpServlet {
 		String adminId = request.getParameter("adminId");
 		String adminPassword = request.getParameter("adminPassword");
 
-		AdminDTO dto = AdminService.loginAdmin(adminId, adminPassword);
+		AdminDTO dto = AdminLoginService.loginAdmin(adminId, adminPassword);
 
-		request.setAttribute("adminDTO", dto);
+		//request.setAttribute("adminDTO", dto);
 
 		if (dto == null) {
 			path = "/WEB-INF/admin/login.jsp";
+
+			request.setAttribute("messeage", "IDまたはパスワードが正しくありません");
 
 		}
 

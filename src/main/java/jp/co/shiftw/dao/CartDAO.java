@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import jp.co.shiftw.dto.CartDTO;
@@ -53,4 +54,25 @@ public class CartDAO extends BaseDAO {
 		}
 		return cartList;
 	}
+
+	public void CartCerate(String userId, int itemId, int amount, Date bookedDate) throws SQLException {
+
+		//カートに追加するレコードを取得するSQL
+		String sql = "INSERT INTO items_in_cart(userId,item_id,amount,booked_date) VALUES(?,?,?,?)";
+
+		//CartDTO dto =new CartDTO();
+
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+			ps.setString(1, userId);
+			ps.setInt(2, itemId);
+			ps.setInt(3, amount);
+			ps.setDate(4, new java.sql.Date(bookedDate.getTime()));
+
+			ps.executeUpdate();
+
+		}
+
+	}
+
 }
