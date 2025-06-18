@@ -14,6 +14,6 @@
 	
 	</form>
 	<a href="/Shift_W/CartListController">カートを見る</a><br>
-	<a href="/Shift_W/LoginController">ログイン</a>
+	<a href="/Shift_W/UsersLoginController">ログイン</a>
 </body>
 </html>

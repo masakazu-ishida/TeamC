@@ -99,4 +99,59 @@ public class PurchasesDAO extends BaseDAO {
 		return purchases;
 	}
 
+	// purchase_idをキーにPurchasesテーブルを検索
+	public PurchasesDTO findByPurchaseId(int purchaseId) throws SQLException {
+		PurchasesDTO purchase = null; // 戻り値(検索結果がない場合はnullで返される)
+		List<PurchaseDetailsDTO> details = new ArrayList<>(); //複数あるPurchaseDetailsを格納するリスト
+
+		String sql = "SELECT purchases.purchase_id, purchased_user, purchases.purchased_date, items.\"name\", items.color, items.manufacturer, items.price, purchase_details.amount, purchases.destination  "
+				+ " FROM purchases\n"
+				+ "	INNER JOIN purchase_details ON purchase_details.purchase_id = purchases.purchase_id\n"
+				+ "	INNER JOIN users ON users.user_id = purchases.purchased_user\n"
+				+ "	INNER JOIN items ON items.item_id = purchase_details.item_id\n"
+				+ "	WHERE purchases.purchase_id = ?;"; //実行するSQL文
+		int count = 0; //検索結果の件数
+
+		// SQLの実行
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setInt(1, purchaseId); // キーであるpurchaseIdをSQL文にセット
+
+			ResultSet rs = ps.executeQuery(); //SQL文を実行しResultSetに入れる
+
+			while (rs.next()) { //purchaseIdは1件のみだがpurchaseDetailsが複数あるのでwhile文を使用している
+				count++; //検索件数を追加
+				if (count == 1) { //最初の結果を取得した時にpurchaseの初期化を行う
+					purchase = new PurchasesDTO(); // purchaseの初期化
+
+					// purchaseのフィールドをセット
+					purchase.setPurchaseId(purchaseId);
+					purchase.setPurchasedUser(rs.getString("purchased_user"));
+					purchase.setPurchasedDate(rs.getDate("purchased_date"));
+					purchase.setDestination(rs.getString("destination"));
+				}
+
+				ItemsDTO item = new ItemsDTO(); //PurchaseDetailsDTOに格納されるItem
+
+				// itemのフィールドをセット
+				item.setName(rs.getString("name"));
+				item.setColor(rs.getString("color"));
+				item.setManufacturer(rs.getString("manufacturer"));
+				item.setPrice(rs.getInt("price"));
+
+				PurchaseDetailsDTO detail = new PurchaseDetailsDTO(); //PurchasesDTOに格納されるPurchaseDetails 
+
+				// detailのフィールドをセット
+				detail.setItem(item); // PurchaseDetailsDTOにItemsDTOを格納
+				detail.setAmount(rs.getInt("amount"));
+
+				details.add(detail); // List<PurchaseDetailsDTO>にdetailを入れる
+			}
+		}
+
+		if (count != 0) { //検索結果があった場合はPurchaseDetailsDTOのリストをPurchasesにセット
+			purchase.setPurchaseDetails(details);
+		}
+
+		return purchase;
+	}
 }

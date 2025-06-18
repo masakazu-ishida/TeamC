@@ -120,4 +120,45 @@ class PurchasesDAOTest {
 		}
 	}
 
+	// 存在するpurchaseIdで検索した場合正しく結果を取得出来るかのテスト
+	// 対象のUserIdから検索が出来るかのテスト
+	@Test
+	void testFindByPurchaseIdIsCorrect() {
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+			try {
+				PurchasesDAO dao = new PurchasesDAO(conn); //DAOの初期化
+				PurchasesDTO purchase = dao.findByPurchaseId(1); //メソッドを実行しDTOを取得
+
+				assertNotNull(purchase); //DTOが正しく取得できているか(Nullでないか)のテスト
+
+				// PurchasesDTOのフィールドが正しくセットされているかのテスト
+				assertEquals(1, purchase.getPurchaseId());
+				assertEquals("user", purchase.getPurchasedUser());
+				assertEquals("2020-10-20", purchase.getPurchasedDate().toString());
+
+				// PurchaseDetailsDTOのリストを取得
+				List<PurchaseDetailsDTO> details = purchase.getPurchaseDetails();
+				assertEquals(2, details.size()); // Detailsの件数が正しいかテスト
+
+				// リストの中からDetailを一つ取り出し中身を確認する
+				PurchaseDetailsDTO detail = details.get(0);
+
+				// DetailからItemを取り出し中身を確認
+				ItemsDTO item = detail.getItem();
+				assertEquals("麦わら帽子", item.getName());
+				assertEquals("黄色", item.getColor());
+				assertEquals("日本帽子製造", item.getManufacturer());
+				assertEquals(4980, item.getPrice());
+
+				assertEquals(1, detail.getAmount());
+				assertEquals("東京都", purchase.getDestination());
+			} catch (Exception e) {
+				e.printStackTrace();
+				fail(e);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+	}
 }

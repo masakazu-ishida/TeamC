@@ -9,17 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jp.co.shiftw.dto.AdminDTO;
+import jp.co.shiftw.service.AdminService;
+
 /**
- * Servlet implementation class Main
+ * Servlet implementation class Admin
  */
-@WebServlet("/Main")
-public class Main extends HttpServlet {
+@WebServlet("/Admin")
+public class AdminLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Main() {
+	public AdminLoginController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -32,11 +35,9 @@ public class Main extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		String path = "/WEB-INF/main/main.jsp";
-
+		String path = "/WEB-INF/admin/login.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);
-
 	}
 
 	/**
@@ -45,7 +46,27 @@ public class Main extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
+
+		String path = "/WEB-INF/admin/main.jsp";
+
+		String adminId = request.getParameter("adminId");
+		String adminPassword = request.getParameter("adminPassword");
+
+		AdminDTO dto = AdminService.loginAdmin(adminId, adminPassword);
+
+		request.setAttribute("adminDTO", dto);
+
+		if (dto == null) {
+			path = "/WEB-INF/admin/login.jsp";
+
+		}
+
+		//String value = request.setAttribute("value",AdminService.loginAdmin(Connection conn, String adminId, String password))
+
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
+
 	}
 
 }

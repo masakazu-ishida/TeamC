@@ -19,7 +19,7 @@ public class CategoriesDAO extends BaseDAO {
 
 	public List<CategoriesDTO> findAll() throws SQLException {
 
-		String sql = "SELECT * FROM Categories";
+		String sql = "SELECT category_id,name FROM Categories";
 
 		List<CategoriesDTO> list = new ArrayList<>();
 

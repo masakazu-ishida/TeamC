@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jp.co.shiftw.dto.AdminDTO;
-import jp.co.shiftw.service.AdminService;
-
 /**
- * Servlet implementation class Admin
+ * Servlet implementation class Main
  */
-@WebServlet("/Admin")
-public class AdminController extends HttpServlet {
+@WebServlet("/Main")
+public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AdminController() {
+	public MainController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -33,7 +30,13 @@ public class AdminController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		String path = "/WEB-INF/main/main.jsp";
+
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
+
 	}
 
 	/**
@@ -42,29 +45,12 @@ public class AdminController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
+		doGet(request, response);
 
-		String path = "/WEB-INF/admin/main.jsp";
-
-		request.setCharacterEncoding("UFT-8");
-
-		String adminId = request.getParameter("id");
-		String adminPassword = request.getParameter("password");
-
-		AdminDTO dto = AdminService.loginAdmin(adminId, adminPassword);
-
-		request.setAttribute("adminDTO", dto);
-
-		if (dto == null) {
-			path = "/WEB-INF/main/UsersLogin.jsp";
-
-		}
-
-		//String value = request.setAttribute("value",AdminService.loginAdmin(Connection conn, String adminId, String password))
+		String path = "/WEB-INF/main/main.jsp";
 
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);
-
 	}
 
 }
