@@ -60,16 +60,9 @@ public class UsersLoginController extends HttpServlet {
 		//IDパスワードチェック処理
 		if (dto != null) {
 
-<<<<<<< HEAD
-			//遷移先の判定処理
-			switch (source) {
-			//カート一覧へ遷移
-			case 1: {
-=======
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", dto.getName());
 			session.setAttribute("pass", dto.getPassword());
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamC.git
 
 			if (session.getAttribute("source") != null) {
 
@@ -79,37 +72,16 @@ public class UsersLoginController extends HttpServlet {
 				//カート一覧へ遷移
 				case 1:
 
-<<<<<<< HEAD
-				break;
-			}
-=======
 					String path = "/CartListController";
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamC.git
 
-<<<<<<< HEAD
-			//カート追加へ遷移
-			case 2:{
-=======
 					RequestDispatcher req1 = request.getRequestDispatcher(path);
 					req1.forward(request, response);
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamC.git
 
-<<<<<<< HEAD
-				String path = "/CartAddController";
-=======
 					break;
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamC.git
 
 				//カート追加へ遷移
 				case 2:
 
-<<<<<<< HEAD
-				break;
-			}
-			//デフォルトでメイン画面に遷移
-			default:{
-			
-=======
 					path = "/CartAddController";
 
 					RequestDispatcher req2 = request.getRequestDispatcher(path);
@@ -119,12 +91,10 @@ public class UsersLoginController extends HttpServlet {
 				}
 
 			} else {
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamC.git
 				String path = "/MainController";
 
 				RequestDispatcher req3 = request.getRequestDispatcher(path);
 				req3.forward(request, response);
-			}
 			}
 
 		} else {
