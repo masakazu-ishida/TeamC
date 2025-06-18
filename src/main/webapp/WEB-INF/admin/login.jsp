@@ -10,7 +10,7 @@
 	<body>
 		<h3>管理者ログイン</h3>
 		<br />
-		<form action='main.html' method='POST'>
+		<form action='../../Shift_W/controller/AdminLoginController' method='POST'>
 			<table>
 				<tr>
 					<th>管理者ID</th>
