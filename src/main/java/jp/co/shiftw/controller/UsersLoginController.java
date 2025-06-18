@@ -50,53 +50,80 @@ public class UsersLoginController extends HttpServlet {
 		//doGet(request, response);
 
 		//ユーザー情報の取得
-		String user_id = request.getParameter("user_id");
+		String userId = request.getParameter("user_id");
 		String password = request.getParameter("password");
 
-		UsersDTO dto = UsersService.loginUsers(user_id, password);
+		UsersDTO dto = UsersService.loginUsers(userId, password);
 
 		request.setAttribute("UsersDTO", dto);
 
-		HttpSession session = request.getSession(true);
-		session.setAttribute("userId", dto.getName());
-		session.setAttribute("pass", dto.getPassword());
-
-		int source = (int) session.getAttribute("source");
 		//IDパスワードチェック処理
 		if (dto != null) {
 
+<<<<<<< HEAD
 			//遷移先の判定処理
 			switch (source) {
 			//カート一覧へ遷移
 			case 1: {
+=======
+			HttpSession session = request.getSession();
+			session.setAttribute("userId", dto.getName());
+			session.setAttribute("pass", dto.getPassword());
+>>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamC.git
 
-				String path = "/CartListController";
+			if (session.getAttribute("source") != null) {
 
-				RequestDispatcher req1 = request.getRequestDispatcher(path);
-				req1.forward(request, response);
+				int source = (int) session.getAttribute("source");
+				//遷移先の判定処理
+				switch (source) {
+				//カート一覧へ遷移
+				case 1:
 
+<<<<<<< HEAD
 				break;
 			}
+=======
+					String path = "/CartListController";
+>>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamC.git
 
+<<<<<<< HEAD
 			//カート追加へ遷移
 			case 2:{
+=======
+					RequestDispatcher req1 = request.getRequestDispatcher(path);
+					req1.forward(request, response);
+>>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamC.git
 
+<<<<<<< HEAD
 				String path = "/CartAddController";
+=======
+					break;
+>>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamC.git
 
-				RequestDispatcher req2 = request.getRequestDispatcher(path);
-				req2.forward(request, response);
+				//カート追加へ遷移
+				case 2:
 
+<<<<<<< HEAD
 				break;
 			}
 			//デフォルトでメイン画面に遷移
 			default:{
 			
+=======
+					path = "/CartAddController";
+
+					RequestDispatcher req2 = request.getRequestDispatcher(path);
+					req2.forward(request, response);
+
+					break;
+				}
+
+			} else {
+>>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamC.git
 				String path = "/MainController";
 
 				RequestDispatcher req3 = request.getRequestDispatcher(path);
 				req3.forward(request, response);
-
-				break;
 			}
 			}
 

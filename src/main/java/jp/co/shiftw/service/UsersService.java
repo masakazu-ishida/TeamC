@@ -12,7 +12,7 @@ public class UsersService {
 	public static UsersDTO loginUsers(String user_id, String password) {
 
 		UsersDTO usersdto = new UsersDTO();
-
+		ConnectionUtil.mode = ConnectionUtil.MODE.TEST;
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
 			UsersDAO dao = new UsersDAO(conn);
 			usersdto = dao.findById(user_id);
