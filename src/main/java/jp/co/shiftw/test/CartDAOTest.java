@@ -31,6 +31,7 @@ class CartDAOTest {
 			} catch (Exception e) {
 				throw e;
 			}
+
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
@@ -38,6 +39,8 @@ class CartDAOTest {
 
 	@Test //存在するIDでリストを表示
 	void CartTest() {
+
+		System.out.println("存在するIDでリストを表示（DAO）");
 
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 
@@ -90,6 +93,8 @@ class CartDAOTest {
 				i = i + 1;
 			}
 
+			System.out.println("--------------------------------------------------");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -98,11 +103,15 @@ class CartDAOTest {
 	@Test //存在しないIDでリストを表示
 	void CartNullTest() {
 
+		System.out.println("存在しないIDでリストを表示（DAO）");
+
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 
 			CartDAO dao = new CartDAO(conn);
 			List<CartDTO> list = dao.CartList("usera");
 			assertEquals(0, list.size());
+
+			System.out.println("--------------------------------------------------");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,6 +120,8 @@ class CartDAOTest {
 
 	@Test //存在するIDでリストを表示
 	void CartListServiceTest() {
+
+		System.out.println("存在するIDでリストを表示（Service）");
 
 		List<CartDTO> list = CartListService.cartList("user");
 
@@ -161,16 +172,22 @@ class CartDAOTest {
 			i = i + 1;
 		}
 
+		System.out.println("--------------------------------------------------");
+
 	}
 
 	@Test //存在しないIDでリストを表示
 	void CartServiceNullTest() {
+
+		System.out.println("存在しないIDでリストを表示（Service）");
 
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 
 			CartDAO dao = new CartDAO(conn);
 			List<CartDTO> list = dao.CartList("usera");
 			assertEquals(0, list.size());
+
+			System.out.println("--------------------------------------------------");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -179,6 +196,8 @@ class CartDAOTest {
 
 	@Test //カートに追加されているか
 	void CartListAddTest() {
+
+		System.out.println("カートにアイテムを追加しリストを表示（Create）");
 
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 
@@ -189,7 +208,6 @@ class CartDAOTest {
 			try {
 				expected = dateFormat.parse(strDate);
 			} catch (ParseException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 				fail();
 			}
@@ -243,7 +261,7 @@ class CartDAOTest {
 				}
 
 				case 3: {
-					assertEquals("ストローハット", item.getName());
+					assertEquals("ストローハット PART2", item.getName());
 					assertEquals("青色", item.getColor());
 					assertEquals("(株)ストローハットジャパン", item.getManufacturer());
 					assertEquals(4480, item.getPrice());
@@ -254,6 +272,8 @@ class CartDAOTest {
 				}
 				i = i + 1;
 			}
+
+			System.out.println("--------------------------------------------------");
 
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
