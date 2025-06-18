@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jp.co.shiftw.dto.ItemsDTO;
+import jp.co.shiftw.service.ItemsSearchService;
+
 /**
  * Servlet implementation class ItemsSearchController
  */
@@ -44,7 +47,12 @@ public class ItemsSearchController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 
-		String value = request.getParameter(path);
+		String categoryId = request.getParameter("categoryId");
+		String name = request.getParameter("name");
+
+		int Id = Integer.parseInt(categoryId);
+
+		ItemsDTO dto = ItemsSearchService.findByCond(categoryId, name);
 
 	}
 
