@@ -65,14 +65,12 @@ public class UsersLoginController extends HttpServlet {
 			session.setAttribute("pass", dto.getPassword());
 
 			if (session.getAttribute("source") != null) {
-<<<<<<< HEAD
-=======
 
 				int sourse = (int) session.getAttribute("source");
 
 				switch (sourse) {
 				case 1:
-					System.out.println("CartAdd");
+					System.out.println("CartList");
 					//					String path = "/CartListController";
 					//					RequestDispatcher rd = request.getRequestDispatcher(path);
 					//					rd.forward(request, response);
@@ -84,47 +82,10 @@ public class UsersLoginController extends HttpServlet {
 				}
 
 			} else {
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamC.git
 				String path = "/MainController";
-<<<<<<< HEAD
-				RequestDispatcher req1 = request.getRequestDispatcher(path);
-				req1.forward(request, response);
-=======
 				RequestDispatcher rd = request.getRequestDispatcher(path);
 				rd.forward(request, response);
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamC.git
 			}
-
-			//				int source = (int) session.getAttribute("source");
-			//				//遷移先の判定処理
-			//				switch (source) {
-			//				//カート一覧へ遷移
-			//				case 1:
-			//
-			//					String path = "/CartListController";
-			//
-			//					RequestDispatcher req1 = request.getRequestDispatcher(path);
-			//					req1.forward(request, response);
-			//
-			//					break;
-			//
-			//				//カート追加へ遷移
-			//				case 2:
-			//
-			//					path = "/CartAddController";
-			//
-			//					RequestDispatcher req2 = request.getRequestDispatcher(path);
-			//					req2.forward(request, response);
-			//
-			//					break;
-			//				}
-			//
-			//			} else {
-			//				String path = "/MainController";
-			//
-			//				RequestDispatcher req3 = request.getRequestDispatcher(path);
-			//				req3.forward(request, response);
-			//			}
 
 		} else {
 			//ログイン画面へ遷移
