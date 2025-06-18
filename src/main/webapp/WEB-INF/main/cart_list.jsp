@@ -25,13 +25,12 @@
 				<td>${cart.items.manufacturer}</td>
 				<td>${cart.items.price}</td>
 				<td>${cart.amount}</td>
-				<td></td>
+				<td><input type="hidden" value="${cart.item.itemId }" 削除</td>
 			</tr>
 		</c:forEach>
-		
-		${totalAmount }
-		
 	</table>
+	合計：${totalAmount }<br>
+	<button href="/Shift_W/">購入</button>
 
 </body>
 </html>

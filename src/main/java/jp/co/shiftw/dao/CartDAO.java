@@ -33,6 +33,7 @@ public class CartDAO extends BaseDAO {
 			while (rs.next()) {
 				ItemsDTO item = new ItemsDTO();
 
+				item.setItemId(rs.getInt("item_id"));
 				item.setName(rs.getString("name"));
 				item.setColor(rs.getString("color"));
 				item.setManufacturer(rs.getString("manufacturer"));
@@ -42,6 +43,9 @@ public class CartDAO extends BaseDAO {
 
 				cart.setItems(item);
 				cart.setAmount(rs.getInt("amount"));
+
+				cart.setBookedDate(rs.getDate("booked_date"));
+				cart.setUserId(rs.getString("user_id"));
 
 				cartList.add(cart);
 			}

@@ -41,7 +41,6 @@ public class CartListController extends HttpServlet {
 		String cartListPath = "/WEB-INF/main/cart_list.jsp";
 
 		HttpSession session = request.getSession();
-		session.setAttribute("userId", "user");
 
 		if (session.getAttribute("userId") == null) {
 			session.setAttribute("source", 1);
