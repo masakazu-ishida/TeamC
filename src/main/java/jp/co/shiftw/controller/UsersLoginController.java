@@ -52,6 +52,7 @@ public class UsersLoginController extends HttpServlet {
 		//ユーザー情報の取得
 		String userId = request.getParameter("user_id");
 		String password = request.getParameter("password");
+		String source = request.getParameter("source");
 
 		UsersDTO dto = UsersService.loginUsers(userId, password);
 
@@ -62,9 +63,13 @@ public class UsersLoginController extends HttpServlet {
 
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", dto.getName());
-			session.setAttribute("pass", dto.getPassword());
 
-			if (session.getAttribute("source") != null) {
+			if (source == null || source == "") {
+				//メイン画面にフォワード
+			}
+
+			//カート一覧から飛んできた場合
+			else if (source.equals("1")) {
 
 				int sourse = (int) session.getAttribute("source");
 
