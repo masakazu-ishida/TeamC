@@ -65,9 +65,33 @@ public class UsersLoginController extends HttpServlet {
 			session.setAttribute("pass", dto.getPassword());
 
 			if (session.getAttribute("source") != null) {
+<<<<<<< HEAD
+=======
+
+				int sourse = (int) session.getAttribute("source");
+
+				switch (sourse) {
+				case 1:
+					String path = "/CartListController";
+					RequestDispatcher rd = request.getRequestDispatcher(path);
+					rd.forward(request, response);
+					break;
+
+				case 2:
+					System.out.println("CartAdd");
+					break;
+				}
+
+			} else {
+>>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamC.git
 				String path = "/MainController";
+<<<<<<< HEAD
 				RequestDispatcher req1 = request.getRequestDispatcher(path);
 				req1.forward(request, response);
+=======
+				RequestDispatcher rd = request.getRequestDispatcher(path);
+				rd.forward(request, response);
+>>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamC.git
 			}
 
 			//				int source = (int) session.getAttribute("source");
@@ -105,8 +129,8 @@ public class UsersLoginController extends HttpServlet {
 			//ログイン画面へ遷移
 			String path = "/WEB-INF/main/UsersLogin.jsp";
 
-			RequestDispatcher req4 = request.getRequestDispatcher(path);
-			req4.forward(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
 
 		}
 
