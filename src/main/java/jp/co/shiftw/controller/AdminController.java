@@ -56,7 +56,7 @@ public class AdminController extends HttpServlet {
 		request.setAttribute("adminDTO", dto);
 
 		if (dto == null) {
-			path = "/WEB-INF/main/Login.jsp";
+			path = "/WEB-INF/main/UsersLogin.jsp";
 
 		}
 
