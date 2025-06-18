@@ -26,6 +26,8 @@
 					<td colspan='2'><input type='submit' value='ログイン' /></td>
 				</tr>
 			</table>
+			
+			<input type ="hidden" name="source" value ="${source }">
 		</form>
 	</body>
 </html>
