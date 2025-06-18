@@ -18,6 +18,7 @@ public class ItemsSearchService {
 		List<ItemsDTO> list = new ArrayList<>();
 
 		//CommonConstantsのLOOKUP_NAMEに接続
+		ConnectionUtil.mode = ConnectionUtil.MODE.TEST;
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
 
 			//トランザクション処理を行う

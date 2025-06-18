@@ -43,7 +43,7 @@ class ItemsDAOTest {
 
 			try {
 
-				List<ItemsDTO> dtos = dao.findByCond(1, "麦わら帽子");
+				List<ItemsDTO> dtos = dao.findByCond(2, "鞄B");
 
 				assertNotNull(dtos);
 
@@ -55,8 +55,88 @@ class ItemsDAOTest {
 				//CategoriesDTOの取得
 				CategoriesDTO category = dto.getCategory();
 
-				assertEquals(1, category.getCategoryId());
-				assertEquals("麦わら帽子", dto.getName());
+				assertEquals(2, category.getCategoryId());
+				assertEquals("鞄B", dto.getName());
+
+				for (ItemsDTO itemsDTO : dtos) {
+					System.out.println(category.getCategoryId() + dto.getName());
+				}
+
+			} catch (Exception e) {
+
+				fail(e.getMessage());
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+
+	}
+
+	@Test
+	void testFindByKey() {
+
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+
+			ItemsDAO dao = new ItemsDAO(conn);
+
+			try {
+
+				List<ItemsDTO> dtos = dao.findByCond(0, "帽子");
+
+				assertNotNull(dtos);
+
+				assertEquals(2, dtos.size());
+
+				//リストの最初の要素を取得
+				ItemsDTO dto = dtos.get(0);
+
+				//CategoriesDTOの取得
+				CategoriesDTO category = dto.getCategory();
+
+				//				for (ItemsDTO itemsDTO : dtos) {
+				//					System.out.println(category.getCategoryId() + dto.getName());
+				//				}
+
+			} catch (Exception e) {
+
+				fail(e.getMessage());
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+
+	}
+
+	@Test
+	void testFindByCote() {
+
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+
+			ItemsDAO dao = new ItemsDAO(conn);
+
+			try {
+
+				List<ItemsDTO> dtos = dao.findByCond(1, "");
+
+				assertNotNull(dtos);
+
+				assertEquals(11, dtos.size());
+
+				//リストの最初の要素を取得
+				ItemsDTO dto = dtos.get(0);
+
+				//CategoriesDTOの取得
+				CategoriesDTO category = dto.getCategory();
+
+				//				for (ItemsDTO itemsDTO : dtos) {
+				//					System.out.println(category.getCategoryId() + dto.getName());
+				//				}
 
 			} catch (Exception e) {
 
