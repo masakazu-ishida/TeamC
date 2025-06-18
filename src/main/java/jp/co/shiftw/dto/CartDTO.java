@@ -4,16 +4,16 @@ import java.util.Date;
 
 public class CartDTO {
 
-	private int userId; //ユーザーID
+	private String userId; //ユーザーID
 	private ItemsDTO items; //ItemsDTO
 	private int amount; //商品の数量
 	private Date bookedDate; //カート登録日
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

@@ -6,22 +6,22 @@ import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import jp.co.shiftw.dao.BaseDAO;
-import jp.co.shiftw.dao.UsersDAO;
 import jp.co.shiftw.dto.UsersDTO;
 import jp.co.shiftw.service.UsersService;
+import jp.co.shiftw.util.CommonConstants;
 import jp.co.shiftw.util.ConnectionUtil;
 
 public class UsersServiseTest {
 
 	@BeforeEach
 	void init() {
-		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+		ConnectionUtil.mode = ConnectionUtil.MODE.TEST;
+		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
 
 			BaseDAO dao = new BaseDAO(conn);
 			try {
@@ -36,49 +36,38 @@ public class UsersServiseTest {
 	}
 
 	@Test
-	void testfindById() {
-		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
-			try {
-				UsersDTO dto = UsersService.loginUsers(conn, null, null);
-				assertNotNull(dto);
+	void testloginUsers() {
+		try {
 
-				assertEquals("user", dto.getUser_id());
-				assertEquals("userpass", dto.getPassword());
-				assertEquals("鳥取一郎", dto.getName());
-				assertEquals("鳥取県鳥取市河原町６丁目１０７", dto.getAddress());
+			UsersDTO user = UsersService.loginUsers("user", "userpass");
 
-			} catch (Exception e) {
+			assertNotNull(user);
 
-				fail(e.getMessage());
+			assertEquals("user", user.getUser_id());
+			assertEquals("userpass", user.getPassword());
+			assertEquals("鳥取一郎", user.getName());
+			assertEquals("鳥取県鳥取市河原町６丁目１０７", user.getAddress());
 
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+
 			fail(e.getMessage());
 
 		}
 	}
 
 	@Test
-	void testfindByIdisNot() {
-		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
-			UsersDAO dao = new UsersDAO(conn);
-			try {
+	void testloginUsersisNot() {
+		try {
 
-				UsersDTO dto = dao.findById("12345");
-				assertNull(dto);
-
-			} catch (Exception e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-				fail(e);
-			}
+			UsersDTO user = UsersService.loginUsers("user", "1userpass");
+			assertNull(user);
 
 		} catch (Exception e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 			fail(e);
 		}
+
 	}
 
 }
