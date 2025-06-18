@@ -197,7 +197,7 @@ class CartDAOTest {
 			CartDAO dao = new CartDAO(conn);
 			dao.CartCerate("user", 4, 7, expected);
 
-			List<CartDTO> list = CartListService.CartList("user");
+			List<CartDTO> list = CartListService.cartList("user");
 
 			assertEquals(4, list.size());
 
