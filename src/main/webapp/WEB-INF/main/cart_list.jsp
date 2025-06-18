@@ -25,8 +25,12 @@
 				<td>${cart.items.manufacturer}</td>
 				<td>${cart.items.price}</td>
 				<td>${cart.amount}</td>
+				<td></td>
 			</tr>
 		</c:forEach>
+		
+		${totalAmount }
+		
 	</table>
 
 </body>

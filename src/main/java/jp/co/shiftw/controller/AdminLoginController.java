@@ -16,13 +16,13 @@ import jp.co.shiftw.service.AdminService;
  * Servlet implementation class Admin
  */
 @WebServlet("/Admin")
-public class AdminController extends HttpServlet {
+public class AdminLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AdminController() {
+	public AdminLoginController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -33,7 +33,11 @@ public class AdminController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		String path = "/WEB-INF/admin/login.jsp";
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
 	}
 
 	/**
@@ -46,17 +50,15 @@ public class AdminController extends HttpServlet {
 
 		String path = "/WEB-INF/admin/main.jsp";
 
-		request.setCharacterEncoding("UFT-8");
-
-		String adminId = request.getParameter("id");
-		String adminPassword = request.getParameter("password");
+		String adminId = request.getParameter("adminId");
+		String adminPassword = request.getParameter("adminPassword");
 
 		AdminDTO dto = AdminService.loginAdmin(adminId, adminPassword);
 
 		request.setAttribute("adminDTO", dto);
 
 		if (dto == null) {
-			path = "/WEB-INF/main/Login.jsp";
+			path = "/WEB-INF/admin/login.jsp";
 
 		}
 

@@ -44,7 +44,7 @@ public class CartListController extends HttpServlet {
 		session.setAttribute("userId", "user");
 
 		if (session.getAttribute("userId") == null) {
-			session.setAttribute("source", "1");
+			session.setAttribute("source", 1);
 
 			RequestDispatcher rd = request.getRequestDispatcher(loginPath);
 			rd.forward(request, response);
@@ -52,10 +52,10 @@ public class CartListController extends HttpServlet {
 			String userId = (String) session.getAttribute("userId");
 
 			List<CartDTO> cartList = CartListService.CartList(userId);
-			//int totalAmount = CartListService.TotalAmount(cartList);
+			int totalAmount = CartListService.TotalAmount(cartList);
 
 			request.setAttribute("cartList", cartList);
-			//request.setAttribute("totalAmount", totalAmount);
+			request.setAttribute("totalAmount", totalAmount);
 
 			RequestDispatcher rd = request.getRequestDispatcher(cartListPath);
 			rd.forward(request, response);
