@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import jp.co.shiftw.dto.UsersDTO;
 import jp.co.shiftw.service.UsersService;
@@ -52,55 +51,39 @@ public class UsersLoginController extends HttpServlet {
 		//ユーザー情報の取得
 		String userId = request.getParameter("user_id");
 		String password = request.getParameter("password");
-		String source = request.getParameter("source");
 
 		UsersDTO dto = UsersService.loginUsers(userId, password);
 
 		request.setAttribute("UsersDTO", dto);
 
+		String source = (String) request.getAttribute("source");
 		//IDパスワードチェック処理
 		if (dto != null) {
 
-			HttpSession session = request.getSession();
-			session.setAttribute("userId", dto.getName());
-
 			if (source == null || source == "") {
 				//メイン画面にフォワード
-			}
-
-			//カート一覧から飛んできた場合
-			else if (source.equals("1")) {
-
-				int sourse = (int) session.getAttribute("source");
-
-				switch (sourse) {
-				case 1:
-					System.out.println("CartList");
-					//					String path = "/CartListController";
-					//					RequestDispatcher rd = request.getRequestDispatcher(path);
-					//					rd.forward(request, response);
-					break;
-
-				case 2:
-					System.out.println("CartAdd");
-					break;
-				}
-
-			} else {
 				String path = "/MainController";
 				RequestDispatcher rd = request.getRequestDispatcher(path);
 				rd.forward(request, response);
+
+				//カート一覧から飛んできた場合
+			} else if (source.equals("1")) {
+				String path = "/CartListController";
+				RequestDispatcher rd = request.getRequestDispatcher(path);
+				rd.forward(request, response);
+
+			} else if (source.equals("2")) {
+				String path = "/CartAddController";
+				RequestDispatcher rd = request.getRequestDispatcher(path);
+				rd.forward(request, response);
+
 			}
 
 		} else {
-			//ログイン画面へ遷移
-			String path = "/WEB-INF/main/UsersLogin.jsp";
-
+			String path = "/UsersLogin.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
-
 		}
 
 	}
-
 }

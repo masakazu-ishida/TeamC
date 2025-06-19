@@ -43,7 +43,7 @@ public class CartListController extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		if (session.getAttribute("userId") == null) {
-			session.setAttribute("source", 1);
+			request.setAttribute("source", "1");
 
 			RequestDispatcher rd = request.getRequestDispatcher(loginPath);
 			rd.forward(request, response);
