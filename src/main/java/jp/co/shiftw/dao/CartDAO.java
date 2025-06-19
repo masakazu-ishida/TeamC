@@ -111,4 +111,20 @@ public class CartDAO extends BaseDAO {
 		return cartItem;
 	}
 
+	public void cartDelete(String userId, int itemId) throws SQLException {
+		//カートに追加するレコードを取得するSQL
+		String sql = "INSERT INTO items_in_cart(user_id,item_id,amount,booked_date) VALUES(?,?,?,?)";
+
+		//CartDTO dto =new CartDTO();
+
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+			ps.setString(1, userId);
+			ps.setInt(2, itemId);
+
+			ps.executeUpdate();
+
+		}
+	}
+
 }
