@@ -1,24 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>カート削除確認画面</title>
 </head>
 <body>
 
-<h3>以下の商品をショッピングカートから削除してよろしいですか？</h3>
-		<br />
-		<c:out value="${name}"/><br/>
-		<c:out value="${manufasuture}"/><br/>
-		<c:out value="${price}"/><br/>
-		<c:out value="${amount}"/><br /><br/>
-		<form action='/Shift_W/CartDeleteCheckController' method='POST'>
+<h3>以下の商品をショッピングカートから削除してよろしいですか？</h3><br>
+			${cartItem.items.name}<br>
+			${cartItem.items.color}<br>
+			${cartItem.items.manufacturer}<br>
+			${cartItem.items.price}<br>
+			数量：${cartItem.amount}個<br>
+			
+		<form action='/Shift_W/CartDeleteController' method='POST'>
 			<input type='hidden' name='itemId' value='123' />
-			<input type='submit' value='削除する' /><br/>
+			<input type='submit' value='削除する' /><br>
 		</form>
-		<a href='/Shift_W/ItemSearchController'>商品検索へ</a><br/>
+		<a href='/Shift_W/MainController'>商品検索へ</a><br>
 
 
 </body>
