@@ -1,6 +1,7 @@
 package jp.co.shiftw.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import jp.co.shiftw.dao.CartDAO;
@@ -13,7 +14,7 @@ public class CartListService {
 
 	public static List<CartDTO> cartList(String userId) {
 
-		List<CartDTO> cartList = null;
+		List<CartDTO> cartList = new ArrayList<>();
 
 		ConnectionUtil.mode = ConnectionUtil.MODE.TEST;
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {

@@ -34,7 +34,6 @@ public class CartDAO extends BaseDAO {
 			while (rs.next()) {
 				ItemsDTO item = new ItemsDTO();
 
-				item.setItemId(rs.getInt("item_id"));
 				item.setName(rs.getString("name"));
 				item.setColor(rs.getString("color"));
 				item.setManufacturer(rs.getString("manufacturer"));
@@ -44,9 +43,6 @@ public class CartDAO extends BaseDAO {
 
 				cart.setItems(item);
 				cart.setAmount(rs.getInt("amount"));
-
-				cart.setBookedDate(rs.getDate("booked_date"));
-				cart.setUserId(rs.getString("user_id"));
 
 				cartList.add(cart);
 			}
@@ -58,7 +54,7 @@ public class CartDAO extends BaseDAO {
 	public void CartCerate(String userId, int itemId, int amount, Date bookedDate) throws SQLException {
 
 		//カートに追加するレコードを取得するSQL
-		String sql = "INSERT INTO items_in_cart(userId,item_id,amount,booked_date) VALUES(?,?,?,?)";
+		String sql = "INSERT INTO items_in_cart(user_id,item_id,amount,booked_date) VALUES(?,?,?,?)";
 
 		//CartDTO dto =new CartDTO();
 

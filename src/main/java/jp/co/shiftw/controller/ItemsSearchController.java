@@ -1,7 +1,9 @@
 package jp.co.shiftw.controller;
 
 import java.io.IOException;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,9 +43,8 @@ public class ItemsSearchController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
 
-		String path = "/WEB-INF/admin/main.jsp";
+		String path = "/WEB-INF/main/Search_result.jsp";
 
 		request.setCharacterEncoding("UTF-8");
 
@@ -52,7 +53,15 @@ public class ItemsSearchController extends HttpServlet {
 
 		int Id = Integer.parseInt(categoryId);
 
-		ItemsDTO dto = ItemsSearchService.findByCond(categoryId, name);
+		List<ItemsDTO> dto = ItemsSearchService.findByCond(Id, name);
+
+		request.setAttribute("keyword", name);
+		request.setAttribute("category", Id);
+		request.setAttribute("ItemsDTO", dto);
+
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+
+		rd.forward(request, response);
 
 	}
 

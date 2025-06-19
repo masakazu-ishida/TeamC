@@ -17,6 +17,80 @@ public class PurchasesDAO extends BaseDAO {
 		super(conn);
 	}
 
+	// Purchasesテーブルを全検索
+	public List<PurchasesDTO> findAll() throws SQLException {
+		List<PurchasesDTO> purchases = new ArrayList<>();//purchase_idごとのpurchasesを格納するリスト
+		String sql = "SELECT purchases.purchase_id, purchased_user, purchases.purchased_date, items.\"name\", items.color, items.manufacturer, items.price, purchase_details.amount, purchases.destination  "
+				+ " FROM purchases\n"
+				+ "	INNER JOIN purchase_details ON purchase_details.purchase_id = purchases.purchase_id\n"
+				+ "	INNER JOIN users ON users.user_id = purchases.purchased_user\n"
+				+ "	INNER JOIN items ON items.item_id = purchase_details.item_id\n"
+				+ "	WHERE purchases.cancel = false \n"
+				+ "	ORDER BY purchases.purchased_date DESC,"
+				+ "purchases.purchase_id ASC";
+		//SQL文の実行
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int purchaseId = rs.getInt("purchase_id");
+				PurchasesDTO purchase = null;
+
+				boolean flg = true;
+				for (PurchasesDTO dto : purchases) {
+					// 既に作成しているPurchasesDTOがあればそれを使用する
+					if (dto.getPurchaseId() == purchaseId) {
+						purchase = dto;
+						flg = false;
+						break;
+					}
+				}
+
+				//既に作成しているPurchasesDTOがない場合は新規作成
+				if (flg) {
+					purchase = new PurchasesDTO();
+					purchase.setPurchaseId(purchaseId);
+					purchase.setPurchasedUser(rs.getString("purchased_user"));
+					purchase.setPurchasedDate(rs.getDate("purchased_date"));
+					purchase.setDestination(rs.getString("destination"));
+				}
+
+				// Purchasesに格納するPurchaseDetailsのリスト
+				List<PurchaseDetailsDTO> details = purchase.getPurchaseDetails();
+
+				// リストがまだ作られていない場合は新規作成する
+				if (details == null) {
+					details = new ArrayList<>();
+				}
+
+				ItemsDTO item = new ItemsDTO(); // PurchaseDetailsDTOに格納されるItem
+
+				item.setName(rs.getString("name"));
+				item.setColor(rs.getString("color"));
+				item.setManufacturer(rs.getString("manufacturer"));
+				item.setPrice(rs.getInt("price"));
+
+				PurchaseDetailsDTO detail = new PurchaseDetailsDTO();
+
+				detail.setItem(item); // PurchaseDetailsDTOにItemsDTOを格納
+				detail.setAmount(rs.getInt("amount"));
+
+				details.add(detail); // List<PurchaseDetailsDTO>にdetailを入れる
+				purchase.setPurchaseDetails(details); // PurchaseDTOにリストを入れる
+
+				int index = purchases.indexOf(purchase);
+
+				if (index != -1) {
+					purchases.set(purchases.indexOf(purchase), purchase);
+				} else {
+					purchases.add(purchase); // List<PurchaseDTO>にpurchaseを入れる
+				}
+			}
+		}
+
+		return purchases;
+	}
+
 	// user_id(purchaced_user)をキーにPurchasesテーブルを検索
 	public List<PurchasesDTO> findByUserId(String userId) throws SQLException {
 		List<PurchasesDTO> purchases = new ArrayList<>();//purchase_idごとのpurchasesを格納するリスト
@@ -25,7 +99,7 @@ public class PurchasesDAO extends BaseDAO {
 				+ "	INNER JOIN purchase_details ON purchase_details.purchase_id = purchases.purchase_id\n"
 				+ "	INNER JOIN users ON users.user_id = purchases.purchased_user\n"
 				+ "	INNER JOIN items ON items.item_id = purchase_details.item_id\n"
-				+ "	WHERE users.user_id LIKE ? \n"
+				+ "	WHERE users.user_id LIKE ? AND purchases.cancel = false \n"
 				+ "	ORDER BY purchases.purchased_date DESC,"
 				+ "purchases.purchase_id ASC";
 
@@ -109,7 +183,7 @@ public class PurchasesDAO extends BaseDAO {
 				+ "	INNER JOIN purchase_details ON purchase_details.purchase_id = purchases.purchase_id\n"
 				+ "	INNER JOIN users ON users.user_id = purchases.purchased_user\n"
 				+ "	INNER JOIN items ON items.item_id = purchase_details.item_id\n"
-				+ "	WHERE purchases.purchase_id = ?;"; //実行するSQL文
+				+ "	WHERE purchases.purchase_id = ? AND purchases.cancel = false;"; //実行するSQL文
 		int count = 0; //検索結果の件数
 
 		// SQLの実行
@@ -153,5 +227,15 @@ public class PurchasesDAO extends BaseDAO {
 		}
 
 		return purchase;
+	}
+
+	// 特定の注文IDの注文をキャンセルにする
+	public void cancel(int purchaseId) throws SQLException {
+		String sql = "UPDATE purchases SET cancel = true WHERE purchase_id = ?";
+
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setInt(1, purchaseId);
+			ps.executeUpdate();
+		}
 	}
 }
