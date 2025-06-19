@@ -41,7 +41,7 @@ public class CartDeleteCheckController extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		String userId = (String) session.getAttribute("userId");
-		int itemId = (int) request.getAttribute("itemId");
+		int itemId = Integer.parseInt(request.getParameter("userId"));
 
 		CartDTO cartItem = CartDeleteCheckService.cartDeleteCheckService(userId, itemId);
 

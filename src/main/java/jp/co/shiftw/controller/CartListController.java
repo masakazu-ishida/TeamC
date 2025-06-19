@@ -47,6 +47,7 @@ public class CartListController extends HttpServlet {
 			rd.forward(request, response);
 		} else {
 			HttpSession session = request.getSession();
+
 			String userId = (String) session.getAttribute("userId");
 
 			List<CartDTO> cartList = CartListService.cartList(userId);

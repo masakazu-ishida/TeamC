@@ -20,7 +20,7 @@ public class CartDAO extends BaseDAO {
 	public List<CartDTO> CartList(String userId) throws SQLException {
 
 		List<CartDTO> cartList = new ArrayList<>();
-		String sql = "SELECT items.name, items.color, items.manufacturer, items.price, items_in_cart.amount\n"
+		String sql = "SELECT items.name, items.color, items.manufacturer, items.price, items_in_cart.amount , items.item_id\n"
 				+ "From items_in_cart \n"
 				+ "INNER JOIN items \n"
 				+ "ON items_in_cart.item_id = items.item_id \n"
@@ -38,6 +38,7 @@ public class CartDAO extends BaseDAO {
 				item.setColor(rs.getString("color"));
 				item.setManufacturer(rs.getString("manufacturer"));
 				item.setPrice(rs.getInt("price"));
+				item.setItemId(rs.getInt("item_id"));
 
 				CartDTO cart = new CartDTO();
 

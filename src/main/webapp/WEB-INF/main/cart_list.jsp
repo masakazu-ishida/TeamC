@@ -25,12 +25,13 @@
 				<td>${cart.items.manufacturer}</td>
 				<td>${cart.items.price}</td>
 				<td>${cart.amount}</td>
-				<td><a href = "/Shift_W/CartDeleteCheckController" value="${cart.items.itemId }" >削除</a></td>
+				<td><a href = "/Shift_W/CartDeleteCheckController?itemId=${cart.items.itemId }" >削除</a></td>
 			</tr>
 		</c:forEach>
 	</table>
 	合計：${totalAmount }<br>
-	<button href="/Shift_W/">購入</button>
+	<button href="/Shift_W/CartDeleteCheckController">購入</button><br>
+	<a href="/Shift_W/MainController">メインメニュー</a>
 
 </body>
 </html>
