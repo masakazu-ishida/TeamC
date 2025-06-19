@@ -40,7 +40,7 @@ class PurchasesDAOTest {
 			try {
 				PurchasesDAO dao = new PurchasesDAO(conn);
 				List<PurchasesDTO> list = dao.findByUserId(null);
-				assertEquals(2, list.size());
+				assertEquals(3, list.size());
 				PurchasesDTO purchaces = list.get(0);
 				assertEquals(1, purchaces.getPurchaseId());
 				assertEquals("user", purchaces.getPurchasedUser());
@@ -75,7 +75,7 @@ class PurchasesDAOTest {
 			try {
 				PurchasesDAO dao = new PurchasesDAO(conn);
 				List<PurchasesDTO> list = dao.findByUserId("user");
-				assertEquals(1, list.size());
+				assertEquals(2, list.size());
 				PurchasesDTO purchaces = list.get(0);
 				assertEquals(1, purchaces.getPurchaseId());
 				assertEquals("user", purchaces.getPurchasedUser());
@@ -172,6 +172,50 @@ class PurchasesDAOTest {
 				PurchasesDTO purchase = dao.findByPurchaseId(99999); //メソッドを実行しDTOを取得
 
 				assertNull(purchase); //DTOがNullで取得出来ているかのテスト
+			} catch (Exception e) {
+				e.printStackTrace();
+				fail(e);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+	}
+
+	//存在するpurchaseIdでキャンセル処理を行った結果検索で表示されなくなるかのテスト
+	@Test
+	void testCanselIsCorrect() {
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+			try {
+				PurchasesDAO dao = new PurchasesDAO(conn); //DAOの初期化
+				dao.cancel(1);//キャンセル処理を実行
+
+				List<PurchasesDTO> purchasesDTOs = dao.findByUserId("user"); //userの注文(本来は2つだが1つをキャンセルした)を取得
+				assertEquals(1, purchasesDTOs.size()); //取得件数が減っているかどうか確認
+
+				PurchasesDTO purchasesDTO = dao.findByPurchaseId(1); //先ほどキャンセルした注文を取得
+				assertNull(purchasesDTO); //取得出来ていないことを確認
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				fail(e);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+	}
+
+	//存在しないpurchaseIdでキャンセル処理を行った結果何も変わらないことを確認
+	@Test
+	void testCanselIsNotCorrect() {
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+			try {
+				PurchasesDAO dao = new PurchasesDAO(conn); //DAOの初期化
+				dao.cancel(9999);//キャンセル処理を実行
+
+				List<PurchasesDTO> purchasesDTOs = dao.findByUserId(null); //全件検索
+				assertEquals(3, purchasesDTOs.size()); //取得件数が変わっていないかの確認
 			} catch (Exception e) {
 				e.printStackTrace();
 				fail(e);

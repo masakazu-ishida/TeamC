@@ -20,10 +20,6 @@
 				<th></th>
 			</tr>
 			<c:forEach var="pur" items="${purchases}" >
-			<form action="purchaseCansel" id="form1" method="post">
-							<input type="hidden" name="purchase_id" value="${pur.purchaseId}">
-			</form>
-			
 				<tr>
 					<td>${pur.purchasedUser}</td>
 					<td>${pur.purchasedDate}</td>

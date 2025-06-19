@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jp.co.shiftw.dto.PurchasesDTO;
+import jp.co.shiftw.service.PurchasesHistoryService;
+
 /**
  * Servlet implementation class PurchaseCanselController
  */
@@ -28,8 +31,14 @@ public class PurchaseCanselController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int purchaseId = Integer.parseInt(request.getParameter("purchase_id"));
-		response.getWriter().append(purchaseId + "");
+
+		int purchaseId = Integer.parseInt(request.getParameter("purchase_id")); //前のページでセットしたpurchaseIdを取得
+
+		PurchasesDTO purchase = PurchasesHistoryService.searchPurchasesByPurchaseId(purchaseId); //purchaseIdをキーとしてDTOを検索
+
+		request.setAttribute("purchase", purchase);
+
+		request.getRequestDispatcher("/WEB-INF/admin/purchases_cansel_confirm.jsp").forward(request, response);
 	}
 
 	/**
