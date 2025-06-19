@@ -20,7 +20,7 @@ public class PurchasesDAO extends BaseDAO {
 	// user_id(purchaced_user)をキーにPurchasesテーブルを検索
 	public List<PurchasesDTO> findByUserId(String userId) throws SQLException {
 		List<PurchasesDTO> purchases = new ArrayList<>();//purchase_idごとのpurchasesを格納するリスト
-		String sql = "SELECT purchases.purchase_id, purchased_user, purchases.purchased_date, items.\"name\", items.color, items.manufacturer, items.price, purchase_details.amount, purchases.destination  "
+		String sql = "SELECT purchases.purchase_id, purchased_user, purchases.purchased_date, items.item_id, items.\"name\", items.color, items.manufacturer, items.price, purchase_details.amount, purchases.destination  "
 				+ " FROM purchases\n"
 				+ "	INNER JOIN purchase_details ON purchase_details.purchase_id = purchases.purchase_id\n"
 				+ "	INNER JOIN users ON users.user_id = purchases.purchased_user\n"
@@ -73,6 +73,7 @@ public class PurchasesDAO extends BaseDAO {
 
 				ItemsDTO item = new ItemsDTO(); // PurchaseDetailsDTOに格納されるItem
 
+				item.setItemId(rs.getInt("item_id"));
 				item.setName(rs.getString("name"));
 				item.setColor(rs.getString("color"));
 				item.setManufacturer(rs.getString("manufacturer"));
@@ -104,7 +105,7 @@ public class PurchasesDAO extends BaseDAO {
 		PurchasesDTO purchase = null; // 戻り値(検索結果がない場合はnullで返される)
 		List<PurchaseDetailsDTO> details = new ArrayList<>(); //複数あるPurchaseDetailsを格納するリスト
 
-		String sql = "SELECT purchases.purchase_id, purchased_user, purchases.purchased_date, items.\"name\", items.color, items.manufacturer, items.price, purchase_details.amount, purchases.destination  "
+		String sql = "SELECT purchases.purchase_id, purchased_user, purchases.purchased_date, items.item_id, items.\"name\", items.color, items.manufacturer, items.price, purchase_details.amount, purchases.destination  "
 				+ " FROM purchases\n"
 				+ "	INNER JOIN purchase_details ON purchase_details.purchase_id = purchases.purchase_id\n"
 				+ "	INNER JOIN users ON users.user_id = purchases.purchased_user\n"
@@ -133,6 +134,7 @@ public class PurchasesDAO extends BaseDAO {
 				ItemsDTO item = new ItemsDTO(); //PurchaseDetailsDTOに格納されるItem
 
 				// itemのフィールドをセット
+				item.setItemId(rs.getInt("item_id"));
 				item.setName(rs.getString("name"));
 				item.setColor(rs.getString("color"));
 				item.setManufacturer(rs.getString("manufacturer"));

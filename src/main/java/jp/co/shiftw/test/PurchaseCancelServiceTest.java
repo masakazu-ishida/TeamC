@@ -9,7 +9,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import jp.co.shiftw.dao.BaseDAO;
+import jp.co.shiftw.dto.ItemsDTO;
+import jp.co.shiftw.dto.PurchaseDetailsDTO;
 import jp.co.shiftw.dto.PurchasesDTO;
+import jp.co.shiftw.service.ItemsSearchService;
 import jp.co.shiftw.service.PurchaseCancelService;
 import jp.co.shiftw.service.PurchasesHistoryService;
 import jp.co.shiftw.util.ConnectionUtil;
@@ -31,16 +34,32 @@ class PurchaseCancelServiceTest {
 		}
 	}
 
-	//存在するpurchaseIdでキャンセル処理を行った結果検索で表示されなくなるかのテスト
+	//存在するpurchaseIdでキャンセル処理を行った結果検索で表示されなくなり, 在庫が変化しているかのテスト
 	@Test
 	void testCancelPurchaseIsCorrect() {
-		PurchaseCancelService.cancelPurchase(1); //キャンセル処理を実行
+		// キャンセルされる商品の元の在庫数を調べる
+		ItemsDTO itemsDTO = ItemsSearchService.findByItemId(2);
+		int stockBefore = itemsDTO.getStock();
 
-		List<PurchasesDTO> purchasesDTOs = PurchasesHistoryService.searchPurchasesByUserId("user"); //userの注文(本来は2つだが1つをキャンセルした)を取得
-		assertEquals(1, purchasesDTOs.size()); //取得件数が減っているかどうか確認
+		// キャンセルする商品の購入品数を調べる
+		PurchasesDTO purchasesDTO = PurchasesHistoryService.searchPurchasesByPurchaseId(2);
+		List<PurchaseDetailsDTO> purchaseDetails = purchasesDTO.getPurchaseDetails();
+		PurchaseDetailsDTO purchaseDetailsDTO = purchaseDetails.get(0);
+		int amount = purchaseDetailsDTO.getAmount();
 
-		PurchasesDTO purchasesDTO = PurchasesHistoryService.searchPurchasesByPurchaseId(1); //先ほどキャンセルした注文を取得
+		PurchaseCancelService.cancelPurchase(2); //キャンセル処理を実行
+
+		List<PurchasesDTO> purchasesDTOs = PurchasesHistoryService.searchPurchasesByUserId("user2"); //userの注文(本来は2つだが1つをキャンセルした)を取得
+		assertEquals(0, purchasesDTOs.size()); //取得件数が減っているかどうか確認
+
+		purchasesDTO = PurchasesHistoryService.searchPurchasesByPurchaseId(2); //先ほどキャンセルした注文を取得
 		assertNull(purchasesDTO); //取得出来ていないことを確認
+
+		// 商品の在庫数がキャンセルされた商品の注文個数分増えているかの確認
+		itemsDTO = ItemsSearchService.findByItemId(2);
+		int stockAfter = itemsDTO.getStock();
+
+		assertEquals(stockBefore + amount, stockAfter);
 	}
 
 	//存在しないpurchaseIdでキャンセル処理を行った結果何も変わらないことを確認

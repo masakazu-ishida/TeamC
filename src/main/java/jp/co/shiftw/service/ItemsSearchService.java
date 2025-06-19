@@ -72,4 +72,34 @@ public class ItemsSearchService {
 
 	}
 
+	public static ItemsDTO findByItemId(int itemId) {
+
+		//DTOの作成
+		ItemsDTO dto = null;
+
+		//CommonConstantsのLOOKUP_NAMEに接続
+		ConnectionUtil.mode = ConnectionUtil.MODE.TEST;
+		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
+
+			//トランザクション処理を行う
+			try {
+				ItemsDAO dao = new ItemsDAO(conn);
+				dto = dao.findByItemId(itemId);
+
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return dto;
+
+	}
+
 }
