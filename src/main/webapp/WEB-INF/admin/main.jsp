@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>管理者メインページ</title>
 </head>
 <body>
 		<h3>管理者メインページ</h3>
