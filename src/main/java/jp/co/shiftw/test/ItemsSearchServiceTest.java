@@ -148,4 +148,16 @@ class ItemsSearchServiceTest {
 
 	}
 
+	@Test
+	//キーワードなしカテゴリ全て
+	void testfindByItemId() {
+
+		ItemsDTO dtos = ItemsSearchService.findByItemId(1);
+
+		assertNotNull(dtos);
+
+		assertEquals(1, 1);
+
+	}
+
 }

@@ -19,20 +19,23 @@
 			</tr>
 			<c:forEach var="item" items="${ItemsDTO}" >
 			<tr>
+			  	<td><a href= "/Shift_W/ItemsDetailController?itemId=${item.itemId}">${item.name}</a></td>
+			  	<td>${item.itemId}</td>
 			  	<td>${item.name}</td>
 			  	<td>${item.color}</td>
 			  	<td>${item.manufacturer}</td>
-			  	<td>${item.price}</td>
+			  	<td>${item.price}円</td>
 			</tr>
 			</c:forEach>
 		</table>
-		前へ 
-		1 
+		前へ
+		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=1">1</a>
 		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=2">2</a> 
 		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=3">3</a>
 		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=4">4</a>
 		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=5">5</a>
-		次へ<br>
+		次へ</a>
+		<br>
 		
 		<a href = "/Shift_W/MainController">商品検索</a>へ
 
