@@ -37,7 +37,7 @@ public class CartListController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		String loginPath = "/WEB-INF/main/users_login.jsp";
+		String loginPath = "/Shift-W/UsersLogin";
 		String cartListPath = "/WEB-INF/main/cart_list.jsp";
 
 		HttpSession session = request.getSession(false);

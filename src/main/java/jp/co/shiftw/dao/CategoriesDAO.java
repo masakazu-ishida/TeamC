@@ -43,7 +43,7 @@ public class CategoriesDAO extends BaseDAO {
 	}
 
 	//category_idを主キーにレコードを取得
-	public CategoriesDTO findById(int category_id) {
+	public CategoriesDTO findById(int categoryId) throws SQLException {
 
 		String sql = "SELECT category_id,name FROM categories WHERE category_id = ?";
 
@@ -64,11 +64,7 @@ public class CategoriesDAO extends BaseDAO {
 				dto.setName(rs.getString("name"));
 			}
 
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
 		}
-
 		return dto;
 
 	}
