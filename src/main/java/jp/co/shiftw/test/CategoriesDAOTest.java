@@ -66,4 +66,32 @@ public class CategoriesDAOTest {
 		}
 	}
 
+	@Test
+	void testFindById() {
+		//fail("まだ実装されていません");
+
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+			CategoriesDAO dao = new CategoriesDAO(conn);
+
+			try {
+
+				CategoriesDTO dto = dao.findById(1);
+
+				assertNotNull(dto);
+
+				assertEquals(1, dto.getCategoryId());
+				assertEquals("帽子", dto.getName());
+
+			} catch (Exception e) {
+				fail(e.getMessage());
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+			//例外が発生したらテストは結果は×
+			fail(e.getMessage());
+		}
+	}
+
 }
