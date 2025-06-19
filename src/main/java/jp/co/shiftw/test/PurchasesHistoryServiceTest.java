@@ -37,7 +37,7 @@ class PurchasesHistoryServiceTest {
 	void testSearchPurchasesByUserIdAllIsCorrect() {
 
 		List<PurchasesDTO> list = PurchasesHistoryService.searchPurchasesByUserId(null);
-		assertEquals(2, list.size());
+		assertEquals(3, list.size());
 		PurchasesDTO purchaces = list.get(0);
 		assertEquals(1, purchaces.getPurchaseId());
 		assertEquals("user", purchaces.getPurchasedUser());
@@ -63,7 +63,7 @@ class PurchasesHistoryServiceTest {
 	void testSearchPurchasesByUserIdIsCorrect() {
 
 		List<PurchasesDTO> list = PurchasesHistoryService.searchPurchasesByUserId("user");
-		assertEquals(1, list.size());
+		assertEquals(2, list.size());
 		PurchasesDTO purchaces = list.get(0);
 		assertEquals(1, purchaces.getPurchaseId());
 		assertEquals("user", purchaces.getPurchasedUser());
