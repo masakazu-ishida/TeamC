@@ -41,4 +41,35 @@ public class CategoriesDAO extends BaseDAO {
 
 		return list;
 	}
+
+	//category_idを主キーにレコードを取得
+	public CategoriesDTO findById(int category_id) {
+
+		String sql = "SELECT category_id,name FROM categories WHERE category_id = ?";
+
+		//dtoの初期化
+		CategoriesDTO dto = null;
+
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+			ps.setInt(1, categoryId);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+
+				dto = new CategoriesDTO();
+
+				dto.setCategoryId(rs.getInt("category_id"));
+				dto.setName(rs.getString("name"));
+			}
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
+		return dto;
+
+	}
 }
