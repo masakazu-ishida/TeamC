@@ -123,7 +123,7 @@ public class ItemsDAO extends BaseDAO {
 				dto.setColor(rs.getString("color"));
 				dto.setPrice(rs.getInt("price"));
 				dto.setStock(rs.getInt("stock"));
-				dto.setRecommended(false);
+				dto.setRecommended(rs.getBoolean("recommended"));
 
 				//listにdtoを格納
 				list.add(dto);

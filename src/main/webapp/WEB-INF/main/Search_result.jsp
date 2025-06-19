@@ -19,9 +19,10 @@
 			</tr>
 			<c:forEach var="item" items="${ItemsDTO}" >
 			<tr>
-			  	<td><a href= "/Shift_W/ItemsDetailController?itemId=${item.itemId}">${item.name}</a></td>
-			  	<td>${item.itemId}</td>
-			  	<td>${item.name}</td>
+			  	<td>
+			  		<a href= "/Shift_W/ItemsDetailController?itemId=${item.itemId}">
+			  		${item.name}</a><c:if test="${item.recommended == true}"><sup>オススメ！</sup></c:if>
+			  	</td>
 			  	<td>${item.color}</td>
 			  	<td>${item.manufacturer}</td>
 			  	<td>${item.price}円</td>

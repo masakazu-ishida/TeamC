@@ -9,7 +9,14 @@
 		<link  rel='stylesheet' type='text/css' href='style.css' />
 </head>
 <body>
-あああ
+<h3>商品の詳細表示</h3>
+<table>
+
+
+
+
+</table>
+
 
 </body>
 </html>
