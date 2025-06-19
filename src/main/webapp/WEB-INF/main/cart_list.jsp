@@ -25,7 +25,7 @@
 				<td>${cart.items.manufacturer}</td>
 				<td>${cart.items.price}</td>
 				<td>${cart.amount}</td>
-				<td><input type="hidden" value="${cart.items.itemId }" 削除</td>
+				<td><a href = "/Shift_W/CartDeleteCheckController" value="${cart.items.itemId }" >削除</a></td>
 			</tr>
 		</c:forEach>
 	</table>

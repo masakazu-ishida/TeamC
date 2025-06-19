@@ -55,13 +55,11 @@ public class UsersLoginController extends HttpServlet {
 
 		UsersDTO dto = UsersService.loginUsers(userId, password);
 
-		request.setAttribute("UsersDTO", dto);
-
-		HttpSession session = request.getSession();
-		String source = (String) session.getAttribute("source");
+		String source = (String) request.getAttribute("source");
 		//IDパスワードチェック処理
 		if (dto != null) {
 			// userIdをセッションにセット
+			HttpSession session = request.getSession();
 			session.setAttribute("userId", userId);
 
 			if (source == null || source == "") {

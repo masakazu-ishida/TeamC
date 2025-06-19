@@ -40,14 +40,13 @@ public class CartListController extends HttpServlet {
 		String loginPath = "/WEB-INF/main/users_login.jsp";
 		String cartListPath = "/WEB-INF/main/cart_list.jsp";
 
-		HttpSession session = request.getSession(false);
-
-		if (session.getAttribute("userId") == null) {
-			session.setAttribute("source", "1");
+		if (request.getSession(false) == null) {
+			request.setAttribute("source", "1");
 
 			RequestDispatcher rd = request.getRequestDispatcher(loginPath);
 			rd.forward(request, response);
 		} else {
+			HttpSession session = request.getSession();
 			String userId = (String) session.getAttribute("userId");
 
 			List<CartDTO> cartList = CartListService.cartList(userId);
