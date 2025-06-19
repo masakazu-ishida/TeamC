@@ -36,12 +36,12 @@ public class CartDeleteCheckController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		String path = "/WEB-INF/cart_delete.jsp";
+		String path = "/WEB-INF/main/delete_check.jsp";
 
 		HttpSession session = request.getSession();
 
 		String userId = (String) session.getAttribute("userId");
-		int itemId = Integer.parseInt(request.getParameter("userId"));
+		int itemId = Integer.parseInt(request.getParameter("itemId"));
 
 		CartDTO cartItem = CartDeleteCheckService.cartDeleteCheckService(userId, itemId);
 
@@ -58,7 +58,7 @@ public class CartDeleteCheckController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
+		doGet(request, response);
 
 		String path = "/CartListController";
 
