@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import jp.co.shiftw.dao.BaseDAO;
@@ -181,6 +182,7 @@ class ItemsDAOTest {
 
 	//検索した値が正しく取得できているか確認するテスト
 	@Test
+	@Order(1)
 	void testFindByItemId() {
 
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
@@ -230,6 +232,131 @@ class ItemsDAOTest {
 				ItemsDTO dto = dao.findByItemId(99999);
 
 				assertNull(dto);
+			} catch (Exception e) {
+
+				fail(e.getMessage());
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			fail(e.getMessage());
+
+		}
+
+	}
+
+	@Test
+	@Order(2)
+	//存在するitemIdに対してに在庫数を増やすことが出来るかのテスト
+	void testChangeStockIncrease() {
+
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+			int itemId = 1; //テストで指定するItemId
+			int changeNum = 3; //増減させる値
+			ItemsDAO dao = new ItemsDAO(conn);
+
+			try {
+				//元の在庫数を調べる
+				ItemsDTO dto = dao.findByItemId(itemId);
+				int stockBefore = dto.getStock();
+
+				//在庫数を3つ増やす
+				dao.changeStock(itemId, changeNum);
+				int stockAfter = stockBefore + changeNum;
+
+				// 増やしたあとの在庫数を調べる
+				dto = dao.findByItemId(itemId);
+				assertEquals(stockAfter, dto.getStock());
+			} catch (Exception e) {
+
+				fail(e.getMessage());
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			fail(e.getMessage());
+
+		}
+
+	}
+
+	@Test
+	//存在するitemIdに対してに在庫数を減らすことが出来るかのテスト
+	void testChangeStockDecrease() {
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+			int itemId = 1; //テストで指定するItemId
+			int changeNum = -3; //増減させる値
+			ItemsDAO dao = new ItemsDAO(conn);
+
+			try {
+				//元の在庫数を調べる
+				ItemsDTO dto = dao.findByItemId(itemId);
+				int stockBefore = dto.getStock();
+
+				//在庫数を3つ減らす
+				dao.changeStock(itemId, changeNum);
+				int stockAfter = stockBefore + changeNum;
+
+				// 増やしたあとの在庫数を調べる
+				dto = dao.findByItemId(itemId);
+				assertEquals(stockAfter, dto.getStock());
+			} catch (Exception e) {
+
+				fail(e.getMessage());
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			fail(e.getMessage());
+
+		}
+	}
+
+	@Test
+	//存在するitemIdに対してに在庫数を0より少なくしようとした場合なにも起きないことを確認するテスト
+	void testChangeStockOverDecrease() {
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+			int itemId = 1; //テストで指定するItemId
+			int changeNum = -3000; //増減させる値
+			ItemsDAO dao = new ItemsDAO(conn);
+
+			try {
+				//元の在庫数を調べる
+				ItemsDTO dto = dao.findByItemId(itemId);
+				int stock = dto.getStock();
+
+				//在庫数を3000つ減らす
+				dao.changeStock(itemId, changeNum);
+
+				// 在庫数が変わっていないことを調べる
+				dto = dao.findByItemId(itemId);
+				assertEquals(stock, dto.getStock());
+			} catch (Exception e) {
+				fail(e.getMessage());
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			fail(e.getMessage());
+
+		}
+
+	}
+
+	//存在しないitemIdに対してに在庫数を増やそうとしても何も起きないことのテスト
+	void testNotChangeStockIncrease() {
+
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+			int itemId = 99999; //テストで指定するItemId
+			int changeNum = 3; //増減させる値
+			ItemsDAO dao = new ItemsDAO(conn);
+
+			try {
+				//存在しないitemIdに対して在庫数を3つ増やす
+				dao.changeStock(itemId, changeNum);
 			} catch (Exception e) {
 
 				fail(e.getMessage());
