@@ -34,7 +34,32 @@ public class ItemsSearchController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		String path = "/WEB-INF/main/Search_result.jsp";
+
+		request.setCharacterEncoding("UTF-8");
+
+		String categoryId = request.getParameter("categoryId");
+		String name = request.getParameter("name");
+		String pageNumber = request.getParameter("pageNumber");
+
+		int Id = Integer.parseInt(categoryId);
+		int Number = Integer.parseInt(pageNumber);
+
+		//List<ItemsDTO> dto = ItemsSearchService.findByCond(Id, name);
+		List<ItemsDTO> page = ItemsSearchService.findByCondForPaging(Id, name, Number);
+
+		request.setAttribute("keyword", name);
+		request.setAttribute("category", Id);
+		request.setAttribute("pagenumber", Number);
+		request.setAttribute("ItemsDTO", page);
+		//request.setAttribute("pagedto", page);
+
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+
+		rd.forward(request, response);
+
 	}
 
 	/**
@@ -43,25 +68,6 @@ public class ItemsSearchController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		String path = "/WEB-INF/main/Search_result.jsp";
-
-		request.setCharacterEncoding("UTF-8");
-
-		String categoryId = request.getParameter("categoryId");
-		String name = request.getParameter("name");
-
-		int Id = Integer.parseInt(categoryId);
-
-		List<ItemsDTO> dto = ItemsSearchService.findByCond(Id, name);
-
-		request.setAttribute("keyword", name);
-		request.setAttribute("category", Id);
-		request.setAttribute("ItemsDTO", dto);
-
-		RequestDispatcher rd = request.getRequestDispatcher(path);
-
-		rd.forward(request, response);
 
 	}
 

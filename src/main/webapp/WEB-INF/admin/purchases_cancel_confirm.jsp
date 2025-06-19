@@ -46,12 +46,12 @@
 			</tr>
 			<tr>
 				<th>配送先</th>
-				<td>自宅</td>
+				<td>${purchase.destination}</td>
 			</tr>
 			<tr>
 				<td colspan='2'>
 					<form action='purchaseCansel' method='POST'>
-						<input type='hidden' name='purchaseId' value="${purchase.purchaseId}" />
+						<input type='hidden' name='purchase_id' value="${purchase.purchaseId}" />
 						<input type='submit' value='キャンセル' /><br />
 					</form>
 				</td>

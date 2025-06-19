@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jp.co.shiftw.dto.PurchasesDTO;
+import jp.co.shiftw.service.PurchaseCancelService;
 import jp.co.shiftw.service.PurchasesHistoryService;
 
 /**
@@ -36,9 +37,9 @@ public class PurchaseCanselController extends HttpServlet {
 
 		PurchasesDTO purchase = PurchasesHistoryService.searchPurchasesByPurchaseId(purchaseId); //purchaseIdをキーとしてDTOを検索
 
-		request.setAttribute("purchase", purchase);
+		request.setAttribute("purchase", purchase); //ゲットしたDTOをJSPに表示させるためにセット
 
-		request.getRequestDispatcher("/WEB-INF/admin/purchases_cansel_confirm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/admin/purchases_cancel_confirm.jsp").forward(request, response); //キャンセル確認画面に遷移
 	}
 
 	/**
@@ -47,6 +48,14 @@ public class PurchaseCanselController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		int purchaseId = Integer.parseInt(request.getParameter("purchase_id")); //前のページでセットしたpurchaseIdを取得
+		PurchasesDTO purchase = PurchasesHistoryService.searchPurchasesByPurchaseId(purchaseId); //purchaseIdをキーとしてDTOを検索
+
+		request.setAttribute("purchase", purchase); //ゲットしたDTOをJSPに表示させるためにセット
+
+		PurchaseCancelService.cancelPurchase(purchaseId); //指定された注文をキャンセルにする。
+
+		request.getRequestDispatcher("/WEB-INF/admin/purchases_cancel.jsp").forward(request, response); //キャンセル完了画面に遷移
 	}
 
 }

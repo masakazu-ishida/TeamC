@@ -136,4 +136,16 @@ class ItemsSearchServiceTest {
 		assertEquals(9, dtos.size());
 	}
 
+	@Test
+	//キーワードなしカテゴリ全て
+	void testShowAllForPaging() {
+
+		List<ItemsDTO> dtos = ItemsSearchService.findByCondForPaging(0, null, 3);
+
+		assertNotNull(dtos);
+
+		assertEquals(0, dtos.size());
+
+	}
+
 }

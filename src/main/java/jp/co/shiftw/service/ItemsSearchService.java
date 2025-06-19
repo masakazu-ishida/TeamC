@@ -42,4 +42,34 @@ public class ItemsSearchService {
 
 	}
 
+	public static List<ItemsDTO> findByCondForPaging(int categoryId, String name, int pageNumber) {
+
+		//リストの作成
+		List<ItemsDTO> list = new ArrayList<>();
+
+		//CommonConstantsのLOOKUP_NAMEに接続
+		ConnectionUtil.mode = ConnectionUtil.MODE.TEST;
+		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
+
+			//トランザクション処理を行う
+			try {
+				ItemsDAO dao = new ItemsDAO(conn);
+				list = dao.findByCondForPaging(categoryId, name, pageNumber);
+
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+
+	}
+
 }

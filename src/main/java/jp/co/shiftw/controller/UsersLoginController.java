@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jp.co.shiftw.dto.UsersDTO;
 import jp.co.shiftw.service.UsersService;
@@ -35,7 +36,7 @@ public class UsersLoginController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		//JSPへフォワード
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/main/UsersLogin.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/main/users_login.jsp");
 		rd.forward(request, response);
 
 	}
@@ -54,11 +55,12 @@ public class UsersLoginController extends HttpServlet {
 
 		UsersDTO dto = UsersService.loginUsers(userId, password);
 
-		request.setAttribute("UsersDTO", dto);
-
 		String source = (String) request.getAttribute("source");
 		//IDパスワードチェック処理
 		if (dto != null) {
+			// userIdをセッションにセット
+			HttpSession session = request.getSession();
+			session.setAttribute("userId", userId);
 
 			if (source == null || source == "") {
 				//メイン画面にフォワード
@@ -80,7 +82,10 @@ public class UsersLoginController extends HttpServlet {
 			}
 
 		} else {
-			String path = "/UsersLogin.jsp";
+			String path = "/WEB-INF/main/users_login.jsp";
+
+			request.setAttribute("messeage", "IDまたはパスワードが正しくありません");
+
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}
