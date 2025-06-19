@@ -55,7 +55,7 @@ public class UsersLoginController extends HttpServlet {
 
 		UsersDTO dto = UsersService.loginUsers(userId, password);
 
-		String source = (String) request.getAttribute("source");
+		String source = request.getParameter("source");
 		//IDパスワードチェック処理
 		if (dto != null) {
 			// userIdをセッションにセット
@@ -73,14 +73,15 @@ public class UsersLoginController extends HttpServlet {
 				String path = "/CartListController";
 				RequestDispatcher rd = request.getRequestDispatcher(path);
 				rd.forward(request, response);
-
+				//カート追加から飛んできた場合
 			} else if (source.equals("2")) {
+
 				String path = "/CartAddController";
 				RequestDispatcher rd = request.getRequestDispatcher(path);
 				rd.forward(request, response);
 
 			}
-
+			//商品Idを保存しつつパスワードが違う処理
 		} else {
 			String path = "/WEB-INF/main/users_login.jsp";
 
