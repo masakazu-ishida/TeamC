@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jp.co.shiftw.dto.CartDTO;
+import jp.co.shiftw.service.CartDeleteCheckService;
 
 /**
  * Servlet implementation class CartDeleteCheckController
@@ -32,15 +34,18 @@ public class CartDeleteCheckController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		int deleteId = Integer.parseInt(request.getParameter("purchase_id")); //前のページでセットしたpurchaseIdを取得
+		String path = "/WEB-INF/cart_delete.jsp";
 
-		CartDTO dto = CartDeleteCheckService. //purchaseIdをキーとしてDTOを検索
+		HttpSession session = request.getSession();
 
-				request.setAttribute("purchase", purchase); //ゲットしたDTOをJSPに表示させるためにセット
+		String userId = (String) session.getAttribute("userId");
+		int itemId = (int) request.getAttribute("itemId");
 
-		String path = "/CartListController";
+		CartDTO cartItem = CartDeleteCheckService.cartDeleteCheckService(userId, itemId);
+
+		request.setAttribute("cartItem", cartItem);
 
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);
