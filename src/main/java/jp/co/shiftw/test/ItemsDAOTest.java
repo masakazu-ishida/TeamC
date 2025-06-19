@@ -1,7 +1,9 @@
 package jp.co.shiftw.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.Connection;
@@ -57,10 +59,6 @@ class ItemsDAOTest {
 
 				assertEquals(2, category.getCategoryId());
 				assertEquals("鞄B", dto.getName());
-
-				for (ItemsDTO itemsDTO : dtos) {
-					System.out.println(category.getCategoryId() + dto.getName());
-				}
 
 			} catch (Exception e) {
 
@@ -167,6 +165,71 @@ class ItemsDAOTest {
 
 				assertEquals(0, dtos.size());
 
+			} catch (Exception e) {
+
+				fail(e.getMessage());
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			fail(e.getMessage());
+
+		}
+
+	}
+
+	//検索した値が正しく取得できているか確認するテスト
+	@Test
+	void testFindByItemId() {
+
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+
+			ItemsDAO dao = new ItemsDAO(conn);
+
+			try {
+
+				ItemsDTO dto = dao.findByItemId(1);
+
+				assertNotNull(dto);
+				assertEquals("麦わら帽子", dto.getName());
+				assertEquals("日本帽子製造", dto.getManufacturer());
+
+				//CategoriesDTOの取得
+				CategoriesDTO category = dto.getCategory();
+				assertEquals(1, category.getCategoryId());
+				assertEquals("帽子", category.getName());
+
+				assertEquals("黄色", dto.getColor());
+				assertEquals(4980, dto.getPrice());
+				assertEquals(12, dto.getStock());
+				assertFalse(dto.isRecommended());
+
+			} catch (Exception e) {
+
+				fail(e.getMessage());
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+	}
+
+	@Test
+	//検索した値がテーブルになくNullで返ってくるか確認するテスト
+	void testNotFindByItemId() {
+
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+
+			ItemsDAO dao = new ItemsDAO(conn);
+
+			try {
+
+				ItemsDTO dto = dao.findByItemId(99999);
+
+				assertNull(dto);
 			} catch (Exception e) {
 
 				fail(e.getMessage());
