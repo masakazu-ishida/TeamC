@@ -7,7 +7,7 @@
 <title>メインメニュー</title>
 </head>
 <body>
-	<form action="/Shift_W/ItemsSearchController" method="post">
+	<form action="/Shift_W/ItemsSearchController" method="get">
 	キーワード<input type="text" name="name"><br>
 	カテゴリ<br />
 			<select name='categoryId'>
@@ -15,7 +15,7 @@
 				<option value='1'>帽子</option>
 				<option value='2'>鞄</option>
 			</select><br />
-	
+	<input type ="hidden" name ="pageNumber" value = "1">
 	<input type="submit" value="検索">
 	
 	</form>
