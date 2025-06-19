@@ -41,8 +41,6 @@ public class ItemsDAO extends BaseDAO {
 			ps.setInt(2, categoryId);
 			ps.setInt(3, categoryId);
 
-			System.out.println(ps.toString());
-
 			//SQL文の実行結果をResultSetに返す
 			ResultSet rs = ps.executeQuery();
 
@@ -135,6 +133,60 @@ public class ItemsDAO extends BaseDAO {
 		}
 		return list;
 
+	}
+
+	//itemIdからアイテムを検索する
+	public ItemsDTO findByItemId(int itemId) throws SQLException {
+		ItemsDTO items = null;
+		//ItemIdで検索するSQL文 「?」の中の数値が一緒であれば正しい範囲のフィールド値が出る
+		String sql = "select item_id, items.name as item_name, manufacturer, items.category_id, categories.name as category_name, color, price, stock, recommended from items "
+				+ "inner join categories on items.category_id = categories.category_id where item_id = ?";
+
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setInt(1, itemId);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				items = new ItemsDTO();
+				items.setItemId(rs.getInt("item_id"));
+				items.setName(rs.getString("item_name"));
+				items.setManufacturer(rs.getString("manufacturer"));
+
+				CategoriesDTO category = new CategoriesDTO();
+				category.setCategoryId(rs.getInt("category_id"));
+				category.setName(rs.getString("category_name"));
+
+				items.setCategory(category);
+				items.setColor(rs.getString("color"));
+				items.setPrice(rs.getInt("price"));
+				items.setStock(rs.getInt("stock"));
+				items.setRecommended(rs.getBoolean("recommended"));
+			}
+
+		}
+
+		return items;
+	}
+
+	//指定した商品の在庫数を変動させる
+	public void changeStock(int itemId, int num) throws SQLException {
+		// 指定した商品の在庫数を調べる
+		ItemsDTO item = this.findByItemId(itemId);
+		int stock = item.getStock() + num; // 現在の在庫数を取得して値を増減させる
+
+		if (stock < 0) {
+			System.out.println("不正な操作: この操作を実行すると在庫数が0を下回ってしまいます");
+			return;
+		}
+
+		String sql = "UPDATE items SET stock = ? WHERE item_id = ?";
+
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setInt(1, stock);
+			ps.setInt(2, itemId);
+
+			ps.executeUpdate();
+		}
 	}
 
 }
