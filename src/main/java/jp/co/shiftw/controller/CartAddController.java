@@ -49,11 +49,9 @@ public class CartAddController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 
-		String path = "/CartListController";
+		String path = "/Shift_W/CartListController";
 
-		HttpSession session = request.getSession(true);
-
-		String userid = (String) session.getAttribute("userid");
+		HttpSession session = request.getSession(false);
 
 		int item = Integer.parseInt(request.getParameter("itemId"));
 		int amon = Integer.parseInt(request.getParameter("amount"));
@@ -71,11 +69,25 @@ public class CartAddController extends HttpServlet {
 
 		Date date = expected;
 
+		if (session == null) {
+
+			request.setAttribute("source", "2");
+			request.setAttribute("itemId", item);
+			request.setAttribute("amount", amon);
+
+			path = "/WEB-INF/main/users_login.jsp";
+
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
+
+			return;
+		}
+
+		String userid = (String) session.getAttribute("userid");
+
 		CartAddService.CartAdd(userid, item, amon, date);
 
-		RequestDispatcher rd = request.getRequestDispatcher(path);
-		rd.forward(request, response);
-
+		response.sendRedirect(path);
 	}
 
 }

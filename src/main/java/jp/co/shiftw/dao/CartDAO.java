@@ -90,7 +90,7 @@ public class CartDAO extends BaseDAO {
 
 			ResultSet rs = ps.executeQuery();
 
-			while (rs.next()) {
+			if (rs.next()) {
 				ItemsDTO item = new ItemsDTO();
 
 				item.setName(rs.getString("name"));
@@ -103,6 +103,7 @@ public class CartDAO extends BaseDAO {
 				cart.setItems(item);
 				cart.setAmount(rs.getInt("amount"));
 
+				cartItem = cart;
 			}
 
 		}

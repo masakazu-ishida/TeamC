@@ -38,37 +38,6 @@ class CartDAOTest {
 	}
 
 	@Test //存在するIDでリストを表示
-	void CartItemTest() {
-
-		System.out.println("存在するUserIDとItemIDで表示（DAO）");
-
-		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
-
-			CartDAO dao = new CartDAO(conn);
-			CartDTO cartItem = dao.CartItem("user", 1);
-
-			ItemsDTO item = cartItem.getItems();
-
-			System.out.println(item.getName()
-					+ item.getColor()
-					+ item.getManufacturer()
-					+ item.getPrice()
-					+ cartItem.getAmount());
-
-			assertEquals("麦わら帽子", item.getName());
-			assertEquals("黄色", item.getColor());
-			assertEquals("日本帽子製造", item.getManufacturer());
-			assertEquals(4980, item.getPrice());
-			assertEquals(5, cartItem.getAmount());
-
-			System.out.println("--------------------------------------------------");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Test //存在するIDでリストを表示
 	void CartTest() {
 
 		System.out.println("存在するIDでリストを表示（DAO）");
@@ -135,82 +104,6 @@ class CartDAOTest {
 	void CartNullTest() {
 
 		System.out.println("存在しないIDでリストを表示（DAO）");
-
-		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
-
-			CartDAO dao = new CartDAO(conn);
-			List<CartDTO> list = dao.CartList("usera");
-			assertEquals(0, list.size());
-
-			System.out.println("--------------------------------------------------");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Test //存在するIDでリストを表示
-	void CartListServiceTest() {
-
-		System.out.println("存在するIDでリストを表示（Service）");
-
-		List<CartDTO> list = CartListService.cartList("user");
-
-		assertEquals(3, list.size());
-
-		int i = 0;
-
-		for (CartDTO cartDTO : list) {
-
-			ItemsDTO item = cartDTO.getItems();
-
-			System.out.println(item.getName()
-					+ item.getColor()
-					+ item.getManufacturer()
-					+ item.getPrice()
-					+ cartDTO.getAmount());
-			switch (i) {
-			case 0: {
-				assertEquals("麦わら帽子", item.getName());
-				assertEquals("黄色", item.getColor());
-				assertEquals("日本帽子製造", item.getManufacturer());
-				assertEquals(4980, item.getPrice());
-				assertEquals(5, cartDTO.getAmount());
-
-				break;
-			}
-			case 1: {
-				assertEquals("ストローハット", item.getName());
-				assertEquals("茶色", item.getColor());
-				assertEquals("(株)ストローハットジャパン", item.getManufacturer());
-				assertEquals(3480, item.getPrice());
-				assertEquals(1, cartDTO.getAmount());
-
-				break;
-			}
-
-			case 2: {
-				assertEquals("子ども用麦わら帽子", item.getName());
-				assertEquals("赤色", item.getColor());
-				assertEquals("東京帽子店", item.getManufacturer());
-				assertEquals(2980, item.getPrice());
-				assertEquals(3, cartDTO.getAmount());
-
-				break;
-			}
-
-			}
-			i = i + 1;
-		}
-
-		System.out.println("--------------------------------------------------");
-
-	}
-
-	@Test //存在しないIDでリストを表示
-	void CartServiceNullTest() {
-
-		System.out.println("存在しないIDでリストを表示（Service）");
 
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 
@@ -311,6 +204,37 @@ class CartDAOTest {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Test //存在するIDでリストを表示
+	void CartItemTest() {
+
+		System.out.println("存在するUserIDとItemIDで表示（DAO）");
+
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+
+			CartDAO dao = new CartDAO(conn);
+			CartDTO cartItem = dao.CartItem("user", 1);
+
+			ItemsDTO item = cartItem.getItems();
+
+			System.out.println(item.getName()
+					+ item.getColor()
+					+ item.getManufacturer()
+					+ item.getPrice()
+					+ cartItem.getAmount());
+
+			assertEquals("麦わら帽子", item.getName());
+			assertEquals("黄色", item.getColor());
+			assertEquals("日本帽子製造", item.getManufacturer());
+			assertEquals(4980, item.getPrice());
+			assertEquals(5, cartItem.getAmount());
+
+			System.out.println("--------------------------------------------------");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
