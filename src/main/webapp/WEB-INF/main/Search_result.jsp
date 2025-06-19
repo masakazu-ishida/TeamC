@@ -9,7 +9,7 @@
 		<link  rel='stylesheet' type='text/css' href='style.css' />
 	</head>
 		<body>
-		<h3>キーワード  ${keyword}  カテゴリ  ${category}  の検索結果 </h3>
+		<h3>キーワード " ${keyword} " カテゴリ " ${category} " の検索結果 </h3>
 		<table>
 			<tr>
 				<th>商品名</th>
@@ -26,7 +26,15 @@
 			</tr>
 			</c:forEach>
 		</table>
-		前へ1234次へ
+		前へ 
+		1 
+		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=2">2</a> 
+		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=3">3</a>
+		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=4">4</a>
+		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=5">5</a>
+		次へ<br>
+		
+		<a href = "/Shift_W/MainController">商品検索</a>へ
 
 		</body>
 </html>
