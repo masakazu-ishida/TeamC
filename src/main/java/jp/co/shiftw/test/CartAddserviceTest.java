@@ -8,8 +8,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import jp.co.shiftw.dao.BaseDAO;
 import jp.co.shiftw.dto.CartDTO;
 import jp.co.shiftw.dto.ItemsDTO;
 import jp.co.shiftw.service.CartAddService;
@@ -18,9 +20,21 @@ import jp.co.shiftw.util.ConnectionUtil;
 
 class CartAddserviceTest {
 
-	@Test
-	void test() {
-		fail("まだ実装されていません");
+	@BeforeEach
+	void init() {
+		ConnectionUtil.mode = ConnectionUtil.MODE.TEST;
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+			BaseDAO dao = new BaseDAO(conn);
+			try {
+				dao.insertBatch("sqlFiles/init.sql");
+
+			} catch (Exception e) {
+				throw e;
+			}
+
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 	}
 
 	@Test //カートリストに追加されているか
@@ -52,9 +66,9 @@ class CartAddserviceTest {
 				ItemsDTO item = cartDTO.getItems();
 
 				System.out.println(item.getName()
-						+ item.getColor()
-						+ item.getManufacturer()
-						+ item.getPrice()
+						+ item.getColor() + " , "
+						+ item.getManufacturer() + " , "
+						+ item.getPrice() + " , "
 						+ cartDTO.getAmount());
 				switch (i) {
 				case 0: {
