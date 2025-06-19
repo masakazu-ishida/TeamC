@@ -12,6 +12,7 @@
 	<body>
 		<h3>ログインしてください。</h3>
 		<br />
+		<h4 style="color: red"><c:out value="${messeage}"/></h4>
 		<form action='/Shift_W/UsersLoginController' method='POST'>
 			<table>
 				<tr>
