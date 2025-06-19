@@ -9,7 +9,7 @@ public class PurchasesDTO {
 	private String purchasedUser; //注文者
 	private Date purchasedDate; //注文日
 	private String destination; //配送先
-	private boolean canse; //キャンセル
+	private boolean cancel; //キャンセル
 	private List<PurchaseDetailsDTO> purchaseDetails; //注文詳細のリスト
 
 	public int getPurchaseId() {
@@ -44,12 +44,12 @@ public class PurchasesDTO {
 		this.destination = destination;
 	}
 
-	public boolean isCanse() {
-		return canse;
+	public boolean isCancel() {
+		return cancel;
 	}
 
-	public void setCanse(boolean canse) {
-		this.canse = canse;
+	public void setCancel(boolean cancel) {
+		this.cancel = cancel;
 	}
 
 	public List<PurchaseDetailsDTO> getPurchaseDetails() {

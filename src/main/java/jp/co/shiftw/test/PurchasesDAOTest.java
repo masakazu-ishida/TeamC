@@ -3,6 +3,10 @@ package jp.co.shiftw.test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -216,6 +220,54 @@ class PurchasesDAOTest {
 
 				List<PurchasesDTO> purchasesDTOs = dao.findByUserId(null); //全件検索
 				assertEquals(3, purchasesDTOs.size()); //取得件数が変わっていないかの確認
+			} catch (Exception e) {
+				e.printStackTrace();
+				fail(e);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+	}
+
+	//注文を新規追加出来るのかテスト
+	@Test
+	void testCreate() {
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+			try {
+				PurchasesDAO dao = new PurchasesDAO(conn); //DAOの初期化
+				dao.create("user2", "アメリカ");
+
+				// 注文詳細の仮データを追加(innerjoin)
+				String sql = "INSERT INTO purchase_details (purchase_id, item_id, amount) values(4, 5, 100);";
+				try (PreparedStatement ps = conn.prepareStatement(sql)) {
+					ps.executeUpdate();
+				} catch (Exception e) {
+					// TODO: handle exception
+					fail(e.toString());
+				}
+
+				List<PurchasesDTO> purchasesDTOs = dao.findByUserId("user2"); //検索
+				assertEquals(2, purchasesDTOs.size());
+
+				PurchasesDTO purchasesDTO = purchasesDTOs.get(0);
+
+				assertEquals(4, purchasesDTO.getPurchaseId());
+				assertEquals("user2", purchasesDTO.getPurchasedUser());
+
+				java.text.SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Date dateNow = new Date();
+
+				try {
+					dateNow = dateFormat.parse("2025-06-19");
+				} catch (ParseException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
+
+				assertEquals(dateNow, purchasesDTO.getPurchasedDate());
+				assertEquals("アメリカ", purchasesDTO.getDestination());
+				assertFalse(purchasesDTO.isCancel());
 			} catch (Exception e) {
 				e.printStackTrace();
 				fail(e);

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import jp.co.shiftw.dto.ItemsDTO;
@@ -17,20 +18,20 @@ public class PurchasesDAO extends BaseDAO {
 		super(conn);
 	}
 
-	// user_id(purchaced_user)をキーにPurchasesテーブルを検索
-	public List<PurchasesDTO> findByUserId(String userId) throws SQLException {
+	// purchaced_userをキーにPurchasesテーブルを検索
+	public List<PurchasesDTO> findByUserId(String parchasedUser) throws SQLException {
 		List<PurchasesDTO> purchases = new ArrayList<>();//purchase_idごとのpurchasesを格納するリスト
-		String sql = "SELECT purchases.purchase_id, purchased_user, purchases.purchased_date, items.item_id, items.\"name\", items.color, items.manufacturer, items.price, purchase_details.amount, purchases.destination  "
+		String sql = "SELECT purchases.purchase_id, purchased_user, purchases.purchased_date, items.item_id, items.\"name\", items.color, items.manufacturer, items.price, purchase_details.amount, purchases.destination, purchase_details.purchase_detail_id  "
 				+ " FROM purchases\n"
 				+ "	INNER JOIN purchase_details ON purchase_details.purchase_id = purchases.purchase_id\n"
 				+ "	INNER JOIN users ON users.user_id = purchases.purchased_user\n"
 				+ "	INNER JOIN items ON items.item_id = purchase_details.item_id\n"
-				+ "	WHERE users.user_id LIKE ? AND purchases.cancel = false \n"
+				+ "	WHERE purchases.purchased_user LIKE ? AND purchases.cancel = false \n"
 				+ "	ORDER BY purchases.purchased_date DESC,"
 				+ "purchases.purchase_id ASC";
 
-		String pattern = userId;
-		if (userId == null) {
+		String pattern = parchasedUser;
+		if (parchasedUser == null) {
 			pattern = "%"; // 検索欄が空の場合は全件検索する
 		}
 
@@ -81,6 +82,7 @@ public class PurchasesDAO extends BaseDAO {
 
 				PurchaseDetailsDTO detail = new PurchaseDetailsDTO();
 
+				detail.setPurchaseDetailId(rs.getInt("purchase_detail_id"));
 				detail.setItem(item); // PurchaseDetailsDTOにItemsDTOを格納
 				detail.setAmount(rs.getInt("amount"));
 
@@ -105,7 +107,7 @@ public class PurchasesDAO extends BaseDAO {
 		PurchasesDTO purchase = null; // 戻り値(検索結果がない場合はnullで返される)
 		List<PurchaseDetailsDTO> details = new ArrayList<>(); //複数あるPurchaseDetailsを格納するリスト
 
-		String sql = "SELECT purchases.purchase_id, purchased_user, purchases.purchased_date, items.item_id, items.\"name\", items.color, items.manufacturer, items.price, purchase_details.amount, purchases.destination  "
+		String sql = "SELECT purchases.purchase_id, purchased_user, purchases.purchased_date, items.item_id, items.\"name\", items.color, items.manufacturer, items.price, purchase_details.amount, purchases.destination, purchase_details.purchase_detail_id  "
 				+ " FROM purchases\n"
 				+ "	INNER JOIN purchase_details ON purchase_details.purchase_id = purchases.purchase_id\n"
 				+ "	INNER JOIN users ON users.user_id = purchases.purchased_user\n"
@@ -143,6 +145,7 @@ public class PurchasesDAO extends BaseDAO {
 				PurchaseDetailsDTO detail = new PurchaseDetailsDTO(); //PurchasesDTOに格納されるPurchaseDetails 
 
 				// detailのフィールドをセット
+				detail.setPurchaseDetailId(rs.getInt("purchase_detail_id"));
 				detail.setItem(item); // PurchaseDetailsDTOにItemsDTOを格納
 				detail.setAmount(rs.getInt("amount"));
 
@@ -155,6 +158,20 @@ public class PurchasesDAO extends BaseDAO {
 		}
 
 		return purchase;
+	}
+
+	//注文を追加する
+	public void create(String purchasedUser, String destination) throws SQLException {
+		String sql = "INSERT INTO purchases(purchased_user, purchased_date, destination, cancel) VALUES(?, ?, ?, false)";
+		Date dateNow = new Date();
+
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setString(1, purchasedUser);
+			ps.setDate(2, new java.sql.Date(dateNow.getTime()));
+			ps.setString(3, destination);
+
+			ps.executeUpdate();
+		}
 	}
 
 	// 特定の注文IDの注文をキャンセルにする
