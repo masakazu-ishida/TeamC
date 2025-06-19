@@ -38,6 +38,37 @@ class CartDAOTest {
 	}
 
 	@Test //存在するIDでリストを表示
+	void CartItemTest() {
+
+		System.out.println("存在するUserIDとItemIDで表示（DAO）");
+
+		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
+
+			CartDAO dao = new CartDAO(conn);
+			CartDTO cartItem = dao.CartItem("user", 1);
+
+			ItemsDTO item = cartItem.getItems();
+
+			System.out.println(item.getName()
+					+ item.getColor()
+					+ item.getManufacturer()
+					+ item.getPrice()
+					+ cartItem.getAmount());
+
+			assertEquals("麦わら帽子", item.getName());
+			assertEquals("黄色", item.getColor());
+			assertEquals("日本帽子製造", item.getManufacturer());
+			assertEquals(4980, item.getPrice());
+			assertEquals(5, cartItem.getAmount());
+
+			System.out.println("--------------------------------------------------");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test //存在するIDでリストを表示
 	void CartTest() {
 
 		System.out.println("存在するIDでリストを表示（DAO）");
