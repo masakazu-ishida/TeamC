@@ -14,7 +14,7 @@
 		<c:out value="${manufasuture}"/><br />
 		<c:out value="${price}"/><br />
 		<c:out value="${amount}"/><br /><br />
-		<a href='main.html'>商品検索</a>へ<br />
+		<a href='/Shift_W/ItemSearchController'>商品検索</a>へ<br />
 		
 </body>
 </html>
