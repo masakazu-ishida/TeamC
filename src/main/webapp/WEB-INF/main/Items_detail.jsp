@@ -25,11 +25,11 @@
 </tr>
 <tr>
 	<th>価格</th>
-	<td>${dto.price }</td>
+	<td>${dto.price }円</td>
 </tr>
 <tr>
 	<th>在庫数</th>
-	<td>${dto.stock }</td>
+	<td>${dto.stock }個</td>
 </tr>
 </table>
 <input type =""><br>
