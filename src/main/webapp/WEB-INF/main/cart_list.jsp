@@ -30,7 +30,7 @@
 		</c:forEach>
 	</table>
 	合計：${totalAmount }<br>
-	<button href="/Shift_W/CartDeleteCheckController">購入</button><br>
+	<button href="/Shift_W/Purchase">購入</button><br>
 	<a href="/Shift_W/MainController">メインメニュー</a>
 
 </body>
