@@ -11,11 +11,11 @@
 
 		<h3>以下の商品をショッピングカートから削除しました。</h3>
 		<br />
-		<c:out value="${name}"/><br />
-		<c:out value="${manufasuture}"/><br />
-		<c:out value="${price}"/><br />
-		<c:out value="${amount}"/><br /><br />
-		<a href='/Shift_W/MainController'>商品検索</a>へ<br />
+		<c:out value="${cartItem.name}"/><br />
+		<c:out value="${cartItem.manufasuture}"/><br />
+		<c:out value="${cartItem.price}"/><br />
+		<c:out value="${cartItem.amount}"/><br /><br />
+		<a href='/Shift_W/MainController'>商品検索へ</a>
 		
 </body>
 </html>
