@@ -9,15 +9,14 @@
 <link  rel='stylesheet' type='text/css' href='style.css' />
 </head>
 <body>
-	<h3>商品検索を行います</h3>/br>
+	<h3>商品検索を行います</h3><br>
 	<form action="/Shift_W/ItemsSearchController" method="get">
 	キーワード<br>
 	<input type="text" name="name"><br>
 	カテゴリ<br>
 			<select name='categoryId'>
-				<option selected value='0'>すべて</option>
-				<c:forEach var='categoryId' items='${categories}'>
-					<option selected value='${categories.categoryId}'>${categories.name }</option>
+				<c:forEach var='category' items='${categories}'>
+					<option selected value='${category.categoryId}'>${category.name }</option>
 				</c:forEach>
 			</select><br />
 	<input type ="hidden" name ="pageNumber" value = "1">
