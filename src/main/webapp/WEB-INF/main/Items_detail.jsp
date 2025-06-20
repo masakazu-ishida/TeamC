@@ -13,23 +13,23 @@
 <table>
 <tr>
 	<th>商品名</th>
-	<td></td>
+	<td>${dto.name }</td>
 </tr>
 <tr>
 	<th>商品の色</th>
-	<td></td>
+	<td>${dto.color }</td>
 </tr>
 <tr>
 	<th>メーカー名</th>
-	<td></td>
+	<td>${dto.manufacture }</td>
 </tr>
 <tr>
 	<th>価格</th>
-	<td></td>
+	<td>${dto.price }</td>
 </tr>
 <tr>
 	<th>在庫数</th>
-	<td></td>
+	<td>${dto.stock }</td>
 </tr>
 </table>
 <input type =""><br>
