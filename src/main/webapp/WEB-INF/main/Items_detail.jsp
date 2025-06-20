@@ -32,8 +32,16 @@
 	<td>${dto.stock }個</td>
 </tr>
 </table>
+数量
+<select name='amount'>
+				<option selected value='1'>1</option>
+				<option value='2'>2</option>
+				<option value='3'>3</option>
+				<option value='4'>4</option>
+				<option value='5'>5</option>
+			</select><br />
 <input type =""><br>
-<a href = "/Shift_W/UsersLoginController">ログイン画面</a><br>
+※ログインしていない状態では、ボタンのクリック後、<a href = "/Shift_W/UsersLoginController">ログイン画面</a>に転送される。<br>
 <a href ="/Shift_W/MainController">商品検索</a>へ
 
 
