@@ -100,8 +100,6 @@ public class ItemsDAO extends BaseDAO {
 			ps.setInt(3, categoryId);
 			ps.setInt(4, (pageNumber - 1) * 10);
 
-			System.out.println(ps.toString());
-
 			//SQL文の実行結果をResultSetに返す
 			ResultSet rs = ps.executeQuery();
 
