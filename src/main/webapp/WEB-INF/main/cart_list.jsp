@@ -31,6 +31,7 @@
 	</table>
 	合計：${totalAmount }<br>
 	<form action="/Shift_W/purchase" method="post">
+		<input type="hidden" name="isConfirmed" value="false">
 		<input type="submit" value="購入">
 	</form>
 	<a href="/Shift_W/MainController">メインメニュー</a>
