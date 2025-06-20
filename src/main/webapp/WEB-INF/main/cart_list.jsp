@@ -30,7 +30,9 @@
 		</c:forEach>
 	</table>
 	合計：${totalAmount }<br>
-	<button href="/Shift_W/Purchase">購入</button><br>
+	<form action="/Shift_W/purchase" method="post">
+		<input type="submit" value="購入">
+	</form>
 	<a href="/Shift_W/MainController">メインメニュー</a>
 
 </body>
