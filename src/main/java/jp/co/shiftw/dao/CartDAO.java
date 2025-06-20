@@ -53,27 +53,6 @@ public class CartDAO extends BaseDAO {
 		return cartList;
 	}
 
-	//商品をカートに追加
-	public void CartCerate(String userId, int itemId, int amount, Date bookedDate) throws SQLException {
-
-		//カートに追加するレコードを取得するSQL
-		String sql = "INSERT INTO items_in_cart(user_id,item_id,amount,booked_date) VALUES(?,?,?,?)";
-
-		//CartDTO dto =new CartDTO();
-
-		try (PreparedStatement ps = conn.prepareStatement(sql)) {
-
-			ps.setString(1, userId);
-			ps.setInt(2, itemId);
-			ps.setInt(3, amount);
-			ps.setDate(4, new java.sql.Date(bookedDate.getTime()));
-
-			ps.executeUpdate();
-
-		}
-
-	}
-
 	//userIdとitemIdを主キーとして対象の商品１つを抽出
 	public CartDTO CartItem(String userId, int itemId) throws SQLException {
 
@@ -114,12 +93,31 @@ public class CartDAO extends BaseDAO {
 		return cartItem;
 	}
 
+	//商品をカートに追加
+	public void CartCerate(String userId, int itemId, int amount, Date bookedDate) throws SQLException {
+
+		//カートに追加するレコードを取得するSQL
+		String sql = "INSERT INTO items_in_cart(user_id,item_id,amount,booked_date) VALUES(?,?,?,?)";
+
+		//CartDTO dto =new CartDTO();
+
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+			ps.setString(1, userId);
+			ps.setInt(2, itemId);
+			ps.setInt(3, amount);
+			ps.setDate(4, new java.sql.Date(bookedDate.getTime()));
+
+			ps.executeUpdate();
+
+		}
+
+	}
+
 	//カート内の商品を削除
 	public void cartDelete(String userId, int itemId) throws SQLException {
 		//カートに追加するレコードを取得するSQL
 		String sql = "DELETE FROM items_in_cart WHERE user_id = ? AND item_id = ? ";
-
-		//CartDTO dto =new CartDTO();
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
