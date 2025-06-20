@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import jp.co.shiftw.dto.CartDTO;
 import jp.co.shiftw.service.CartListService;
 import jp.co.shiftw.service.PurchaseService;
+import jp.co.shiftw.service.UserSearchService;
 
 /**
  * Servlet implementation class PurchaseController
@@ -55,7 +56,7 @@ public class PurchaseController extends HttpServlet {
 		//配送先を取得する
 		String destination = request.getParameter("destination");
 		if (destination.equals("registered")) {
-			destination = "ご自宅";
+			destination = UserSearchService.searchUserByUserId(userId).getAddress();
 		} else {
 			destination = request.getParameter("address");
 		}
