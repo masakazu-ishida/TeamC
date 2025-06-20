@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>カート削除</title>
 </head>
 <body>
 
@@ -14,7 +14,7 @@
 		<c:out value="${manufasuture}"/><br />
 		<c:out value="${price}"/><br />
 		<c:out value="${amount}"/><br /><br />
-		<a href='/Shift_W/ItemSearchController'>商品検索</a>へ<br />
+		<a href='/Shift_W/MainController'>商品検索</a>へ<br />
 		
 </body>
 </html>

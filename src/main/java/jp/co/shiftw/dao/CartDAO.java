@@ -17,6 +17,7 @@ public class CartDAO extends BaseDAO {
 		super(conn);
 	}
 
+	//ユーザーIDを主キーとし、カート内の商品を検索
 	public List<CartDTO> CartList(String userId) throws SQLException {
 
 		List<CartDTO> cartList = new ArrayList<>();
@@ -52,6 +53,7 @@ public class CartDAO extends BaseDAO {
 		return cartList;
 	}
 
+	//商品をカートに追加
 	public void CartCerate(String userId, int itemId, int amount, Date bookedDate) throws SQLException {
 
 		//カートに追加するレコードを取得するSQL
@@ -72,6 +74,7 @@ public class CartDAO extends BaseDAO {
 
 	}
 
+	//userIdとitemIdを主キーとして対象の商品１つを抽出
 	public CartDTO CartItem(String userId, int itemId) throws SQLException {
 
 		CartDTO cartItem = new CartDTO();
@@ -111,9 +114,10 @@ public class CartDAO extends BaseDAO {
 		return cartItem;
 	}
 
+	//カート内の商品を削除
 	public void cartDelete(String userId, int itemId) throws SQLException {
 		//カートに追加するレコードを取得するSQL
-		String sql = "INSERT INTO items_in_cart(user_id,item_id,amount,booked_date) VALUES(?,?,?,?)";
+		String sql = "DELETE FROM items_in_cart WHERE user_id = ? AND item_id = ? ";
 
 		//CartDTO dto =new CartDTO();
 
