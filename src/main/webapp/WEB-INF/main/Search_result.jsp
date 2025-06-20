@@ -35,7 +35,7 @@
 		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=3">3</a>
 		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=4">4</a>
 		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=5">5</a>
-		次へ</a>
+		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=2">次へ</a>
 		<br>
 		
 		<a href = "/Shift_W/MainController">商品検索</a>へ

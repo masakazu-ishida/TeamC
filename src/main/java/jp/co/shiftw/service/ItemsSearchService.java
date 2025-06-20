@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.co.shiftw.dao.ItemsDAO;
-import jp.co.shiftw.dto.CategoriesDTO;
 import jp.co.shiftw.dto.ItemsDTO;
 import jp.co.shiftw.util.CommonConstants;
 import jp.co.shiftw.util.ConnectionUtil;
@@ -103,7 +102,8 @@ public class ItemsSearchService {
 
 	}
 
-	public static CategoriesDTO findById(int categoryId) {
+<<<<<<< HEAD
+	public static ItemsDTO findById(int categoryId) {
 
 		//DTOの作成
 		ItemsDTO dto = null;
@@ -133,4 +133,6 @@ public class ItemsSearchService {
 
 	}
 
+=======
+>>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamC.git
 }
