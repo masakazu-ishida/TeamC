@@ -18,7 +18,7 @@ public class CartDAO extends BaseDAO {
 	}
 
 	//ユーザーIDを主キーとし、カート内の商品を検索
-	public List<CartDTO> CartList(String userId) throws SQLException {
+	public List<CartDTO> cartList(String userId) throws SQLException {
 
 		List<CartDTO> cartList = new ArrayList<>();
 		String sql = "SELECT items.name, items.color, items.manufacturer, items.price, items_in_cart.amount , items.item_id\n"

@@ -100,7 +100,7 @@ class CartListServiceTest {
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 
 			CartDAO dao = new CartDAO(conn);
-			List<CartDTO> list = dao.CartList("usera");
+			List<CartDTO> list = dao.cartList("usera");
 			assertEquals(0, list.size());
 
 			System.out.println("--------------------------------------------------");

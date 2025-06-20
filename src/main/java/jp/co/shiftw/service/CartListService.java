@@ -20,7 +20,7 @@ public class CartListService {
 		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
 			//try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 			CartDAO dao = new CartDAO(conn);
-			cartList = dao.CartList(userId);
+			cartList = dao.cartList(userId);
 
 		} catch (Exception e) {
 			e.printStackTrace();
