@@ -34,12 +34,12 @@ public class CartDeleteController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		String path = "/WEB-INF/main/cart_delete.jsp";
 
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("userId");
-		int itemId = (int) request.getAttribute("itemId");
+		int itemId = Integer.parseInt(request.getParameter("itemId"));
 
 		CartDTO cartItem = CartDeleteService.cartDelete(userId, itemId);
 
