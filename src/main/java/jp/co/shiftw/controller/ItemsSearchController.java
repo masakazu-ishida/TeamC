@@ -52,7 +52,7 @@ public class ItemsSearchController extends HttpServlet {
 
 		request.setAttribute("keyword", name);
 		request.setAttribute("category", Id);
-		request.setAttribute("pagenumber", Number);
+		request.setAttribute("pageNumber", Number);
 		request.setAttribute("ItemsDTO", page);
 		//request.setAttribute("pagedto", page);
 

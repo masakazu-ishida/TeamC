@@ -21,7 +21,7 @@
 </tr>
 <tr>
 	<th>メーカー名</th>
-	<td>${dto.manufacture }</td>
+	<td>${dto.manufacturer }</td>
 </tr>
 <tr>
 	<th>価格</th>
