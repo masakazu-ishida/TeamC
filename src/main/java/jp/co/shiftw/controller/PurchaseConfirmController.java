@@ -12,19 +12,18 @@ import javax.servlet.http.HttpSession;
 
 import jp.co.shiftw.dto.CartDTO;
 import jp.co.shiftw.service.CartListService;
-import jp.co.shiftw.service.PurchaseService;
 
 /**
- * Servlet implementation class PurchaseController
+ * Servlet implementation class PurchaseConfirmController
  */
-@WebServlet(name = "purchase", urlPatterns = { "/purchase" })
-public class PurchaseController extends HttpServlet {
+@WebServlet(name = "purchaseConfirm", urlPatterns = { "/purchaseConfirm" })
+public class PurchaseConfirmController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public PurchaseController() {
+	public PurchaseConfirmController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -43,6 +42,7 @@ public class PurchaseController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		String path = "/WEB-INF/main/purchase_confirm.jsp";
 
 		//セッションに登録されているユーザーIDを取得
@@ -52,20 +52,10 @@ public class PurchaseController extends HttpServlet {
 		//カートの中身を取得
 		List<CartDTO> cartList = CartListService.cartList(userId);
 
-		//配送先を取得する
-		String destination = request.getParameter("address");
-		//購入処理
-		PurchaseService.purchase(userId, cartList, destination);
-
-		//パスを購入完了画面に変更
-		path = "/WEB-INF/main/purchase.jsp";
-		request.setAttribute("destination", destination);
-
 		//画面出力項目の設定
 		request.setAttribute("cartList", cartList);
 
 		request.getRequestDispatcher(path).forward(request, response);
-
 	}
 
 }

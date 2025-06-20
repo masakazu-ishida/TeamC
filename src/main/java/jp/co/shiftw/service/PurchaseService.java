@@ -39,7 +39,7 @@ public class PurchaseService {
 						return false;
 					}
 
-					//注文を追加する
+					//注文詳細を追加する
 					PurchaseDetailsDAO purchaseDetailsDAO = new PurchaseDetailsDAO(conn);
 					purchaseDetailsDAO.create(purchaseId, itemId, amount);
 
