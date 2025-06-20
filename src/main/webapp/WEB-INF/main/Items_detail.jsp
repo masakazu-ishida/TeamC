@@ -40,7 +40,7 @@
 				<option value='4'>4</option>
 				<option value='5'>5</option>
 			</select><br />
-<input type =""><br>
+<a href = "/Shift_W/CartListController"><input type ="submit" value ="ショッピングカートに入れる"></a><br>
 <a href = "/Shift_W/UsersLoginController">ログイン画面</a><br>
 <a href ="/Shift_W/MainController">商品検索</a>へ
 
