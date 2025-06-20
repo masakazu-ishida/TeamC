@@ -169,14 +169,14 @@ public class ItemsDAO extends BaseDAO {
 	}
 
 	//指定した商品の在庫数を変動させる
-	public void changeStock(int itemId, int num) throws SQLException {
+	public boolean changeStock(int itemId, int num) throws SQLException {
 		// 指定した商品の在庫数を調べる
 		ItemsDTO item = this.findByItemId(itemId);
 		int stock = item.getStock() + num; // 現在の在庫数を取得して値を増減させる
 
 		if (stock < 0) {
 			System.out.println("不正な操作: この操作を実行すると在庫数が0を下回ってしまいます");
-			return;
+			return false;
 		}
 
 		String sql = "UPDATE items SET stock = ? WHERE item_id = ?";
@@ -187,6 +187,8 @@ public class ItemsDAO extends BaseDAO {
 
 			ps.executeUpdate();
 		}
+
+		return true;
 	}
 
 }

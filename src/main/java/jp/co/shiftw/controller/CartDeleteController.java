@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.co.shiftw.dto.CartDTO;
 import jp.co.shiftw.service.CartDeleteService;
 
 /**
@@ -40,7 +41,9 @@ public class CartDeleteController extends HttpServlet {
 		String userId = (String) session.getAttribute("userId");
 		int itemId = (int) request.getAttribute("itemId");
 
-		CartDeleteService.cartDelete(userId, itemId);
+		CartDTO cartItem = CartDeleteService.cartDelete(userId, itemId);
+
+		request.setAttribute("cartItem", cartItem);
 
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);
