@@ -16,7 +16,12 @@
 	カテゴリ<br>
 			<select name='categoryId'>
 				<c:forEach var='category' items='${categories}'>
+					<c:if test="${category.categoryId == 0}">
 					<option selected value='${category.categoryId}'>${category.name }</option>
+					</c:if>
+					<c:if test="${category.categoryId != 0}">
+					<option value='${category.categoryId}'>${category.name }</option>
+					</c:if>
 				</c:forEach>
 			</select><br />
 	<input type ="hidden" name ="pageNumber" value = "1">
