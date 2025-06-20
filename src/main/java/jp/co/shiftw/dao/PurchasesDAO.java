@@ -161,17 +161,25 @@ public class PurchasesDAO extends BaseDAO {
 	}
 
 	//注文を追加する
-	public void create(String purchasedUser, String destination) throws SQLException {
+	public int create(String purchasedUser, String destination) throws SQLException {
 		String sql = "INSERT INTO purchases(purchased_user, purchased_date, destination, cancel) VALUES(?, ?, ?, false)";
 		Date dateNow = new Date();
+		int purchaseId = -1;
 
-		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+		try (PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			ps.setString(1, purchasedUser);
 			ps.setDate(2, new java.sql.Date(dateNow.getTime()));
 			ps.setString(3, destination);
 
 			ps.executeUpdate();
+
+			ResultSet rs = ps.getGeneratedKeys();
+			if (rs.next()) {
+				purchaseId = rs.getInt(1);
+			}
 		}
+
+		return purchaseId;
 	}
 
 	// 特定の注文IDの注文をキャンセルにする

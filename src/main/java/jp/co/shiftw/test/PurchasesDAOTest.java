@@ -3,7 +3,6 @@ package jp.co.shiftw.test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import jp.co.shiftw.dao.BaseDAO;
+import jp.co.shiftw.dao.PurchaseDetailsDAO;
 import jp.co.shiftw.dao.PurchasesDAO;
 import jp.co.shiftw.dto.ItemsDTO;
 import jp.co.shiftw.dto.PurchaseDetailsDTO;
@@ -235,31 +235,26 @@ class PurchasesDAOTest {
 	void testCreate() {
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 			try {
-				PurchasesDAO dao = new PurchasesDAO(conn); //DAOの初期化
-				dao.create("user2", "アメリカ");
+				PurchasesDAO purchasesDAO = new PurchasesDAO(conn); //DAOの初期化
+				int purchaceId = purchasesDAO.create("user2", "アメリカ");
 
-				// 注文詳細の仮データを追加(innerjoin)
-				String sql = "INSERT INTO purchase_details (purchase_id, item_id, amount) values(4, 5, 100);";
-				try (PreparedStatement ps = conn.prepareStatement(sql)) {
-					ps.executeUpdate();
-				} catch (Exception e) {
-					// TODO: handle exception
-					fail(e.toString());
-				}
+				// 注文詳細のデータを追加
+				PurchaseDetailsDAO purchaseDetailsDAO = new PurchaseDetailsDAO(conn);
+				purchaseDetailsDAO.create(purchaceId, 5, 1);
 
-				List<PurchasesDTO> purchasesDTOs = dao.findByUserId("user2"); //検索
+				List<PurchasesDTO> purchasesDTOs = purchasesDAO.findByUserId("user2"); //検索
 				assertEquals(2, purchasesDTOs.size());
 
 				PurchasesDTO purchasesDTO = purchasesDTOs.get(0);
 
-				assertEquals(4, purchasesDTO.getPurchaseId());
+				assertEquals(purchaceId, purchasesDTO.getPurchaseId());
 				assertEquals("user2", purchasesDTO.getPurchasedUser());
 
 				java.text.SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				Date dateNow = new Date();
 
 				try {
-					dateNow = dateFormat.parse("2025-06-19");
+					dateNow = dateFormat.parse("2025-06-20");
 				} catch (ParseException e) {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
