@@ -54,6 +54,8 @@ public class PurchaseConfirmController extends HttpServlet {
 
 		//画面出力項目の設定
 		request.setAttribute("cartList", cartList);
+		int totalAmount = CartListService.totalAmount(cartList);
+		request.setAttribute("totalAmount", totalAmount);
 
 		request.getRequestDispatcher(path).forward(request, response);
 	}

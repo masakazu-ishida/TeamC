@@ -43,7 +43,7 @@ public class PurchaseController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String path = "/WEB-INF/main/purchase_confirm.jsp";
+		String path = "/WEB-INF/main/purchase_complete.jsp";
 
 		//セッションに登録されているユーザーIDを取得
 		HttpSession session = request.getSession(false);
@@ -53,15 +53,20 @@ public class PurchaseController extends HttpServlet {
 		List<CartDTO> cartList = CartListService.cartList(userId);
 
 		//配送先を取得する
-		String destination = request.getParameter("address");
+		String destination = request.getParameter("destination");
+		if (destination.equals("registered")) {
+			destination = "ご自宅";
+		} else {
+			destination = request.getParameter("address");
+		}
+		int totalAmount = CartListService.totalAmount(cartList);
+
 		//購入処理
 		PurchaseService.purchase(userId, cartList, destination);
 
-		//パスを購入完了画面に変更
-		path = "/WEB-INF/main/purchase.jsp";
-		request.setAttribute("destination", destination);
-
 		//画面出力項目の設定
+		request.setAttribute("destination", destination);
+		request.setAttribute("totalAmount", totalAmount);
 		request.setAttribute("cartList", cartList);
 
 		request.getRequestDispatcher(path).forward(request, response);

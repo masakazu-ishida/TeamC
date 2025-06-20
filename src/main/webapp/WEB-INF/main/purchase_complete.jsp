@@ -5,11 +5,11 @@
 <html>
 <head>
 		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-		<title>商品の購入確認</title>
+		<title>商品の購入完了</title>
 		<link rel='stylesheet' type='text/css' href='style.css' />
 	</head>
 <body>
-		<h3>以下の商品を購入しますか？</h3>
+		<h3>以下の商品を購入しました。</h3>
 		<br />
 		<table>
 			<tr>
@@ -30,19 +30,8 @@
 			</c:forEach>
 		</table>
 		合計 ${totalAmount} 円<br /><br />
-		<form action='/Shift_W/purchase' method='POST'>
-			清算方法<br />
-			<select name='payment'>
-				<option selected>代金引換</option>
-			</select><br /><br />
-			配送先<br />
-			<input type='radio' name='destination' value='registered' checked />ご自宅<br /><br />
-			<input type='radio' name='destination' value='another' />配送先を指定<br />
-			ご住所<br />
-			<input type='text' name='address' /><br /><br />
-			購入しますか？<br />
-			<input type='submit' value='購入する' />
-		</form>
+		清算方法 代金引換<br /><br />
+		配送先 ${destination}<br /><br />
 		<br /><br />
 		<a href='/Shift_W/MainController'>商品検索</a>へ<br />
 	</body>
