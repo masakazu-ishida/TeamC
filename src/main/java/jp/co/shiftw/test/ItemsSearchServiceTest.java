@@ -160,4 +160,17 @@ class ItemsSearchServiceTest {
 
 	}
 
+	@Test
+	//キーワードなしカテゴリ全て
+	void testfindById() {
+
+		CategoriesDTO dtos = ItemsSearchService.findById(1);
+
+		assertNotNull(dtos);
+
+		assertEquals(1, dtos.getCategoryId());
+		assertEquals("帽子", dtos.getName());
+
+	}
+
 }

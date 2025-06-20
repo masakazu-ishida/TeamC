@@ -41,7 +41,7 @@
 				<option value='5'>5</option>
 			</select><br />
 <input type =""><br>
-※ログインしていない状態では、ボタンのクリック後、<a href = "/Shift_W/UsersLoginController">ログイン画面</a>に転送される。<br>
+<a href = "/Shift_W/UsersLoginController">ログイン画面</a><br>
 <a href ="/Shift_W/MainController">商品検索</a>へ
 
 

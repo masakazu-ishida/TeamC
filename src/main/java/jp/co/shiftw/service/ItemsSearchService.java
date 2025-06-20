@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.co.shiftw.dao.CategoriesDAO;
 import jp.co.shiftw.dao.ItemsDAO;
+import jp.co.shiftw.dto.CategoriesDTO;
 import jp.co.shiftw.dto.ItemsDTO;
 import jp.co.shiftw.util.CommonConstants;
 import jp.co.shiftw.util.ConnectionUtil;
@@ -85,6 +87,36 @@ public class ItemsSearchService {
 			try {
 				ItemsDAO dao = new ItemsDAO(conn);
 				dto = dao.findByItemId(itemId);
+
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return dto;
+
+	}
+
+	public static CategoriesDTO findById(int categoryId) {
+
+		//DTOの作成
+		CategoriesDTO dto = null;
+
+		//CommonConstantsのLOOKUP_NAMEに接続
+		ConnectionUtil.mode = ConnectionUtil.MODE.TEST;
+		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
+
+			//トランザクション処理を行う
+			try {
+				CategoriesDAO dao = new CategoriesDAO(conn);
+				dto = dao.findById(categoryId);
 
 			} catch (SQLException e) {
 

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jp.co.shiftw.dto.CategoriesDTO;
 import jp.co.shiftw.dto.ItemsDTO;
 import jp.co.shiftw.service.ItemsSearchService;
 
@@ -49,9 +50,10 @@ public class ItemsSearchController extends HttpServlet {
 
 		//List<ItemsDTO> dto = ItemsSearchService.findByCond(Id, name);
 		List<ItemsDTO> page = ItemsSearchService.findByCondForPaging(Id, name, Number);
+		CategoriesDTO cate = ItemsSearchService.findById(Id);
 
 		request.setAttribute("keyword", name);
-		request.setAttribute("category", Id);
+		request.setAttribute("category", cate);
 		request.setAttribute("pageNumber", Number);
 		request.setAttribute("ItemsDTO", page);
 		//request.setAttribute("pagedto", page);

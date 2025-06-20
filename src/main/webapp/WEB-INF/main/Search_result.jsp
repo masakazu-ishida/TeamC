@@ -9,7 +9,7 @@
 		<link  rel='stylesheet' type='text/css' href='style.css' />
 	</head>
 		<body>
-		<h3>キーワード " ${keyword} " カテゴリ " ${category} " の検索結果 </h3>
+		<h3>キーワード " ${keyword} " カテゴリ " ${category.name} " の検索結果 </h3>
 		<table>
 			<tr>
 				<th>商品名</th>
@@ -29,14 +29,15 @@
 			</tr>
 			</c:forEach>
 		</table>
-		<c:if test="${pageNumber > 1}"><a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=${pageNumber-1}">前へ</a></c:if>
-		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=1">1</a>
-		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=2">2</a> 
-		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=3">3</a>
-		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=4">4</a>
-		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=5">5</a>
-		<c:if test="${pageNumber < 5}"><a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category}&pageNumber=${pageNumber+1}">次へ</a></c:if>
-		
+		<c:if test="${pageNumber > 1}"><a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category.categoryId}&pageNumber=${pageNumber-1}">前へ</a></c:if>
+		<c:if test="${pageNumber == 1}">前へ</c:if>
+		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category.categoryId}&pageNumber=1">1</a>
+		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category.categoryId}&pageNumber=2">2</a> 
+		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category.categoryId}&pageNumber=3">3</a>
+		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category.categoryId}&pageNumber=4">4</a>
+		<a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category.categoryId}&pageNumber=5">5</a>
+		<c:if test="${pageNumber < 5}"><a href = "/Shift_W/ItemsSearchController?name=${keyword}&categoryId=${category.categoryId}&pageNumber=${pageNumber+1}">次へ</a></c:if>
+		<c:if test="${pageNumber > 4}">次へ</c:if>
 		<br>
 		
 		<a href = "/Shift_W/MainController">商品検索</a>へ
