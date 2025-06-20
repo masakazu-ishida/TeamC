@@ -45,6 +45,7 @@ public class CartDeleteCheckController extends HttpServlet {
 
 		CartDTO cartItem = CartDeleteCheckService.cartDeleteCheckService(userId, itemId);
 
+		request.setAttribute("itemId", itemId);
 		request.setAttribute("cartItem", cartItem);
 
 		RequestDispatcher rd = request.getRequestDispatcher(path);
