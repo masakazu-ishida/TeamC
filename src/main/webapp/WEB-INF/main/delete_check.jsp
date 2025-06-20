@@ -17,7 +17,7 @@
 			数量：${cartItem.amount}個<br>
 			
 		<form action='/Shift_W/CartDeleteController' method='POST'>
-			<input type='hidden' name='itemId' value='${cartItem.itemId}' />
+			<input type='hidden' name='itemId' value = ${ cartItem.itemId} />
 			<input type='submit' value='削除する' /><br>
 		</form>
 		<a href='/Shift_W/MainController'>商品検索へ</a><br>
