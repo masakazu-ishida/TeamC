@@ -258,7 +258,7 @@ class CartDAOTest {
 	@Test
 	void cartDeleteTest() {
 
-		System.out.println("カートから該当の商品を削除（DAO）");
+		System.out.println("カートから該当の商品を削除し表示（DAO）");
 
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 
