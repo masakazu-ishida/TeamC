@@ -102,6 +102,7 @@ public class ItemsSearchService {
 
 	}
 
+<<<<<<< HEAD
 	public static ItemsDTO findById(int categoryId) {
 
 		//DTOの作成
@@ -132,4 +133,6 @@ public class ItemsSearchService {
 
 	}
 
+=======
+>>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamC.git
 }
