@@ -11,11 +11,30 @@
 <body>
 <h3>商品の詳細表示</h3>
 <table>
-
-
-
-
+<tr>
+	<th>商品名</th>
+	<td></td>
+</tr>
+<tr>
+	<th>商品の色</th>
+	<td></td>
+</tr>
+<tr>
+	<th>メーカー名</th>
+	<td></td>
+</tr>
+<tr>
+	<th>価格</th>
+	<td></td>
+</tr>
+<tr>
+	<th>在庫数</th>
+	<td></td>
+</tr>
 </table>
+<input type =""><br>
+<a href = "/Shift_W/UsersLoginController">ログイン画面</a><br>
+<a href ="/Shift_W/MainController">商品検索</a>へ
 
 
 </body>
