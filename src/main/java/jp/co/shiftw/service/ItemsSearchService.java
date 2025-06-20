@@ -102,37 +102,4 @@ public class ItemsSearchService {
 
 	}
 
-<<<<<<< HEAD
-	public static ItemsDTO findById(int categoryId) {
-
-		//DTOの作成
-		ItemsDTO dto = null;
-
-		//CommonConstantsのLOOKUP_NAMEに接続
-		ConnectionUtil.mode = ConnectionUtil.MODE.TEST;
-		try (Connection conn = ConnectionUtil.getConnection(CommonConstants.LOOKUP_NAME)) {
-
-			//トランザクション処理を行う
-			try {
-				ItemsDAO dao = new ItemsDAO(conn);
-				dto = dao.findByItemId(categoryId);
-
-			} catch (SQLException e) {
-
-				e.printStackTrace();
-
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return dto;
-
-	}
-
-=======
->>>>>>> branch 'master' of https://github.com/masakazu-ishida/TeamC.git
 }
