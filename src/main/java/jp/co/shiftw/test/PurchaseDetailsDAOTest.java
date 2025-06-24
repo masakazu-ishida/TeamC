@@ -34,6 +34,7 @@ class PurchaseDetailsDAOTest {
 		}
 	}
 
+	//注文詳細の作成が正しく行えているのかのテスト
 	@Test
 	void testCreate() {
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {

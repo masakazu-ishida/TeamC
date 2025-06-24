@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ page import="java.util.Date"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -32,17 +33,19 @@
 	<td>${dto.stock }個</td>
 </tr>
 </table>
-<form action = "/Shift_W//CartAddController"method = "post">
-数量 <select name='amount'>
-				<option selected value='1'>1</option>
-				<option value='2'>2</option>
-				<option value='3'>3</option>
-				<option value='4'>4</option>
-				<option value='5'>5</option>
-			</select><br />
-<input type="hidden" name = "itemId" value = "dto.itemId">
-<input type ="submit" value ="ショッピングカートに入れる"></a>
-</form><br>
+数量
+<form action="/Shift_W//CartAddController" method="post">
+	<input type = "hidden" name = "itemId" value = "${dto.itemId}">
+	<select name='amount'>
+		<option selected value='1'>1</option>
+		<option value='2'>2</option>
+		<option value='3'>3</option>
+		<option value='4'>4</option>
+		<option value='5'>5</option>
+	</select><br />
+	<input type = "submit" value = "ショッピングカートに入れる">
+</form>
+
 <a href = "/Shift_W/UsersLoginController">ログイン画面</a><br>
 <a href ="/Shift_W/MainController">商品検索</a>へ
 
