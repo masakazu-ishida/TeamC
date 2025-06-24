@@ -83,7 +83,7 @@ public class CartAddController extends HttpServlet {
 			return;
 		}
 
-		String userid = (String) session.getAttribute("userid");
+		String userid = (String) session.getAttribute("userId");
 
 		CartAddService.CartAdd(userid, item, amon, date);
 
