@@ -9,6 +9,7 @@
 <title>カート一覧</title>
 </head>
 <body>
+	<h3>ショッピングカート内の商品一覧</h3>
 	<table>
 		<tr>
 			<th>商品名</th>
@@ -33,7 +34,8 @@
 	<form action="/Shift_W/purchaseConfirm" method="post">
 		<input type="submit" value="購入">
 	</form>
-	<a href="/Shift_W/MainController">メインメニュー</a>
+	<br>
+	<a href="/Shift_W/MainController">商品検索</a>へ
 
 </body>
 </html>

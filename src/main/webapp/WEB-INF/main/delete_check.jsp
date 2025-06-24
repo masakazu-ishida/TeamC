@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>カート削除確認画面</title>
+<title>ショッピングカート内の商品を削除</title>
 </head>
 <body>
 
@@ -13,8 +13,8 @@
 			${cartItem.items.name}<br>
 			${cartItem.items.color}<br>
 			${cartItem.items.manufacturer}<br>
-			${cartItem.items.price}<br>
-			数量：${cartItem.amount}個<br>
+			${cartItem.items.price}円<br>
+			数量${cartItem.amount}個<br>
 			
 		<form action='/Shift_W/CartDeleteController' method='POST'>
 			<input type='hidden' name='itemId' value ='${itemId}' />
