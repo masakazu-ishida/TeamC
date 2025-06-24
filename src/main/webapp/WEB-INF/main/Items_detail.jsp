@@ -53,7 +53,7 @@
 	<input type = "submit" value = "ショッピングカートに入れる">
 </form>
 
-<a href = "/Shift_W/UsersLoginController">ログイン画面</a><br>
+
 <a href ="/Shift_W/MainController">商品検索</a>へ
 
 
