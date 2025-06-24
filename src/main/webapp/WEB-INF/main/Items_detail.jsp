@@ -32,15 +32,17 @@
 	<td>${dto.stock }個</td>
 </tr>
 </table>
-数量
-<select name='amount'>
+<form action = "/Shift_W//CartAddController"method = "post">
+数量 <select name='amount'>
 				<option selected value='1'>1</option>
 				<option value='2'>2</option>
 				<option value='3'>3</option>
 				<option value='4'>4</option>
 				<option value='5'>5</option>
 			</select><br />
-<a href = "/Shift_W//CartAddController"><input type ="submit" value ="ショッピングカートに入れる"></a><br>
+<input type="hidden" name = "itemId" value = "dto.itemId">
+<input type ="submit" value ="ショッピングカートに入れる"></a>
+</form><br>
 <a href = "/Shift_W/UsersLoginController">ログイン画面</a><br>
 <a href ="/Shift_W/MainController">商品検索</a>へ
 
