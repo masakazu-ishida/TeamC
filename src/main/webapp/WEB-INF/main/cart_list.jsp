@@ -30,7 +30,7 @@
 			</tr>
 		</c:forEach>
 	</table>
-	合計：${totalAmount }<br>
+	合計 ${totalAmount }円<br>
 	<form action="/Shift_W/purchaseConfirm" method="post">
 		<input type="submit" value="購入">
 	</form>
