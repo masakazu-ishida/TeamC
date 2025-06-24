@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>メインメニュー</title>
-<link  rel='stylesheet' type='text/css' href='style.css' />
+<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
 	<h3>商品検索を行います</h3><br>

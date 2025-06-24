@@ -6,7 +6,8 @@
 	<head>
 		<meta  http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 		<title>検索結果</title>
-		<link  rel='stylesheet' type='text/css' href='style.css' />
+		<link rel="stylesheet" type="text/css" href="style.css" >
+		
 	</head>
 		<body>
 		<h3>キーワード " ${keyword} " カテゴリ " ${category.name} " の検索結果 </h3>
