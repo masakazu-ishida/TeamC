@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@ page import="java.util.Date"%>
+    <%@ page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -43,6 +44,12 @@
 		<option value='4'>4</option>
 		<option value='5'>5</option>
 	</select><br />
+	<%
+    	Date now = new Date();
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    	String formattedDate = sdf.format(now);
+  	%>
+	<input type = "hidden" name = "date" value = "<%= formattedDate %>">
 	<input type = "submit" value = "ショッピングカートに入れる">
 </form>
 
