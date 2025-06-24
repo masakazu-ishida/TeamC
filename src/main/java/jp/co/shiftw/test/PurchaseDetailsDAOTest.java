@@ -38,7 +38,7 @@ class PurchaseDetailsDAOTest {
 	void testCreate() {
 		try (Connection conn = ConnectionUtil.getConnectionForJUnit()) {
 			PurchaseDetailsDAO dao = new PurchaseDetailsDAO(conn);
-			dao.create(2, 6, 5555);
+			dao.create(2, 6, 5);
 
 			PurchasesDAO dao2 = new PurchasesDAO(conn);
 			PurchasesDTO dto = dao2.findByPurchaseId(2);
@@ -52,7 +52,7 @@ class PurchaseDetailsDAOTest {
 			ItemsDTO itemsDTO = dao3.findByItemId(6);
 
 			assertEquals(itemsDTO.getItemId(), purchaseDetailsDTO.getItem().getItemId());
-			assertEquals(5555, purchaseDetailsDTO.getAmount());
+			assertEquals(5, purchaseDetailsDTO.getAmount());
 		} catch (Exception e) {
 			fail(e.toString());
 		}
