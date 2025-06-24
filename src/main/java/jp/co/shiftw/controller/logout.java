@@ -2,6 +2,7 @@ package jp.co.shiftw.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,6 +33,11 @@ public class logout extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		request.getSession(true).invalidate();
+
+		String path = "/MainController";
+
+		RequestDispatcher rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
 
 	}
 

@@ -29,7 +29,7 @@
 	
 	</form>
 	<a href="/Shift_W/CartListController">カートを見る</a><br>
-	<a href=${ url}>${ urlName}</a>
-	<a href=${ logOutUrl}>${ urlName}</a>
+	<a href=${ url}>${ urlName}</a><br>
+	<a href=${ logOutUrl}>${ logOut}</a>
 </body>
 </html>

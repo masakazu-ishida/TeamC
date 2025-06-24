@@ -54,7 +54,7 @@ public class MainController extends HttpServlet {
 			request.setAttribute("url", "");
 			request.setAttribute("urlName", "会員情報の変更");
 			request.setAttribute("logOutUrl", "/Shift_W/logout");
-			request.setAttribute("logOut", "logOut");
+			request.setAttribute("logOut", "ログアウト");
 		}
 
 		RequestDispatcher rd = request.getRequestDispatcher(path);
