@@ -76,3 +76,6 @@ INSERT INTO purchase_details (purchase_id, item_id, amount) values(2, 2, 2);
 INSERT INTO purchases (purchased_user, purchased_date, destination, cancel) values('user', '2010/05/20', '東京都', false);
 INSERT INTO purchase_details (purchase_id, item_id, amount) values(3, 4, 10);
 
+INSERT INTO purchases (purchased_user, purchased_date, destination, cancel) values('user2', '2019/03/18', '鳥取県', true);
+INSERT INTO purchase_details (purchase_id, item_id, amount) values(4, 1, 8);
+
