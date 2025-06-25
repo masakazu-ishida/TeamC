@@ -1,8 +1,10 @@
+<%@page import="jp.co.shiftw.dto.ItemsDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@ page import="java.util.Date"%>
     <%@ page import="java.text.SimpleDateFormat"%>
+    <%@ page import="jp.co.shiftw.dto.ItemsDTO"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -37,12 +39,13 @@
 数量
 <form action="/Shift_W//CartAddController" method="post">
 	<input type = "hidden" name = "itemId" value = "${dto.itemId}">
-	<select name='amount'>
-		<option selected value='1'>1</option>
-		<option value='2'>2</option>
-		<option value='3'>3</option>
-		<option value='4'>4</option>
-		<option value='5'>5</option>
+	<select name='amount' size="5">
+	<option selected value='1'>1</option>
+	<% 
+		ItemsDTO dto = (ItemsDTO)request.getAttribute("dto");
+		for(int i = 2; i <= dto.getStock(); i ++) { %>
+			<option value=<%= i %>><%= i %></option>
+	<%}%>
 	</select><br />
 	<%
     	Date now = new Date();
