@@ -52,6 +52,12 @@ public class PurchaseConfirmController extends HttpServlet {
 		//カートの中身を取得
 		List<CartDTO> cartList = CartListService.cartList(userId);
 
+		//カートの中身が空の場合はその旨を表示する
+		if (cartList.size() == 0) {
+			path = "/WEB-INF/main/cart_empty.jsp";
+			request.getRequestDispatcher(path).forward(request, response);
+		}
+
 		//画面出力項目の設定
 		request.setAttribute("cartList", cartList);
 		int totalAmount = CartListService.totalAmount(cartList);
