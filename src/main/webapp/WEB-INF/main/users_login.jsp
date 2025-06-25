@@ -31,6 +31,7 @@
 			<input type="hidden" name="source" value="${source}">
 			<input type="hidden" name="itemId" value="${itemId}">
 			<input type="hidden" name="amount" value="${amount}">
+			<input type="hidden" name="date" value="${date}">
 			
 		</form>
 	</body>

@@ -69,11 +69,14 @@ public class CartAddController extends HttpServlet {
 
 		Date date = expected;
 
-		if (session == null) {
+		String userid = (String) session.getAttribute("userId");
+
+		if (userid == null) {
 
 			request.setAttribute("source", "2");
 			request.setAttribute("itemId", item);
 			request.setAttribute("amount", amon);
+			request.setAttribute("date", strDate);
 
 			path = "/WEB-INF/main/users_login.jsp";
 
@@ -82,8 +85,6 @@ public class CartAddController extends HttpServlet {
 
 			return;
 		}
-
-		String userid = (String) session.getAttribute("userId");
 
 		CartAddService.CartAdd(userid, item, amon, date);
 
