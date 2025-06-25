@@ -58,7 +58,14 @@
     	String formattedDate = sdf.format(now);
   	%>
 	<input type = "hidden" name = "date" value = "<%= formattedDate %>">
-	<input type = "submit" value = "ショッピングカートに入れる">
+	<c:if test="${dto.stock > 0}">
+		<input type = "submit" value = "ショッピングカートに入れる">
+	</c:if>
+	
+	<c:if test="${dto.stock == 0}">
+		<p style="color: red; font-weight: bold;">売り切れ</p>
+	</c:if>
+	
 </form>
 
 
