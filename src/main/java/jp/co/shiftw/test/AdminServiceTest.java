@@ -52,7 +52,7 @@ class AdminServiceTest {
 	@Test
 	void testLoginIsNot() {
 
-		AdminDTO dto = AdminLoginService.loginAdmin("admin", "admin");
+		AdminDTO dto = AdminLoginService.loginAdmin("admin", "admi");
 
 		assertNull(dto);
 
