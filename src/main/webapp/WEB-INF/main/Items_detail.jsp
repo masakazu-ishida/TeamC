@@ -40,11 +40,16 @@
 <form action="/Shift_W//CartAddController" method="post">
 	<input type = "hidden" name = "itemId" value = "${dto.itemId}">
 	<select name='amount' size="5">
-	<option selected value='1'>1</option>
+	
 	<% 
 		ItemsDTO dto = (ItemsDTO)request.getAttribute("dto");
-		for(int i = 2; i <= dto.getStock(); i ++) { %>
-			<option value=<%= i %>><%= i %></option>
+		for(int i = 1; i <= dto.getStock(); i ++) { %>
+			<c:if test="<%= i == 1 %>">
+					<option selected value='1'>1</option>
+			</c:if>
+			<c:if test="<%= i > 1 %>">
+					<option value=<%= i %>><%= i %></option>
+			</c:if>
 	<%}%>
 	</select><br />
 	<%
