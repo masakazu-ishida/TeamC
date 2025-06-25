@@ -13,8 +13,8 @@
 		<br />
 		<table>
 			<tr>
-				<th>注文者ID</th>
-				<td>${purchase.purchaseId}</td>
+				<th>購入者ID</th>
+				<td>${purchase.purchasedUser}</td>
 			</tr>
 			<tr>
 				<th>注文日</th>
