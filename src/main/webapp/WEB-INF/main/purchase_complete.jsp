@@ -8,10 +8,10 @@
 		<title>商品の購入完了</title>
 		<link rel='stylesheet' type='text/css' href='style.css' />
 	</head>
-<body>
+<body style="margin: auto; text-align: center;">
 		<h3>${message}</h3>
 		<br />
-		<table>
+		<table style="margin: auto; text-align: center;">
 			<tr>
 				<th>商品名</th>
 				<th>商品の色</th>
@@ -28,7 +28,7 @@
 					<td>${cart.amount}個</td>
 				</tr>
 			</c:forEach>
-		</table>
+		</table><br>
 		合計 ${totalAmount} 円<br /><br />
 		清算方法 代金引換<br /><br />
 		配送先 ${destination}<br /><br />

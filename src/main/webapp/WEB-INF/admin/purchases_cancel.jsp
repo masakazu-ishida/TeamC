@@ -8,10 +8,10 @@
 		<title>注文のキャンセル完了</title>
 		<link rel='stylesheet' type='text/css' href='../style.css' />
 	</head>
-	<body>
+	<body style="margin: auto; text-align: center;">
 		<h3>以下の注文をキャンセルしました。</h3>
 		<br />
-		<table>
+		<table style="margin: auto; text-align: center;">
 			<tr>
 				<th>購入者ID</th>
 				<td>${purchase.purchasedUser}</td>

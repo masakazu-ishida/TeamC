@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>カート削除</title>
 </head>
-<body>
+<body style="margin: auto; text-align: center;">
 
 		<h3>以下の商品をショッピングカートから削除しました。</h3>
 		<br />

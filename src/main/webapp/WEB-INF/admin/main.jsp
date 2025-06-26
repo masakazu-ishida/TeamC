@@ -6,11 +6,11 @@
 <meta charset="UTF-8">
 <title>管理者メインページ</title>
 </head>
-<body>
+<body style="margin: auto; text-align: center;">
 		<h3>管理者メインページ</h3>
 		<h4>購入履歴の検索</h4>
 		<form action='../../Shift_W/admin/purchasesHistory' method='GET'>
-			<table>
+			<table style="margin: auto; text-align: center;">
 				<tr>
 					<th>会員ID</th>
 					<td><input type='text' class='id' name='user_id' /></td>

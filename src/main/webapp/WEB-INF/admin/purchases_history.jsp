@@ -8,10 +8,10 @@
 		<title>購入履歴一覧</title>
 		<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/style.css' />
 	</head>
-	<body>
+	<body style="margin: auto; text-align: center;">
 		<h3>購入履歴の一覧</h3>
 		<br />
-		<table>
+		<table style="margin: auto; text-align: center;">
 			<tr>
 				<th>購入者ID</th>
 				<th>注文日</th>

@@ -12,9 +12,9 @@
 		<title>検索詳細</title>
 		<link  rel='stylesheet' type='text/css' href='style.css' />
 </head>
-<body>
+<body style="margin: auto; text-align: center;">
 <h3>商品の詳細表示</h3>
-<table>
+<table style="margin: auto; ">
 <tr>
 	<th>商品名</th>
 	<td>${dto.name }</td>
@@ -66,7 +66,7 @@
 		<p style="color: red; font-weight: bold;">売り切れ</p>
 	</c:if>
 	
-</form>
+</form><br>
 
 
 <a href ="/Shift_W/MainController">商品検索</a>へ

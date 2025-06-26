@@ -9,12 +9,12 @@
 		<title>会員ログイン</title>
 		<link rel='stylesheet' type='text/css' href='style.css' />
 	</head>
-	<body>
+	<body style="margin: auto; text-align: center;">
 		<h3>ログインしてください。</h3>
 		<br />
 		<h4 style="color: red"><c:out value="${messeage}"/></h4>
 		<form action='/Shift_W/UsersLoginController' method='POST'>
-			<table>
+			<table style="margin: auto; text-align: center;">
 				<tr>
 					<th>会員ID</th>
 					<td><input type='text' class='id' name='user_id' /></td>

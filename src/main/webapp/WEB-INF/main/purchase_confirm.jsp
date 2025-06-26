@@ -8,10 +8,10 @@
 		<title>商品の購入確認</title>
 		<link rel='stylesheet' type='text/css' href='style.css' />
 	</head>
-<body>
+<body style="margin: auto; text-align: center;">
 		<h3>以下の商品を購入しますか？</h3>
 		<br />
-		<table>
+		<table style="margin: auto; text-align: center;">
 			<tr>
 				<th>商品名</th>
 				<th>商品の色</th>
@@ -28,7 +28,7 @@
 					<td>${cart.amount}個</td>
 				</tr>
 			</c:forEach>
-		</table>
+		</table><br>
 		合計 ${totalAmount} 円<br /><br />
 		<form action='/Shift_W/purchase' method='POST'>
 			清算方法<br />

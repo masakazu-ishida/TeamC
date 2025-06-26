@@ -8,9 +8,9 @@
 <link rel='stylesheet' type='text/css' href='style.css'>
 <title>カート一覧</title>
 </head>
-<body>
+<body style="margin: auto; text-align: center;">
 	<h3>ショッピングカート内の商品一覧</h3>
-	<table>
+	<table style="margin: auto; ">
 		<tr>
 			<th>商品名</th>
 			<th>商品の色</th>
@@ -29,7 +29,7 @@
 				<td><a href = "/Shift_W/CartDeleteCheckController?itemId=${cart.items.itemId }" >削除</a></td>
 			</tr>
 		</c:forEach>
-	</table>
+	</table><br>
 	合計 ${totalAmount }円<br>
 	<form action="/Shift_W/purchaseConfirm" method="post">
 		<input type="submit" value="購入">

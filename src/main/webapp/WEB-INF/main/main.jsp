@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>メインメニュー</title>
+<title >メインメニュー</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
-<body>
-	<h3>商品検索を行います</h3><br>
+<body style="margin: auto; text-align: center;">
+	<h3 >商品検索を行います</h3><br>
 	<form action="/Shift_W/ItemsSearchController" method="get">
 	キーワード<br>
-	<input type="text" name="name"><br>
+	<input type="text" name="name" ><br>
 	カテゴリ<br>
 			<select name='categoryId'>
 				<c:forEach var='category' items='${categories}'>
@@ -24,12 +24,12 @@
 					</c:if>
 				</c:forEach>
 			</select><br />
-	<input type ="hidden" name ="pageNumber" value = "1">
-	<input type="submit" value="検索">
+	<input type ="hidden" name ="pageNumber" value = "1"><br>
+	<input type="submit" value="検索"><br><br>
 	
 	</form>
-	<a href="/Shift_W/CartListController">カートを見る</a><br>
-	<a href=${ url}>${ urlName}</a><br>
+	<a href="/Shift_W/CartListController" >カートを見る</a><br><br>
+	<a href=${ url}>${ urlName}</a><br><br>
 	<a href=${ logOutUrl}>${ logOut}</a>
 </body>
 </html>

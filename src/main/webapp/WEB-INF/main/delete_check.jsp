@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>ショッピングカート内の商品を削除</title>
 </head>
-<body>
+<body style="margin: auto; text-align: center;">
 
 <h3>以下の商品をショッピングカートから削除してよろしいですか？</h3><br>
 			${cartItem.items.name}<br>
@@ -17,9 +17,9 @@
 			数量${cartItem.amount}個<br>
 			
 		<form action='/Shift_W/CartDeleteController' method='POST'>
-			<input type='hidden' name='itemId' value ='${itemId}' />
-			<input type='submit' value='削除する' /><br>
-		</form>
+			<input type='hidden' name='itemId' value ='${itemId}' /><br>
+			<input type='submit' value='削除する' /><br><br>
+		</form><br>
 		<a href='/Shift_W/MainController'>商品検索へ</a><br>
 
 
