@@ -129,4 +129,19 @@ public class CartDAO extends BaseDAO {
 		}
 	}
 
+	//カート内の商品の在庫数を変更
+	public void cartAmountEdit(String userId, int itemId, int amount) throws SQLException {
+		//カートに追加するレコードを取得するSQL
+		String sql = "UPDATE items_in_cart SET amount = ? WHERE user_id = ? AND item_id = ? ";
+
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+			ps.setString(2, userId);
+			ps.setInt(3, itemId);
+			ps.setInt(1, amount);
+
+			ps.executeUpdate();
+		}
+	}
+
 }
