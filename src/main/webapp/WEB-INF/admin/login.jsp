@@ -9,7 +9,7 @@
 		<link rel='stylesheet' type='text/css' href='style.css' />
 	</head>
 	<body>
-		<h3 class="heading-29">管理者ログイン</h3>
+		<h3 >管理者ログイン</h3>
 		<br />
 		<h4><c:out value="${messeage}"/></h4>
 		<form action='/Shift_W/Admin' method='POST'>
@@ -24,7 +24,7 @@
 				</tr>
 				</table><br>
 				<tr>
-					<td colspan='2'><button class="button-55" style="margin: auto; ">ログイン</button></td>
+					<td colspan='2'><button style="margin: auto; ">ログイン</button></td>
 				</tr>
 			
 		</form>
