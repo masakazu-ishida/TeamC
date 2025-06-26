@@ -9,7 +9,7 @@
 		<link rel='stylesheet' type='text/css' href='style.css' />
 	</head>
 <body>
-		<h3>以下の商品を購入しました。</h3>
+		<h3>${message}</h3>
 		<br />
 		<table>
 			<tr>

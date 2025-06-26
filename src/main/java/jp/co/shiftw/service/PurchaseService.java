@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 
+import jp.co.shiftw.dao.CartDAO;
 import jp.co.shiftw.dao.ItemsDAO;
 import jp.co.shiftw.dao.PurchaseDetailsDAO;
 import jp.co.shiftw.dao.PurchasesDAO;
@@ -44,8 +45,10 @@ public class PurchaseService {
 					purchaseDetailsDAO.create(purchaseId, itemId, amount);
 
 					//カートを削除する
-					CartDeleteService.cartDelete(userId, itemId);
+					CartDAO cartDAO = new CartDAO(conn);
+					cartDAO.cartDelete(userId, itemId);
 				}
+
 				conn.commit();
 			} catch (SQLException e) {
 				conn.rollback();

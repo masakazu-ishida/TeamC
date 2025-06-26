@@ -63,7 +63,13 @@ public class PurchaseController extends HttpServlet {
 		int totalAmount = CartListService.totalAmount(cartList);
 
 		//購入処理
-		PurchaseService.purchase(userId, cartList, destination);
+		boolean ifPurchase = PurchaseService.purchase(userId, cartList, destination);
+
+		if (ifPurchase) {
+			request.setAttribute("message", "以下の商品を購入しました。");
+		} else {
+			request.setAttribute("message", "注文に失敗しました: 購入した商品の注文数が在庫数を上回っています。");
+		}
 
 		//画面出力項目の設定
 		request.setAttribute("destination", destination);
