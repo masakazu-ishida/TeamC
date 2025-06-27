@@ -8,8 +8,8 @@
 <title >メインメニュー</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
-<body style="margin: auto; text-align: center;">
-	<h3 >商品検索を行います</h3><br>
+<body style="margin: auto; text-align: center;" >
+	<h3 class="heading-29">商品検索を行います</h3><br>
 	<form action="/Shift_W/ItemsSearchController" method="get">
 	キーワード<br>
 	<input type="text" name="name" ><br>
@@ -25,7 +25,8 @@
 				</c:forEach>
 			</select><br />
 	<input type ="hidden" name ="pageNumber" value = "1"><br>
-	<input type="submit" value="検索"><br><br>
+	
+	<button class ="button-55" style="margin: auto; text-align: center;">検索</button><br>
 	
 	</form>
 	<a href="/Shift_W/CartListController" >カートを見る</a><br><br>

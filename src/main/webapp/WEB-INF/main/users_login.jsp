@@ -10,7 +10,7 @@
 		<link rel='stylesheet' type='text/css' href='style.css' />
 	</head>
 	<body style="margin: auto; text-align: center;">
-		<h3>ログインしてください。</h3>
+		<h3 class="heading-29">ログインしてください。</h3>
 		<br />
 		<h4 style="color: red"><c:out value="${messeage}"/></h4>
 		<form action='/Shift_W/UsersLoginController' method='POST'>
@@ -27,6 +27,7 @@
 					<td colspan='2'><input type='submit' value='ログイン' /></td>
 				</tr>
 			</table>
+			
 			
 			<input type="hidden" name="source" value="${source}">
 			<input type="hidden" name="itemId" value="${itemId}">
