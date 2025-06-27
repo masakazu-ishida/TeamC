@@ -74,22 +74,23 @@ INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) 
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('覇王のブラッドメイル','(株)Riot',5,'紫',3300,4,TRUE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('スピリットビサージュ','(株)Riot',4,'緑',2700,8,TRUE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('スイフトネスブーツ','(株)Riot',3,'緑',1000,10,TRUE);
+INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('スニーカー','NB',3,'白',20000,10,TRUE);
 
 
-insert into items_in_cart values('user',1,5,'2020/10/20');
-insert into items_in_cart values('user',2,1,'2020/10/20');
-insert into items_in_cart values('user',3,3,'2020/10/20');
+insert into items_in_cart values('igayu@example.com',1,5,'2020/10/20');
+insert into items_in_cart values('igayu@example.com',2,1,'2020/10/20');
+insert into items_in_cart values('igayu@example.com',3,3,'2020/10/20');
 
-INSERT INTO purchases (purchased_user, purchased_date, destination, cancel) values('user', '2020/10/20', '東京都', false);
+INSERT INTO purchases (purchased_user, purchased_date, destination, cancel) values('igayu@example.com', '2020/10/20', '北海道函館市五稜郭町４４', false);
 INSERT INTO purchase_details (purchase_id, item_id, amount) values(1, 1, 1);
 INSERT INTO purchase_details (purchase_id, item_id, amount) values(1, 3, 3);
 
-INSERT INTO purchases (purchased_user, purchased_date, destination, cancel) values('user2', '2018/11/24', '鳥取県', false);
+INSERT INTO purchases (purchased_user, purchased_date, destination, cancel) values('himari@example.net', '2018/11/24', '東京都江東区三好４丁目１−１', false);
 INSERT INTO purchase_details (purchase_id, item_id, amount) values(2, 2, 2);
 
-INSERT INTO purchases (purchased_user, purchased_date, destination, cancel) values('user', '2010/05/20', '東京都', false);
+INSERT INTO purchases (purchased_user, purchased_date, destination, cancel) values('igayu@example.com', '2010/05/20', '鳥取県鳥取市河原町3-20', false);
 INSERT INTO purchase_details (purchase_id, item_id, amount) values(3, 4, 10);
 
-INSERT INTO purchases (purchased_user, purchased_date, destination, cancel) values('user2', '2019/03/18', '鳥取県', true);
+INSERT INTO purchases (purchased_user, purchased_date, destination, cancel) values('himari@example.net', '2019/03/18', '東京都江東区三好４丁目１−１', true);
 INSERT INTO purchase_details (purchase_id, item_id, amount) values(4, 1, 8);
 
