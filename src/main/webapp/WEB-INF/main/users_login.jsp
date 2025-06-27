@@ -24,7 +24,7 @@
 					<td><input type='password' class='password' name='password' /></td>
 				</tr>
 				<tr>
-					<td colspan='2'><input type='submit' value='ログイン' style="button-1"/></td>
+					<td colspan='2'><input type='submit' value='ログイン' /></td>
 				</tr>
 			</table>
 			
