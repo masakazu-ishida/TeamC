@@ -33,7 +33,7 @@ ALTER TABLE purchases ALTER COLUMN "purchase_id" SET DEFAULT nextval('SEQ_PURCHA
 ALTER TABLE purchase_details ALTER COLUMN "purchase_detail_id" SET DEFAULT nextval('SEQ_PUR_DETAIL_ID');
 
 INSERT INTO administrators (admin_id, password, name) VALUES ('admin', 'admin', '管理者');
-INSERT INTO public.users(user_id,password,name,address) VALUES ('igayu@exmaple.com','userpass','五十嵐優一','北海道函館市五稜郭町４４');
+INSERT INTO public.users(user_id,password,name,address) VALUES ('igayu@example.com','userpass','五十嵐優一','北海道函館市五稜郭町４４');
 INSERT INTO public.users(user_id,password,name,address) VALUES ('himari@example.net','userpass2','徳川日葵','東京都江東区三好４丁目１−１');
 INSERT INTO public.users(user_id,password,name,address) VALUES ('kairyu@example.jp','userpass3','甲斐龍一','鳥取県鳥取市河原町3-20');
 INSERT INTO public.users(user_id,password,name,address) VALUES ('Dr','Mundo','ドクタームンド','不明');
