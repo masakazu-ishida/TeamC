@@ -36,11 +36,15 @@ INSERT INTO administrators (admin_id, password, name) VALUES ('admin', 'admin', 
 INSERT INTO public.users(user_id,password,name,address) VALUES ('user','userpass','五十嵐優一','北海道函館市五稜郭町４４');
 INSERT INTO public.users(user_id,password,name,address) VALUES ('user2','userpass2','徳川日葵','東京都江東区三好４丁目１−１');
 INSERT INTO public.users(user_id,password,name,address) VALUES ('user3','userpass3','甲斐龍一','鳥取県鳥取市河原町3-20');
+INSERT INTO public.users(user_id,password,name,address) VALUES ('Dr','Mundo','ドクタームンド','不明');
 
 INSERT INTO categories (category_id,name) VALUES (0,'すべて');
 INSERT INTO categories (category_id,name) VALUES (1,'帽子');
 INSERT INTO categories (category_id,name) VALUES (2,'鞄');
 INSERT INTO categories (category_id,name) VALUES (3,'靴');
+INSERT INTO categories (category_id,name) VALUES (4,'武器');
+INSERT INTO categories (category_id,name) VALUES (5,'鎧');
+INSERT INTO categories (category_id,name) VALUES (6,'特殊');
 
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('麦わら帽子','(株)フーシャ村',1,'黄色',4980,12,FALSE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('Mキャップ','(株)ブラザーズ',1,'赤色',3480,15,TRUE);
@@ -64,6 +68,11 @@ INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) 
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ボディバッグ','グレコリ',2,'茶色',690,1,FALSE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('先人の道標','(株)Riot',2,'茶色',690,1,FALSE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ラバドンデスキャップ','(株)Riot',1,'茶色',690,1,FALSE);
+INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('心の鋼','(株)Riot',6,'白',3000,3,FALSE);
+INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ワーモグアーマー','(株)Riot',5,'緑',3100,3,FALSE);
+INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('タイタンハイドラ','(株)Riot',4,'茶色',3300,9,FALSE);
+INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('覇王のブラッドメイル','(株)Riot',5,'紫',3300,4,FALSE);
+INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('スピリットビサージュ','(株)Riot',4,'緑',2700,8,FALSE);
 
 
 insert into items_in_cart values('user',1,5,'2020/10/20');
