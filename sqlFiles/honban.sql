@@ -73,6 +73,7 @@ INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) 
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('タイタンハイドラ','(株)Riot',4,'茶色',3300,9,TRUE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('覇王のブラッドメイル','(株)Riot',5,'紫',3300,4,TRUE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('スピリットビサージュ','(株)Riot',4,'緑',2700,8,TRUE);
+INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('スイフトネスブーツ','(株)Riot',3,'緑',1000,10,TRUE);
 
 
 insert into items_in_cart values('user',1,5,'2020/10/20');
