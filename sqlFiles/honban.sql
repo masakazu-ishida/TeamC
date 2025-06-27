@@ -59,13 +59,13 @@ INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) 
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('マジックハット','東京帽子店',1,'緑色',650,17,TRUE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ガラスの靴','シンデレラ',3,'透明',1100000,1,TRUE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ショルダーバッグ','東京鞄店',2,'緑色',4980,15,FALSE);
-INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('トートバッグ','ラルフーローラン',2,'紺色',2200,3,FALSE);
+INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ビーチサンダル','ラルフーローラン',2,'紺色',2200,3,FALSE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('バックパック','エニエスベー',2,'黄色',2980,6,FALSE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('エコバッグ','環境保護',2,'茶色',780,17,TRUE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('超高級鞄','(株)ボッテガ',2,'赤色',250000,5,TRUE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('鞄BAG','東京鞄店',2,'青色',1800,20,TRUE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ハンドバッグ','(株)MS',2,'緑色',34000,2,TRUE);
-INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ボディバッグ','グレコリ',2,'茶色',690,1,FALSE);
+INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ルブタンのスニーカー','Christian Louboutin',3,'茶色',192500,1,FALSE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('先人の道標','(株)Riot',2,'茶色',690,1,FALSE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ラバドンデスキャップ','(株)Riot',1,'茶色',690,1,FALSE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('心の鋼','(株)Riot',6,'白',3000,3,TRUE);
