@@ -68,11 +68,11 @@ INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) 
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ボディバッグ','グレコリ',2,'茶色',690,1,FALSE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('先人の道標','(株)Riot',2,'茶色',690,1,FALSE);
 INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ラバドンデスキャップ','(株)Riot',1,'茶色',690,1,FALSE);
-INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('心の鋼','(株)Riot',6,'白',3000,3,FALSE);
-INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ワーモグアーマー','(株)Riot',5,'緑',3100,3,FALSE);
-INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('タイタンハイドラ','(株)Riot',4,'茶色',3300,9,FALSE);
-INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('覇王のブラッドメイル','(株)Riot',5,'紫',3300,4,FALSE);
-INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('スピリットビサージュ','(株)Riot',4,'緑',2700,8,FALSE);
+INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('心の鋼','(株)Riot',6,'白',3000,3,TRUE);
+INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('ワーモグアーマー','(株)Riot',5,'緑',3100,3,TRUE);
+INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('タイタンハイドラ','(株)Riot',4,'茶色',3300,9,TRUE);
+INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('覇王のブラッドメイル','(株)Riot',5,'紫',3300,4,TRUE);
+INSERT INTO items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('スピリットビサージュ','(株)Riot',4,'緑',2700,8,TRUE);
 
 
 insert into items_in_cart values('user',1,5,'2020/10/20');
