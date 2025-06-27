@@ -57,9 +57,9 @@
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     	String formattedDate = sdf.format(now);
   	%>
-	<input type = "hidden" name = "date" value = "<%= formattedDate %>">
+	<input type = "hidden" name = "date" value = "<%= formattedDate %>"><br>
 	<c:if test="${dto.stock > 0}">
-		<input type = "submit" value = "ショッピングカートに入れる">
+		<button class="button-61" style="margin: auto; text-align: center;">カートに追加</button>
 	</c:if>
 	
 	<c:if test="${dto.stock == 0}">
