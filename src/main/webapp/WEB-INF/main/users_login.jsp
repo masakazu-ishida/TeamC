@@ -23,10 +23,12 @@
 					<th>パスワード</th>
 					<td><input type='password' class='password' name='password' /></td>
 				</tr>
-				<tr>
+				
+			</table><br>
+			<tr>
 					<td colspan='2'><input type='submit' value='ログイン' /></td>
 				</tr>
-			</table>
+			  
 			
 			
 			

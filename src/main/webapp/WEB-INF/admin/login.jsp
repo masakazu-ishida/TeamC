@@ -8,8 +8,8 @@
 		<title>会員ログイン</title>
 		<link rel='stylesheet' type='text/css' href='style.css' />
 	</head>
-	<body>
-		<h3 >管理者ログイン</h3>
+	<body style="margin: auto; text-align: center;">
+		<h3 class="heading-29">管理者ログイン</h3>
 		<br />
 		<h4><c:out value="${messeage}"/></h4>
 		<form action='/Shift_W/Admin' method='POST'>
