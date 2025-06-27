@@ -50,8 +50,8 @@ public class MainController extends HttpServlet {
 			request.setAttribute("url", "/Shift_W/UsersLoginController");
 			request.setAttribute("urlName", "ログイン");
 		} else {
-			request.setAttribute("url", "");
-			request.setAttribute("urlName", "会員情報の変更");
+			request.setAttribute("url", "/Shift_W/logout");
+			request.setAttribute("urlName", "ログアウト");
 		}
 
 		RequestDispatcher rd = request.getRequestDispatcher(path);
