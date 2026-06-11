@@ -20,10 +20,14 @@ public class ConnectionUtil {
 		Connection connection = null;
 		try {
 
-			String env = System.getProperty("env.type");
+			boolean assertsEnabled = false;
+
+			// -ea が有効な場合のみ、ここの代入文（assertsEnabled = true）が実行される
+			// （assertの条件式自体は常に true になるようにして、エラーを防ぎます）
+			assert assertsEnabled = true;
 
 			//JUnit経由の起動かどうかをチェック
-			if ("junit".equals(env)) {
+			if (assertsEnabled == true) {
 				String url = "jdbc:postgresql://localhost:5432/ecsite";
 				String username = "ecsite";
 				String password = "ecsite";
@@ -38,7 +42,7 @@ public class ConnectionUtil {
 			}
 			return connection;
 		} catch (NamingException e) {
-			fail("これはJUnitでテストしてますか？このテストクラス実行時に、VM引数に『-Denv.type=junit』を指定していない可能性があります。確認して下さい。");
+			fail(e.getMessage());
 			throw new ServletException(e);
 		}
 
