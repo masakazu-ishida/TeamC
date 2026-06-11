@@ -37,7 +37,8 @@ public class ItemsDAO extends ItemsDTO {
 
 	///カテゴリー検索
 	public ItemsDTO findById(int category_id) throws SQLException {
-		String sql = "select *from items where category_id=?";
+		String sql = "select  items.item_id ,items.name,items.manufacturer,items.category_id,items.color,items.price,items.stock,items.recommended"
+				+ " from items where category_id=?";
 
 		ItemsDTO item = null;
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -53,7 +54,8 @@ public class ItemsDAO extends ItemsDTO {
 
 	///テスト用（item_idで検索）
 	public ItemsDTO findById1(int item_id) throws SQLException {
-		String sql = "select *from items where item_id=?";
+		String sql = "select  items.item_id ,items.name,items.manufacturer,items.category_id,items.color,items.price,items.stock,items.recommended"
+				+ " from items where item_id=?";
 
 		ItemsDTO item = null;
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -81,7 +83,8 @@ public class ItemsDAO extends ItemsDTO {
 
 	///キーワード検索
 	public List<ItemsDTO> findAm(String keyword) throws SQLException {
-		String sql = "select *from items where name like ? order by item_id ASC ";
+		String sql = "select items.item_id ,items.name,items.manufacturer,items.category_id,items.color,items.price,items.stock,items.recommended\n"
+				+ "from items where name like ? order by item_id asc ";
 
 		List<ItemsDTO> list = new ArrayList<>();
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -94,6 +97,27 @@ public class ItemsDAO extends ItemsDTO {
 			}
 		}
 		return list;
+	}
+
+	//キーワードカテゴリー検索の両方
+	public List<ItemsDTO> findAll2(String keyword, int category_id) throws SQLException {
+
+		String sql = "select items.item_id ,items.name,items.manufacturer,items.category_id,items.color,items.price,items.stock,items.recommended\n"
+				+ " from items where name like ? and items.category_id=? order by item_id asc";
+
+		List<ItemsDTO> list = new ArrayList<>();
+		try (PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setString(1, "%" + keyword + "%");
+			ps.setInt(2, category_id);
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					ItemsDTO items = mapRow(rs);
+					list.add(items);
+				}
+			}
+		}
+		return list;
+
 	}
 
 	private ItemsDTO mapRow(ResultSet rs) throws SQLException {

@@ -154,4 +154,35 @@ class ItemsDAOTest extends TestBase {
 
 	}
 
+	@Test
+	void testFindAll2() {
+
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			ItemsDAO dao = new ItemsDAO(conn);
+
+			List<ItemsDTO> itemList = dao.findAll2("帽子", 1);
+
+			assertNotNull(itemList);
+			assertEquals(2, itemList.size());
+
+			for (ItemsDTO item : itemList) {
+				assertEquals(1, item.getItem_id());
+				assertEquals("麦わら帽子", item.getName());
+				assertEquals("日本帽子製造", item.getManufacturer());
+				assertEquals(1, item.getCategory_id());
+				assertEquals("黄色", item.getColor());
+				assertEquals(4980, item.getPrice());
+				assertEquals(12, item.getStock());
+				assertEquals(false, item.isRecommended());
+				break;
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+
+	}
+
 }
