@@ -17,7 +17,7 @@ import jp.co.sars.service.LoginService;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/Login")
+@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
