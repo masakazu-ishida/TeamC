@@ -53,7 +53,7 @@ public class ItemsInCartDAO {
 		}
 	}
 
-	//主キーで検索して商品IDが一致するものを内部結合して表示
+	//会員IDで検索して商品IDが一致するものを内部結合して表示
 	public List<ItemsInCartDTO> findById(String userId) throws SQLException {
 		String sql = "SELECT \n"
 				+ "    i.name,i.color,i.manufacturer,i.price,c.amount,\n"
@@ -79,6 +79,29 @@ public class ItemsInCartDAO {
 			}
 		}
 		return cartList;
+	}
+
+	//複合キーで検索して商品IDが一致するものを内部結合して表示
+	public ItemsInCartDTO findByItem(String userId, int itemId) throws SQLException {
+		String sql = "SELECT i.name,i.color,i.manufacturer,i.price,c.amount,c.item_id,c.user_id,c.booked_date \n"
+				+ "FROM items_in_cart c INNER JOIN items i ON c.item_id = i.item_id WHERE c.user_id = ? AND c.item_id = ?";
+		ItemsInCartDTO cart = null;
+		try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+			ps.setString(1, userId);
+			ps.setInt(2, itemId);
+
+			try (ResultSet rs = ps.executeQuery()) {
+
+				if (rs.next()) {
+
+					cart = mapRow(rs);
+					return cart;
+
+				}
+			}
+		}
+		return null;//見つからなかったらnull
 	}
 
 	private ItemsInCartDTO mapRow(ResultSet rs) throws SQLException {

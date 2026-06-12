@@ -76,8 +76,8 @@ class ItemsInCartDAOTest extends TestBase {
 			assertEquals("2025-04-12", item1.getBookedDate().toString());
 
 			//結合先(itemsテーブル)のデータ
+			assertNotNull(item1.getItems());
 
-			assertNotNull(item1.getItems(), "結合されたItemsDTOがnull");
 			assertEquals("麦わら帽子", item1.getItems().getName());
 			assertEquals("黄色", item1.getItems().getColor());
 			assertEquals("日本帽子製造", item1.getItems().getManufacturer());
@@ -91,7 +91,8 @@ class ItemsInCartDAOTest extends TestBase {
 			assertEquals("2025-04-12", item2.getBookedDate().toString());
 
 			//二件目の結合先データ
-			assertNotNull(item2.getItems(), "結合されたItemsDTOがnull");
+
+			assertNotNull(item2.getItems());
 			assertEquals("ストローハット", item2.getItems().getName());
 			assertEquals("茶色", item2.getItems().getColor());
 			assertEquals("(株)ストローハットジャパン", item2.getItems().getManufacturer());
@@ -114,6 +115,73 @@ class ItemsInCartDAOTest extends TestBase {
 
 			assertNotNull(cart);
 			assertEquals(0, cart.size());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+
+	}
+
+	//商品が存在する場合のテスト
+	@Test
+	void findByItem1() {
+
+		//JUnitテストでは引数はNULLでよい。
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			conn.setAutoCommit(false);
+
+			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
+
+			//2件中1件だけを抜き出したいため、2件のデータを用意
+			//テスト用データの挿入1件目
+			ItemsInCartDTO cart1 = new ItemsInCartDTO();
+			cart1.setUserId("user1");
+			cart1.setItemId(1);
+			cart1.setAmount(2);
+			cart1.setBookedDate(java.sql.Date.valueOf("2025-04-12"));
+			dao.insert(cart1);//インサート
+
+			//テスト用データ2件目
+			ItemsInCartDTO cart2 = new ItemsInCartDTO();
+			cart2.setUserId("user1");
+			cart2.setItemId(2);
+			cart2.setAmount(3);
+			cart2.setBookedDate(java.sql.Date.valueOf("2025-04-12"));
+			dao.insert(cart2); //インサート
+
+			ItemsInCartDTO cart = dao.findByItem("user1", 1);
+			//確認
+			assertNotNull(cart);
+			assertEquals("user1", cart.getUserId());
+			assertEquals(1, cart.getItemId());
+			assertEquals(2, cart.getAmount());
+
+			//結合先
+			assertNotNull(cart.getItems());
+			assertEquals("麦わら帽子", cart.getItems().getName());
+			assertEquals("黄色", cart.getItems().getColor());
+			assertEquals("日本帽子製造", cart.getItems().getManufacturer());
+			assertEquals(4980, cart.getItems().getPrice());
+
+			conn.rollback();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+
+	}
+
+	//商品が存在しない場合のテスト
+	@Test
+	void findByItem2() {
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
+			ItemsInCartDTO cart = dao.findByItem("user1", 1);
+
+			assertNull(cart);
+			assertEquals(null, cart);
 
 		} catch (Exception e) {
 			e.printStackTrace();
