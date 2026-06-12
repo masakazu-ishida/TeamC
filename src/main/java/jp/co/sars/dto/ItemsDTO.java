@@ -1,21 +1,21 @@
 package jp.co.sars.dto;
 
 public class ItemsDTO {
-	private int item_id; //商品ID
+	private int itemId; //商品ID
 	private String name; //商品名
 	private String manufacturer; //メーカー名
-	private int category_id; //カテゴリID
+	private int categoryId; //カテゴリID
 	private String color; //色
 	private int price;
 	private int stock; //在庫
 	private boolean recommended;//おすすめ	
 
-	public int getItem_id() {
-		return item_id;
+	public int getItemId() {
+		return itemId;
 	}
 
-	public void setItem_id(int item_id) {
-		this.item_id = item_id;
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
 	}
 
 	public String getName() {
@@ -34,12 +34,12 @@ public class ItemsDTO {
 		this.manufacturer = manufacturer;
 	}
 
-	public int getCategory_id() {
-		return category_id;
+	public int getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public String getColor() {

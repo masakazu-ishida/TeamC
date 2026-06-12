@@ -51,10 +51,10 @@ class ItemsDAOTest extends TestBase {
 			assertEquals(20, itemList.size());
 
 			for (ItemsDTO item : itemList) {
-				assertEquals(1, item.getItem_id());
+				assertEquals(1, item.getItemId());
 				assertEquals("麦わら帽子", item.getName());
 				assertEquals("日本帽子製造", item.getManufacturer());
-				assertEquals(1, item.getCategory_id());
+				assertEquals(1, item.getCategoryId());
 				assertEquals("黄色", item.getColor());
 				assertEquals(4980, item.getPrice());
 				assertEquals(12, item.getStock());
@@ -76,10 +76,10 @@ class ItemsDAOTest extends TestBase {
 			ItemsDTO item = dao.findById(1);
 
 			assertNotNull(item);
-			assertEquals(1, item.getItem_id());
+			assertEquals(1, item.getItemId());
 			assertEquals("麦わら帽子", item.getName());
 			assertEquals("日本帽子製造", item.getManufacturer());
-			assertEquals(1, item.getCategory_id());
+			assertEquals(1, item.getCategoryId());
 			assertEquals("黄色", item.getColor());
 			assertEquals(4980, item.getPrice());
 			assertEquals(12, item.getStock());
@@ -99,7 +99,7 @@ class ItemsDAOTest extends TestBase {
 			ItemsDTO item = new ItemsDTO();
 
 			item.setStock(11);
-			item.setItem_id(1);
+			item.setItemId(1);
 
 			int result = dao.update(item);
 
@@ -107,10 +107,10 @@ class ItemsDAOTest extends TestBase {
 
 			item = dao.findById1(1);
 			assertNotNull(item);
-			assertEquals(1, item.getItem_id());
+			assertEquals(1, item.getItemId());
 			assertEquals("麦わら帽子", item.getName());
 			assertEquals("日本帽子製造", item.getManufacturer());
-			assertEquals(1, item.getCategory_id());
+			assertEquals(1, item.getCategoryId());
 			assertEquals("黄色", item.getColor());
 			assertEquals(4980, item.getPrice());
 			assertEquals(11, item.getStock());
@@ -135,10 +135,10 @@ class ItemsDAOTest extends TestBase {
 			assertEquals(2, itemList.size());
 
 			for (ItemsDTO item : itemList) {
-				assertEquals(1, item.getItem_id());
+				assertEquals(1, item.getItemId());
 				assertEquals("麦わら帽子", item.getName());
 				assertEquals("日本帽子製造", item.getManufacturer());
-				assertEquals(1, item.getCategory_id());
+				assertEquals(1, item.getCategoryId());
 				assertEquals("黄色", item.getColor());
 				assertEquals(4980, item.getPrice());
 				assertEquals(12, item.getStock());
@@ -166,10 +166,10 @@ class ItemsDAOTest extends TestBase {
 			assertEquals(2, itemList.size());
 
 			for (ItemsDTO item : itemList) {
-				assertEquals(1, item.getItem_id());
+				assertEquals(1, item.getItemId());
 				assertEquals("麦わら帽子", item.getName());
 				assertEquals("日本帽子製造", item.getManufacturer());
-				assertEquals(1, item.getCategory_id());
+				assertEquals(1, item.getCategoryId());
 				assertEquals("黄色", item.getColor());
 				assertEquals(4980, item.getPrice());
 				assertEquals(12, item.getStock());

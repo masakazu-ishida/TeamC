@@ -36,13 +36,13 @@ public class ItemsDAO extends ItemsDTO {
 	}
 
 	///カテゴリー検索
-	public ItemsDTO findById(int category_id) throws SQLException {
+	public ItemsDTO findById(int categoryId) throws SQLException {
 		String sql = "select  items.item_id ,items.name,items.manufacturer,items.category_id,items.color,items.price,items.stock,items.recommended"
 				+ " from items where category_id=?";
 
 		ItemsDTO item = null;
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
-			ps.setInt(1, category_id);
+			ps.setInt(1, categoryId);
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
 					item = mapRow(rs);
@@ -53,13 +53,13 @@ public class ItemsDAO extends ItemsDTO {
 	}
 
 	///テスト用（item_idで検索）
-	public ItemsDTO findById1(int item_id) throws SQLException {
+	public ItemsDTO findById1(int itemId) throws SQLException {
 		String sql = "select  items.item_id ,items.name,items.manufacturer,items.category_id,items.color,items.price,items.stock,items.recommended"
 				+ " from items where item_id=?";
 
 		ItemsDTO item = null;
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
-			ps.setInt(1, item_id);
+			ps.setInt(1, itemId);
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
 					item = mapRow(rs);
@@ -75,7 +75,7 @@ public class ItemsDAO extends ItemsDTO {
 
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, item.getStock());
-			ps.setInt(2, item.getItem_id());
+			ps.setInt(2, item.getItemId());
 			return ps.executeUpdate();
 		}
 
@@ -100,7 +100,7 @@ public class ItemsDAO extends ItemsDTO {
 	}
 
 	//キーワードカテゴリー検索の両方
-	public List<ItemsDTO> findAll2(String keyword, int category_id) throws SQLException {
+	public List<ItemsDTO> findAll2(String keyword, int categoryId) throws SQLException {
 
 		String sql = "select items.item_id ,items.name,items.manufacturer,items.category_id,items.color,items.price,items.stock,items.recommended\n"
 				+ " from items where name like ? and items.category_id=? order by item_id asc";
@@ -108,7 +108,7 @@ public class ItemsDAO extends ItemsDTO {
 		List<ItemsDTO> list = new ArrayList<>();
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, "%" + keyword + "%");
-			ps.setInt(2, category_id);
+			ps.setInt(2, categoryId);
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
 					ItemsDTO items = mapRow(rs);
@@ -122,10 +122,10 @@ public class ItemsDAO extends ItemsDTO {
 
 	private ItemsDTO mapRow(ResultSet rs) throws SQLException {
 		ItemsDTO item = new ItemsDTO();
-		item.setItem_id(rs.getInt("item_id"));
+		item.setItemId(rs.getInt("item_id"));
 		item.setName(rs.getString("name"));
 		item.setManufacturer(rs.getString("manufacturer"));
-		item.setCategory_id(rs.getInt("category_id"));
+		item.setCategoryId(rs.getInt("category_id"));
 		item.setColor(rs.getString("color"));
 		item.setPrice(rs.getInt("price"));
 		item.setStock(rs.getInt("stock"));
