@@ -42,7 +42,7 @@ class ItemsInCartDAOTest extends TestBase {
 
 	//カートテーブル内にデータがある場合のテスト
 	@Test
-	void testfindById1() {
+	void testfindByUser1() {
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			conn.setAutoCommit(false);
 
@@ -64,7 +64,7 @@ class ItemsInCartDAOTest extends TestBase {
 			cart2.setBookedDate(java.sql.Date.valueOf("2025-04-12"));
 			dao.insert(cart2); //インサート
 
-			List<ItemsInCartDTO> cart = dao.findById("user1");//ここから確認開始をする
+			List<ItemsInCartDTO> cart = dao.findByUser("user1");//ここから確認開始をする
 			assertNotNull(cart);
 			assertEquals(2, cart.size());
 
@@ -107,11 +107,11 @@ class ItemsInCartDAOTest extends TestBase {
 
 	//主キーが存在しない場合のテスト
 	@Test
-	void testfindById2() {
+	void testfindByUser2() {
 		//JUnitテストでは引数はNULLでよい。
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
-			List<ItemsInCartDTO> cart = dao.findById("999999ABVS?(%#$");
+			List<ItemsInCartDTO> cart = dao.findByUser("999999ABVS?(%#$");
 
 			assertNotNull(cart);
 			assertEquals(0, cart.size());
@@ -125,7 +125,7 @@ class ItemsInCartDAOTest extends TestBase {
 
 	//商品が存在する場合のテスト
 	@Test
-	void findByItem1() {
+	void findById1() {
 
 		//JUnitテストでは引数はNULLでよい。
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
@@ -150,7 +150,7 @@ class ItemsInCartDAOTest extends TestBase {
 			cart2.setBookedDate(java.sql.Date.valueOf("2025-04-12"));
 			dao.insert(cart2); //インサート
 
-			ItemsInCartDTO cart = dao.findByItem("user1", 1);
+			ItemsInCartDTO cart = dao.findById("user1", 1);
 			//確認
 			assertNotNull(cart);
 			assertEquals("user1", cart.getUserId());
@@ -175,10 +175,10 @@ class ItemsInCartDAOTest extends TestBase {
 
 	//商品が存在しない場合のテスト
 	@Test
-	void findByItem2() {
+	void findById2() {
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			ItemsInCartDAO dao = new ItemsInCartDAO(conn);
-			ItemsInCartDTO cart = dao.findByItem("user1", 1);
+			ItemsInCartDTO cart = dao.findById("user1", 1);
 
 			assertNull(cart);
 			assertEquals(null, cart);
@@ -205,7 +205,7 @@ class ItemsInCartDAOTest extends TestBase {
 
 			assertEquals(1, result);
 
-			List<ItemsInCartDTO> cartList = dao.findById("user1");
+			List<ItemsInCartDTO> cartList = dao.findByUser("user1");
 			//件数の確認
 			assertNotNull(cartList);
 			assertEquals(1, cartList.size(), "データが見つかりません");
@@ -250,7 +250,7 @@ class ItemsInCartDAOTest extends TestBase {
 
 			assertEquals(1, result);
 
-			List<ItemsInCartDTO> cartList = dao.findById("user1");
+			List<ItemsInCartDTO> cartList = dao.findByUser("user1");
 			//件数の確認
 			assertNotNull(cartList);
 			assertEquals(1, cartList.size(), "データが見つかりません");
@@ -293,7 +293,7 @@ class ItemsInCartDAOTest extends TestBase {
 
 			assertEquals(1, result);
 
-			List<ItemsInCartDTO> cartList = dao.findById("user1");
+			List<ItemsInCartDTO> cartList = dao.findByUser("user1");
 
 			assertNotNull(cartList);
 			assertEquals(0, cartList.size());

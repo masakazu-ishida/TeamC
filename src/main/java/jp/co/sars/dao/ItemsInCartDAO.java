@@ -54,7 +54,7 @@ public class ItemsInCartDAO {
 	}
 
 	//会員IDで検索して商品IDが一致するものを内部結合して表示
-	public List<ItemsInCartDTO> findById(String userId) throws SQLException {
+	public List<ItemsInCartDTO> findByUser(String userId) throws SQLException {
 		String sql = "SELECT \n"
 				+ "    i.name,i.color,i.manufacturer,i.price,c.amount,\n"
 				+ "	c.item_id,c.user_id,c.booked_date\n"
@@ -82,7 +82,7 @@ public class ItemsInCartDAO {
 	}
 
 	//複合キーで検索して商品IDが一致するものを内部結合して表示
-	public ItemsInCartDTO findByItem(String userId, int itemId) throws SQLException {
+	public ItemsInCartDTO findById(String userId, int itemId) throws SQLException {
 		String sql = "SELECT i.name,i.color,i.manufacturer,i.price,c.amount,c.item_id,c.user_id,c.booked_date \n"
 				+ "FROM items_in_cart c INNER JOIN items i ON c.item_id = i.item_id WHERE c.user_id = ? AND c.item_id = ?";
 		ItemsInCartDTO cart = null;
