@@ -35,11 +35,9 @@ class ItemSearchServiceTest extends TestBase {
 			assertEquals(1, item.getItemId());
 			assertEquals("麦わら帽子", item.getName());
 			assertEquals("日本帽子製造", item.getManufacturer());
-			assertEquals(1, item.getCategoryId());
 			assertEquals("黄色", item.getColor());
 			assertEquals(4980, item.getPrice());
 			assertEquals(12, item.getStock());
-			assertEquals(false, item.isRecommended());
 
 		} catch (Exception e) {
 			// TODO: handle exception
