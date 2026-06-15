@@ -73,8 +73,20 @@ class ItemsDAOTest extends TestBase {
 	void testFindById() {
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			ItemsDAO dao = new ItemsDAO(conn);
-			ItemsDTO item = dao.findById(1);
+			List<ItemsDTO> itemList = dao.findById(1);
 
+			assertNotNull(itemList);
+			assertEquals(11, itemList.size());
+
+			ItemsDTO item = new ItemsDTO();
+			item.setStock(11);
+			item.setItemId(1);
+
+			int result = dao.update(item);
+
+			assertEquals(1, result);
+
+			item = dao.findById1(1);
 			assertNotNull(item);
 			assertEquals(1, item.getItemId());
 			assertEquals("麦わら帽子", item.getName());
@@ -82,10 +94,12 @@ class ItemsDAOTest extends TestBase {
 			assertEquals(1, item.getCategoryId());
 			assertEquals("黄色", item.getColor());
 			assertEquals(4980, item.getPrice());
-			assertEquals(12, item.getStock());
+			assertEquals(11, item.getStock());
 			assertEquals(false, item.isRecommended());
 
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			e.printStackTrace();
 			fail(e);
 		}

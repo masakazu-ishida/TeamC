@@ -9,7 +9,7 @@
 <body>
 	<h3>商品の検索を行います</h3>
 	
-	<form action="" method="get">
+	<form action="/TeamC/itemSearch" method="get">
 	
 	キーワード<br>
 	<input type="text" name="keyword"><br>

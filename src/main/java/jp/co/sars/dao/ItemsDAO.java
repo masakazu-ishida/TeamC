@@ -36,20 +36,21 @@ public class ItemsDAO extends ItemsDTO {
 	}
 
 	///カテゴリー検索
-	public ItemsDTO findById(int categoryId) throws SQLException {
-		String sql = "select  items.item_id ,items.name,items.manufacturer,items.category_id,items.color,items.price,items.stock,items.recommended"
-				+ " from items where category_id=?";
+	public List<ItemsDTO> findById(int categoryId) throws SQLException {
+		String sql = "select  items.item_id ,items.name,items.manufacturer,items.category_id,items.color,items.price,items.stock,items.recommended from \n"
+				+ "items where category_id=? order by item_id asc ";
 
-		ItemsDTO item = null;
+		List<ItemsDTO> list = new ArrayList<>();
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, categoryId);
 			try (ResultSet rs = ps.executeQuery()) {
-				if (rs.next()) {
-					item = mapRow(rs);
+				while (rs.next()) {
+					ItemsDTO items = mapRow(rs);
+					list.add(items);
 				}
 			}
 		}
-		return item;
+		return list;
 	}
 
 	///テスト用（item_idで検索）
