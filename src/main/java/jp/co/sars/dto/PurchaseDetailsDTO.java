@@ -8,6 +8,26 @@ public class PurchaseDetailsDTO {
 	private int itemId;//商品ID(FK)
 	private int amount;//注文数
 
+	//結合用の注文テーブルと商品テーブル
+	private PurchasesDTO purchases;
+	private ItemsDTO items;
+
+	public void setPurchases(PurchasesDTO purchases) {
+		this.purchases = purchases;
+	}
+
+	public void setItems(ItemsDTO items) {
+		this.items = items;
+	}
+
+	public PurchasesDTO getPurchases() {
+		return purchases;
+	}
+
+	public ItemsDTO getItems() {
+		return items;
+	}
+
 	public int getPurchaseDetailId() {
 		return purchaseDetailId;
 	}
