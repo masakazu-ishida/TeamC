@@ -5,7 +5,7 @@ public class PurchaseDetailsDTO {
 	//注文詳細テーブル
 	private int purchaseDetailId;//注文詳細ID(PK)
 	private int purchaseId;//注文ID(FK)
-	private int itemId;//商品ID
+	private int itemId;//商品ID(FK)
 	private int amount;//注文数
 
 	public int getPurchaseDetailId() {
