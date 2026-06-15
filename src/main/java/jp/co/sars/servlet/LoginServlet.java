@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
 
 		//LoginServiceの中で主キー検索後にパスワード判定
 		LoginService service = new LoginService();
-		UserDTO dto = new UserDTO();
+		UserDTO dto = null;
 		try {
 
 			dto = service.Login(userId, password);
