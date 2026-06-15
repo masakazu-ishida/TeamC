@@ -19,7 +19,7 @@
 	
 	<c:forEach var="item" items="${itemList}">
 	<tr>
-	<td><a href=""><c:out value="${item.name}"></c:out></a>
+	<td><a href="itemDetail?id=${item.itemId}"><c:out value="${item.name}"></c:out></a>
 	<c:if test="${item.recommended}">
     <span class="osusume">オススメ！</span>
     </c:if>
@@ -33,7 +33,7 @@
 	</table>
 	
 	
-	<a href="/TeamC/MainServlet">商品検索へ</a>
+	<a href="/TeamC/main">商品検索へ</a>
 
 </body>
 </html>
