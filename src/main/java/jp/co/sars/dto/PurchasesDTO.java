@@ -11,12 +11,6 @@ public class PurchasesDTO {
 	private String destination;//発送先
 	private boolean cancel;//キャンセル
 
-	//結合先Itemsテーブル
-	private ItemsDTO items;
-
-	//結合先PurchaseDetailsテーブル
-	private PurchaseDetailsDTO purchaseDetails;
-
 	//ゲッターセッター
 
 	public int getPurchaseId() {
@@ -57,22 +51,6 @@ public class PurchasesDTO {
 
 	public void setCancel(boolean cancel) {
 		this.cancel = cancel;
-	}
-
-	public ItemsDTO getItems() {
-		return items;
-	}
-
-	public void setItems(ItemsDTO items) {
-		this.items = items;
-	}
-
-	public PurchaseDetailsDTO getPurchaseDetails() {
-		return purchaseDetails;
-	}
-
-	public void setPurchaseDetails(PurchaseDetailsDTO purchaseDetails) {
-		this.purchaseDetails = purchaseDetails;
 	}
 
 }
