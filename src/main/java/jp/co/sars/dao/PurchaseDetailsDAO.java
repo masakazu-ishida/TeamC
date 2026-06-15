@@ -18,6 +18,24 @@ public class PurchaseDetailsDAO {
 		this.con = con;
 	}
 
+	//注文詳細IDから情報を表示
+	public PurchaseDetailsDTO findById(int purchaseDetailId) throws SQLException {
+		String sql = "select purchase_detail_id,purchase_id,item_id,amount from purchase_details where purchase_detail_id = ?";
+		PurchaseDetailsDTO dto = null;
+		try (PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, purchaseDetailId);
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+
+					//mapRowはResultSetからDTOへの変換メソッド。複数箇所で利用するので共通化
+					dto = mapRow(rs);
+					return dto;
+				}
+			}
+		}
+		return null;
+	}
+
 	// 注文詳細IDの値のデータを削除
 	public int DetailDelete(String purchaseDetailId) throws SQLException {
 		String sql = "DELETE FROM purchase_details WHERE purchase_detail_id = ?";
@@ -52,13 +70,15 @@ public class PurchaseDetailsDAO {
 
 	//注文者（ユーザID）で一覧を取得する
 	public List<PurchaseDetailsDTO> findByPurchasedUser(String purchasedUser) throws SQLException {
-		String sql = "select purchased_date, name,color,manufacturer,price,amount,destination,cancel\n"
+		String sql = "select purchase_detail_id,pd.purchase_id,pd.item_id,p.purchased_user,\n"
+				+ "purchased_date, name,color,manufacturer,price,amount,destination,cancel\n"
 				+ "from purchase_details pd \n"
 				+ "inner join purchases p on\n"
 				+ "p.purchase_id = pd.purchase_id\n"
 				+ "inner join items i on\n"
 				+ "pd.item_id = i.item_id\n"
-				+ "p.purchased_user = ?";
+				+ "where p.purchased_user = ?\n"
+				+ "order by pd.purchase_detail_id desc";
 		List<PurchaseDetailsDTO> purchaseList = new ArrayList<>();//リストで取得
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 
@@ -81,13 +101,15 @@ public class PurchaseDetailsDAO {
 
 	//注文IDで一覧を取得する
 	public List<PurchaseDetailsDTO> findByPurchaseId(int purchaseId) throws SQLException {
-		String sql = "select purchased_date, name,color,manufacturer,price,amount,destination,cancel\n"
+		String sql = "select purchase_detail_id,pd.purchase_id,pd.item_id,p.purchased_user,\n"
+				+ "purchased_date, name,color,manufacturer,price,amount,destination,cancel\n"
 				+ "from purchase_details pd \n"
 				+ "inner join purchases p on\n"
 				+ "p.purchase_id = pd.purchase_id\n"
 				+ "inner join items i on\n"
 				+ "pd.item_id = i.item_id\n"
-				+ "where pd.purchase_id = ?";
+				+ "where pd.purchase_id = ?\n"
+				+ "order by pd.purchase_detail_id desc";
 		List<PurchaseDetailsDTO> purchaseList = new ArrayList<>();//リストで取得
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 
