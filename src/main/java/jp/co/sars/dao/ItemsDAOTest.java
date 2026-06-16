@@ -73,7 +73,7 @@ class ItemsDAOTest extends TestBase {
 	void testFindById() {
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			ItemsDAO dao = new ItemsDAO(conn);
-			List<ItemsDTO> itemList = dao.findById(1);
+			List<ItemsDTO> itemList = dao.findByCategory(1);
 
 			assertNotNull(itemList);
 			assertEquals(11, itemList.size());
@@ -86,7 +86,7 @@ class ItemsDAOTest extends TestBase {
 
 			assertEquals(1, result);
 
-			item = dao.findById1(1);
+			item = dao.findById(1);
 			assertNotNull(item);
 			assertEquals(1, item.getItemId());
 			assertEquals("麦わら帽子", item.getName());
@@ -119,7 +119,7 @@ class ItemsDAOTest extends TestBase {
 
 			assertEquals(1, result);
 
-			item = dao.findById1(1);
+			item = dao.findById(1);
 			assertNotNull(item);
 			assertEquals(1, item.getItemId());
 			assertEquals("麦わら帽子", item.getName());

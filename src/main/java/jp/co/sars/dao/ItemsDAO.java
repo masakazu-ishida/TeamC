@@ -36,7 +36,7 @@ public class ItemsDAO extends ItemsDTO {
 	}
 
 	///カテゴリー検索
-	public List<ItemsDTO> findById(int categoryId) throws SQLException {
+	public List<ItemsDTO> findByCategory(int categoryId) throws SQLException {
 		String sql = "select  items.item_id ,items.name,items.manufacturer,items.category_id,items.color,items.price,items.stock,items.recommended from \n"
 				+ "items where category_id=? order by item_id asc ";
 
@@ -54,7 +54,7 @@ public class ItemsDAO extends ItemsDTO {
 	}
 
 	///テスト用（item_idで検索）
-	public ItemsDTO findById1(int itemId) throws SQLException {
+	public ItemsDTO findById(int itemId) throws SQLException {
 		String sql = "select  items.item_id ,items.name,items.manufacturer,items.category_id,items.color,items.price,items.stock,items.recommended"
 				+ " from items where item_id=?";
 

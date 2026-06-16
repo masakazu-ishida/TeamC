@@ -30,9 +30,9 @@ public class ItemSearchService {
 			} else if (keyword == null && category.equals("1")) {
 				itemList = itemsDAO.findAll();
 			} else if (keyword == null && category.equals("2")) {
-				itemList = itemsDAO.findById(1);
+				itemList = itemsDAO.findByCategory(1);
 			} else if (keyword == null && category.equals("3")) {
-				itemList = itemsDAO.findById(2);
+				itemList = itemsDAO.findByCategory(2);
 			}
 
 		} catch (SQLException e) {
