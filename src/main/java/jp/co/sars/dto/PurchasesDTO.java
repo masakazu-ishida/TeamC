@@ -1,6 +1,7 @@
 package jp.co.sars.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 public class PurchasesDTO {
 
@@ -11,10 +12,23 @@ public class PurchasesDTO {
 	private String destination;//発送先
 	private boolean cancel;//キャンセル
 
+	//結合先Itemsテーブル
+	private ItemsDTO items;
+
+	private List<PurchaseDetailsDTO> list;
+
 	//ゲッターセッター
 
 	public int getPurchaseId() {
 		return purchaseId;
+	}
+
+	public List<PurchaseDetailsDTO> getList() {
+		return list;
+	}
+
+	public void setList(List<PurchaseDetailsDTO> list) {
+		this.list = list;
 	}
 
 	public void setPurchaseId(int purchaseId) {
@@ -51,6 +65,14 @@ public class PurchasesDTO {
 
 	public void setCancel(boolean cancel) {
 		this.cancel = cancel;
+	}
+
+	public ItemsDTO getItems() {
+		return items;
+	}
+
+	public void setItems(ItemsDTO items) {
+		this.items = items;
 	}
 
 }
