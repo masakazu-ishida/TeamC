@@ -4,13 +4,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import jp.co.sars.dto.PurchaseDetailsDTO;
+import jp.co.sars.dto.PurchasesDTO;
 import jp.co.sars.util.ConnectionUtil;
 import jp.co.sars.util.TestBase;
 
@@ -55,30 +55,16 @@ public class PurchaseDetailsDAOTest extends TestBase {
 		}
 	}
 
-	//注文者（ユーザID）で注文履歴を表示する
+	//注文詳細IDで検索した結果Nullの場合
 	@Test
-	void testFindById1() {
+	void testFindByIdNull() {
 
 		//JUnitテストでは引数はNULLでよい。
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			PurchaseDetailsDAO dao = new PurchaseDetailsDAO(conn);
-			List<PurchaseDetailsDTO> purchaseDetailsList = dao.findByPurchasedUser("user1");
+			PurchaseDetailsDTO dto = dao.findById(10);
 
-			assertNotNull(purchaseDetailsList);
-			assertEquals(3, purchaseDetailsList.size());
-
-			for (PurchaseDetailsDTO dto : purchaseDetailsList) {
-				assertEquals("2026-06-15", dto.getPurchases().getPurchasedDate().toString());
-				assertEquals("野球帽", dto.getItems().getName());
-				assertEquals("緑色", dto.getItems().getColor());
-				assertEquals("日本帽子製造", dto.getItems().getManufacturer());
-				assertEquals(2500, dto.getItems().getPrice());
-				assertEquals(2, dto.getAmount());
-				assertEquals(null, dto.getPurchases().getDestination());
-				assertEquals(false, dto.getPurchases().isCancel());
-				//先頭だけDTOの中身をチェック
-				break;
-			}
+			assertNull(dto);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -86,34 +72,89 @@ public class PurchaseDetailsDAOTest extends TestBase {
 		}
 	}
 
-	//注文IDで注文履歴を表示する
 	@Test
-	void testFindById2() {
-
-		//JUnitテストでは引数はNULLでよい。
+	void testInsert() {
 		try (Connection conn = ConnectionUtil.getConnection(null)) {
 			PurchaseDetailsDAO dao = new PurchaseDetailsDAO(conn);
-			List<PurchaseDetailsDTO> purchaseDetailsList = dao.findByPurchaseId(1);
+			PurchaseDetailsDTO dto = new PurchaseDetailsDTO();
+			dto.setPurchaseId(1);
+			dto.setItemId(1);
+			dto.setAmount(1);
 
-			assertNotNull(purchaseDetailsList);
-			assertEquals(3, purchaseDetailsList.size());
+			int PurchaseDetailId = dao.insert(dto);
 
-			for (PurchaseDetailsDTO dto : purchaseDetailsList) {
-				assertEquals("2026-06-15", dto.getPurchases().getPurchasedDate().toString());
-				assertEquals("野球帽", dto.getItems().getName());
-				assertEquals("緑色", dto.getItems().getColor());
-				assertEquals("日本帽子製造", dto.getItems().getManufacturer());
-				assertEquals(2500, dto.getItems().getPrice());
-				assertEquals(2, dto.getAmount());
-				assertEquals(null, dto.getPurchases().getDestination());
-				assertEquals(false, dto.getPurchases().isCancel());
-				//先頭だけDTOの中身をチェック
-				break;
-			}
+			dto = dao.findById(PurchaseDetailId);
+
+			assertNotNull(dto);
+			assertEquals(PurchaseDetailId, dto.getPurchaseDetailId());
+			assertEquals(1, dto.getPurchaseId());
+			assertEquals(1, dto.getItemId());
+			assertEquals(1, dto.getAmount());
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail(e);
 		}
+
+	}
+
+	@Test
+	void testDetailDelete() {
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			PurchaseDetailsDAO dao = new PurchaseDetailsDAO(conn);
+			PurchaseDetailsDTO dto = new PurchaseDetailsDTO();
+			dto.setPurchaseId(1);
+			dto.setItemId(1);
+			dto.setAmount(1);
+
+			int purchaseDetailsId = dao.insert(dto);
+
+			int result = dao.DetailDelete(purchaseDetailsId);
+
+			assertEquals(1, result);
+
+			dto = dao.findById(purchaseDetailsId);
+
+			assertNull(dto);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+	}
+
+	@Test
+	void testPurchasDelete() {
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			PurchasesDAO PurDao = new PurchasesDAO(conn);
+			PurchasesDTO PurDto = new PurchasesDTO();
+			PurDto.setPurchasedUser("user4");
+			PurDto.setPurchasedDate(java.sql.Date.valueOf("2026-06-15"));
+			PurDto.setDestination(null);
+			PurDto.setCancel(false);
+
+			int purchaseId = PurDao.insert(PurDto);
+
+			PurchaseDetailsDAO dao = new PurchaseDetailsDAO(conn);
+			PurchaseDetailsDTO dto = new PurchaseDetailsDTO();
+			dto.setPurchaseId(purchaseId);
+			dto.setItemId(1);
+			dto.setAmount(1);
+
+			int purchaseDetailsId = dao.insert(dto);
+
+			int result = dao.purchasDelete(purchaseId);
+
+			assertEquals(1, result);
+
+			dto = dao.findById(purchaseDetailsId);
+
+			assertNull(dto);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+
 	}
 }
