@@ -19,7 +19,7 @@ public class itemDetailServic {
 		try (Connection conn = ConnectionUtil.getConnection(jndiName)) {
 			ItemsDAO dao = new ItemsDAO(conn);
 
-			item = dao.findById1(itemId);
+			item = dao.findById(itemId);
 
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
