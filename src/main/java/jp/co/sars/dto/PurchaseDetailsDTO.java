@@ -10,6 +10,14 @@ public class PurchaseDetailsDTO {
 
 	private ItemsDTO items;//結合用の商品DTO
 
+	public ItemsDTO getItems() {
+		return items;
+	}
+
+	public void setItems(ItemsDTO items) {
+		this.items = items;
+	}
+
 	public int getPurchaseDetailId() {
 		return purchaseDetailId;
 	}

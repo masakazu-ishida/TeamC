@@ -32,7 +32,7 @@ public class PurchaseDetailsDAO {
 	}
 
 	// 注文詳細IDの値のデータを削除
-	public int DetailDelete(int purchaseDetailId) throws SQLException {
+	public int detailDelete(int purchaseDetailId) throws SQLException {
 		String sql = "DELETE FROM purchase_details WHERE purchase_detail_id = ?";
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, purchaseDetailId);
@@ -59,7 +59,7 @@ public class PurchaseDetailsDAO {
 			ps.setInt(2, purchaseDetails.getItemId());//商品ID
 			ps.setInt(3, purchaseDetails.getAmount());//数量
 
-			ps.executeUpdate();
+			int result = ps.executeUpdate();
 
 			//取得した注文IDを取得する
 			ResultSet rs = ps.getGeneratedKeys();
@@ -72,7 +72,7 @@ public class PurchaseDetailsDAO {
 				purchaseDetails.setPurchaseId(purchaseDetailsId);
 			}
 
-			return purchaseDetailsId;
+			return result;
 		}
 
 	}
