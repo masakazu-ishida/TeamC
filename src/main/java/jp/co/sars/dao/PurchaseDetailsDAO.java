@@ -59,7 +59,8 @@ public class PurchaseDetailsDAO {
 			ps.setInt(2, purchaseDetails.getItemId());//商品ID
 			ps.setInt(3, purchaseDetails.getAmount());//数量
 
-			int result = ps.executeUpdate();
+			int result = 0;
+			result = ps.executeUpdate();
 
 			//取得した注文IDを取得する
 			ResultSet rs = ps.getGeneratedKeys();
@@ -69,7 +70,7 @@ public class PurchaseDetailsDAO {
 
 				purchaseDetailsId = rs.getInt("purchase_detail_id");
 
-				purchaseDetails.setPurchaseId(purchaseDetailsId);
+				purchaseDetails.setPurchaseDetailId(purchaseDetailsId);
 			}
 
 			return result;

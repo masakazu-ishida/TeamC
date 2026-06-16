@@ -81,12 +81,14 @@ public class PurchaseDetailsDAOTest extends TestBase {
 			dto.setItemId(1);
 			dto.setAmount(1);
 
-			int PurchaseDetailId = dao.insert(dto);
+			int result = dao.insert(dto);
+			int PurchaseDetailId = dto.getPurchaseDetailId();
 
 			dto = dao.findById(PurchaseDetailId);
 
 			assertNotNull(dto);
-			assertEquals(PurchaseDetailId, dto.getPurchaseDetailId());
+			assertEquals(1, result);
+			assertEquals(9, dto.getPurchaseDetailId());
 			assertEquals(1, dto.getPurchaseId());
 			assertEquals(1, dto.getItemId());
 			assertEquals(1, dto.getAmount());
@@ -107,9 +109,10 @@ public class PurchaseDetailsDAOTest extends TestBase {
 			dto.setItemId(1);
 			dto.setAmount(1);
 
-			int purchaseDetailsId = dao.insert(dto);
+			dao.insert(dto);
+			int purchaseDetailsId = dto.getPurchaseDetailId();
 
-			int result = dao.DetailDelete(purchaseDetailsId);
+			int result = dao.detailDelete(purchaseDetailsId);
 
 			assertEquals(1, result);
 
@@ -141,7 +144,8 @@ public class PurchaseDetailsDAOTest extends TestBase {
 			dto.setItemId(1);
 			dto.setAmount(1);
 
-			int purchaseDetailsId = dao.insert(dto);
+			dao.insert(dto);
+			int purchaseDetailsId = dto.getPurchaseDetailId();
 
 			int result = dao.purchasDelete(purchaseId);
 
