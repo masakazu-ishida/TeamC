@@ -8,6 +8,8 @@ public class PurchaseDetailsDTO {
 	private int itemId;//商品ID(FK)
 	private int amount;//注文数
 
+	private ItemsDTO items;//結合用の商品DTO
+
 	public int getPurchaseDetailId() {
 		return purchaseDetailId;
 	}
