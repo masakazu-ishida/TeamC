@@ -23,7 +23,6 @@ public class PurchaseDetailsDAO {
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
 
-					//mapRowはResultSetからDTOへの変換メソッド。複数箇所で利用するので共通化
 					dto = mapRow(rs);
 					return dto;
 				}
