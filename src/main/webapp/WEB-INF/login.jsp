@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ログイン画面</title>
+ <link rel="stylesheet" href="<c:url value='/style.css' />">
 </head>
 <body>
 <h1>ログインしてください</h1>
