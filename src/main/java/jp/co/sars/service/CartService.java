@@ -35,6 +35,7 @@ public class CartService {
 		} catch (Exception e) {
 
 		}
+		//戻り値を二つ返す
 		Map<String, Object> result = new HashMap<>();
 		result.put("cartList", cartList);
 		result.put("userPrice", userPrice);
