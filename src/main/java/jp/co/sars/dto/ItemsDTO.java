@@ -10,6 +10,8 @@ public class ItemsDTO {
 	private int stock; //在庫
 	private boolean recommended;//おすすめ	
 
+	private int amount;
+
 	public int getItemId() {
 		return itemId;
 	}
@@ -72,6 +74,14 @@ public class ItemsDTO {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public int getAmount() {
+		return this.amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
 }

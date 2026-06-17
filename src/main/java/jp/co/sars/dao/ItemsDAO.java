@@ -71,11 +71,11 @@ public class ItemsDAO extends ItemsDTO {
 	}
 
 	//在庫を減らす
-	public int update(ItemsDTO item) throws SQLException {
-		String sql = "update public.items set stock = ? where item_id = ?";
+	public int updateRow(ItemsDTO item) throws SQLException {
+		String sql = "update public.items set stock = stock - ? where item_id = ?";
 
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
-			ps.setInt(1, item.getStock());
+			ps.setInt(1, item.getAmount());
 			ps.setInt(2, item.getItemId());
 			return ps.executeUpdate();
 		}
@@ -118,6 +118,18 @@ public class ItemsDAO extends ItemsDTO {
 			}
 		}
 		return list;
+
+	}
+
+	///在庫の追加
+	public int updateSum(ItemsDTO item) throws SQLException {
+		String sql = "update public.items set  stock = stock + ?  where item_id = ?";
+
+		try (PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, item.getAmount());
+			ps.setInt(2, item.getItemId());
+			return ps.executeUpdate();
+		}
 
 	}
 
