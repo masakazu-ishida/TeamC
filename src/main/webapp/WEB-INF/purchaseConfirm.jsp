@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +36,7 @@
 	</td>
 	</tr>
 	</table>
-	合計${userPrice }円
+	合計<fmt:formatNumber value="${userPrice}" />円
 	
 	<form action="" method="post">
 	清算方法

@@ -47,7 +47,7 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String path = "";
 
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession(true);
 		String userId = (String) session.getAttribute("userId");
 		if (userId == null) {
 			path = "";//ログイン画面へ遷移
