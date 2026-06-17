@@ -32,7 +32,7 @@ class CartServiceTest extends TestBase {
 			Map<String, Object> displayCart = service.execute("user1");
 			assertEquals(2, displayCart.size());
 
-			List<ItemsInCartDTO> cart = (List<ItemsInCartDTO>) displayCart.get("cartList");
+			List<ItemsInCartDTO> cart = (List<ItemsInCartDTO>) displayCart.get("cart");
 
 			assertNotNull(cart);
 			assertEquals(1, cart.size());
@@ -71,7 +71,7 @@ class CartServiceTest extends TestBase {
 
 			assertEquals(2, displayCart.size());
 
-			List<ItemsInCartDTO> cart = (List<ItemsInCartDTO>) displayCart.get("cartList");
+			List<ItemsInCartDTO> cart = (List<ItemsInCartDTO>) displayCart.get("cart");
 
 			assertNotNull(cart);
 			assertEquals(0, cart.size());
