@@ -45,7 +45,7 @@ public class ItemsInCartDAO {
 
 	//カートから削除
 	public int delete(String userId, int itemId) throws SQLException {
-		String sql = "DELETE FROM items_in_cart WHERE user_id = ?  AND item_id = ?;";
+		String sql = "DELETE FROM items_in_cart WHERE user_id = ? AND item_id = ?;";
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, userId);//会員ID
 			ps.setInt(2, itemId);//商品ID
@@ -55,12 +55,8 @@ public class ItemsInCartDAO {
 
 	//会員IDで検索して商品IDが一致するものを内部結合して表示
 	public List<ItemsInCartDTO> findByUser(String userId) throws SQLException {
-		String sql = "SELECT \n"
-				+ "    i.name,i.color,i.manufacturer,i.price,c.amount,\n"
-				+ "	c.item_id,c.user_id,c.booked_date\n"
-				+ "FROM items_in_cart c INNER JOIN items i ON c.item_id = i.item_id\n"
-				+ "WHERE \n"
-				+ "    c.user_id = ?";
+		String sql = "SELECT i.name,i.color,i.manufacturer,i.price,i.category_id,i.stock,i.recommended,c.amount,c.item_id,c.user_id,c.booked_date \n"
+				+ "FROM items_in_cart c INNER JOIN items i ON c.item_id = i.item_id WHERE c.user_id = ?";
 		List<ItemsInCartDTO> cartList = new ArrayList<>();//リストで取得
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 
@@ -83,7 +79,7 @@ public class ItemsInCartDAO {
 
 	//複合キーで検索して商品IDが一致するものを内部結合して表示
 	public ItemsInCartDTO findById(String userId, int itemId) throws SQLException {
-		String sql = "SELECT i.name,i.color,i.manufacturer,i.price,c.amount,c.item_id,c.user_id,c.booked_date \n"
+		String sql = "SELECT i.name,i.color,i.manufacturer,i.price,i.category_id,i.stock,i.recommended,c.amount,c.item_id,c.user_id,c.booked_date \n"
 				+ "FROM items_in_cart c INNER JOIN items i ON c.item_id = i.item_id WHERE c.user_id = ? AND c.item_id = ?";
 		ItemsInCartDTO cart = null;
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -118,6 +114,9 @@ public class ItemsInCartDAO {
 		items.setManufacturer(rs.getString("manufacturer"));
 		items.setColor(rs.getString("color"));
 		items.setPrice(rs.getInt("price"));
+		items.setCategoryId(rs.getInt("category_id"));
+		items.setStock(rs.getInt("stock"));
+		items.setRecommended(rs.getBoolean("recommended"));
 		cart.setItems(items);
 
 		return cart;
