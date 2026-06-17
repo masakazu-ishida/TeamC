@@ -57,7 +57,7 @@ public class CartServlet extends HttpServlet {
 		//セッションしていなかったらurlを渡してログイン画面へ遷移
 		if (userId == null) {
 			path = "";
-			request.setAttribute("path", "/TeamC/cart");
+			request.setAttribute("path", "/cart");
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 
@@ -76,7 +76,6 @@ public class CartServlet extends HttpServlet {
 
 		request.setAttribute("cart", cartList);
 		request.setAttribute("userPrice", userPrice);
-		request.setAttribute("userId", userId);
 
 		request.getRequestDispatcher(path).forward(request, response);
 

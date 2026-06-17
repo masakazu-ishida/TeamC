@@ -32,11 +32,11 @@
 			</c:forEach>
 		</table>
 		合計  <fmt:formatNumber value="${userPrice}" />円<br/>
-		<form action="/TeamC/purchaseConfirm" method="post">
+		<form action="${pageContext.request.contextPath}/purchaseConfirm" method="post">
 			<input type="submit" value='購入する' />
 		</form>
 		<br />
-		<a href="/TeamC/main">商品検索</a>へ<br />
+		<a href="/itemSearch">商品検索</a>へ<br />
 
 </body>
 </html>
