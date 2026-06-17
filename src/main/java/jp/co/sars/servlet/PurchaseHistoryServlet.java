@@ -53,6 +53,7 @@ public class PurchaseHistoryServlet extends HttpServlet {
 		}
 
 		String userId = (String) session.getAttribute("userId");
+
 		PurchaseHistoryService phs = new PurchaseHistoryService();
 		try {
 			List<PurchasesDTO> list = phs.execute(userId);

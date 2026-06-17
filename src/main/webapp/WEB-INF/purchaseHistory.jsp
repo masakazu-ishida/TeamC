@@ -66,7 +66,7 @@
                         
         <%-- キャンセル可能な場合はリンクを表示 仮のサーブレット名 --%>
 		<c:otherwise>
-			<a href="CancelConfirmServlet?purchaseId=${purchase.purchaseId}">キャンセル</a>
+			<a href="PurchaseCancelConfirm?purchaseId=${purchase.purchaseId}">キャンセル</a>
 		</c:otherwise>
 	</c:choose>
 </td>
