@@ -29,7 +29,7 @@
 	</tr>
 	</table>
 	
-	<form action="" method="post">
+	<form action="${pageContext.request.contextPath}/addCart" method="post">
 	<select name="amount">
 		<option value="1" selected>1</option>
 		<option value="2">2</option>

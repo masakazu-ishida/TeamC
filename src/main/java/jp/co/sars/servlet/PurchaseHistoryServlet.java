@@ -1,6 +1,8 @@
 package jp.co.sars.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -10,20 +12,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import jp.co.sars.dto.ItemsDTO;
-import jp.co.sars.service.itemDetailServic;
+import jp.co.sars.dto.PurchasesDTO;
+import jp.co.sars.service.PurchaseHistoryService;
 
 /**
- * Servlet implementation class ItemDetailServlet
+ * Servlet implementation class PurchaseHistoryServlet
  */
-@WebServlet("/itemDetail")
-public class ItemDetailServlet extends HttpServlet {
+@WebServlet("/PurchaseHistory")
+public class PurchaseHistoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ItemDetailServlet() {
+	public PurchaseHistoryServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,24 +36,36 @@ public class ItemDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String path = "/WEB-INF/itemDetail.jsp";
-		HttpSession session = request.getSession();
+		String path = "/WEB-INF/purchaseHistory.jsp";
 
-		Object userId = session.getAttribute("userId");
+		HttpSession session = request.getSession(false);
 
-		request.setAttribute("userId", userId);
+		//セッションがない場合不正アクセス
+		if (session == null) {
+			path = "/WEB-INF/error.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
 
-		String itemId = request.getParameter("id");
-		int item = Integer.parseInt(itemId);
+			return;
 
-		itemDetailServic iDS = new itemDetailServic();
-		ItemsDTO items = iDS.execute(item);
+		}
 
-		request.setAttribute("item", items);
+		String userId = (String) session.getAttribute("userId");
 
-		RequestDispatcher rd = request.getRequestDispatcher(path);
-		rd.forward(request, response);
+		PurchaseHistoryService phs = new PurchaseHistoryService();
+		try {
+			List<PurchasesDTO> list = phs.execute(userId);
+			request.setAttribute("list", list);
 
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+
+			rd.forward(request, response);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ServletException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

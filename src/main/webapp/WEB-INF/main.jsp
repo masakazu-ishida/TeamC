@@ -23,7 +23,7 @@
 	<input type="submit" value="検索">
 	</form>
 	
-	<a href="">ショッピングカートを見る</a>
+	<a href="/TeamC/cart">ショッピングカートを見る</a>
 	
 	<p>※ログインしていない場合には以下を表示</p>
 	<a href="">ログイン</a><br>

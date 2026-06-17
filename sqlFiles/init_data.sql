@@ -117,9 +117,9 @@ INSERT INTO public.items (name,manufacturer,category_id,color,price,stock,recomm
 INSERT INTO public.items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('鞄D','東京鞄店',2,'緑色',1980,2,FALSE);
 INSERT INTO public.items (name,manufacturer,category_id,color,price,stock,recommended) VALUES ('鞄I','日本鞄製造',2,'茶色',690,1,FALSE);
 
-INSERT INTO public.purchases(purchased_user, purchased_date, destination, cancel)VALUES('user1', CURRENT_DATE, null, false);
-INSERT INTO public.purchases(purchased_user, purchased_date, destination, cancel)VALUES('user2', CURRENT_DATE, null, false);
-INSERT INTO public.purchases(purchased_user, purchased_date, destination, cancel)VALUES('user3', CURRENT_DATE, null, false);
+INSERT INTO public.purchases(purchased_user, purchased_date, destination, cancel)VALUES('user1', '2026-06-16', null, false);
+INSERT INTO public.purchases(purchased_user, purchased_date, destination, cancel)VALUES('user2', '2026-06-16', null, false);
+INSERT INTO public.purchases(purchased_user, purchased_date, destination, cancel)VALUES('user3', '2026-06-16', null, false);
 
 INSERT INTO public.purchase_details( purchase_id, item_id, amount) VALUES (1,  7, 4);
 INSERT INTO public.purchase_details( purchase_id, item_id, amount) VALUES (1,  6, 1);
@@ -136,4 +136,5 @@ ALTER TABLE items  ALTER COLUMN "item_id" SET DEFAULT nextval('SEQ_ITEMS_ITEMID'
 ALTER TABLE purchases ALTER COLUMN "purchase_id" SET DEFAULT nextval('SEQ_PURCHASE_ID');
 ALTER TABLE purchase_details ALTER COLUMN "purchase_detail_id" SET DEFAULT nextval('SEQ_PUR_DETAIL_ID');
 
+INSERT INTO public.items_in_cart (user_id, item_id, amount, booked_date) VALUES ('user1', 5, 3, '2026-06-16');
 

@@ -8,22 +8,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
-import jp.co.sars.dto.ItemsDTO;
-import jp.co.sars.service.itemDetailServic;
 
 /**
- * Servlet implementation class ItemDetailServlet
+ * Servlet implementation class UpdateUserServlet
  */
-@WebServlet("/itemDetail")
-public class ItemDetailServlet extends HttpServlet {
+@WebServlet("/UpdateUser")
+public class UpdateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ItemDetailServlet() {
+	public UpdateUserServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,24 +30,13 @@ public class ItemDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String path = "/WEB-INF/itemDetail.jsp";
-		HttpSession session = request.getSession();
+		String path = "/WEB-INF/updateUser.jsp";
 
-		Object userId = session.getAttribute("userId");
-
-		request.setAttribute("userId", userId);
-
-		String itemId = request.getParameter("id");
-		int item = Integer.parseInt(itemId);
-
-		itemDetailServic iDS = new itemDetailServic();
-		ItemsDTO items = iDS.execute(item);
-
-		request.setAttribute("item", items);
+		request.setCharacterEncoding("UTF-8");
 
 		RequestDispatcher rd = request.getRequestDispatcher(path);
-		rd.forward(request, response);
 
+		rd.forward(request, response);
 	}
 
 	/**

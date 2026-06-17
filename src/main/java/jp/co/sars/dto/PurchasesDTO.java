@@ -1,3 +1,4 @@
+
 package jp.co.sars.dto;
 
 import java.sql.Date;
@@ -11,9 +12,6 @@ public class PurchasesDTO {
 	private Date purchasedDate;//注文日
 	private String destination;//発送先
 	private boolean cancel;//キャンセル
-
-	//結合先Itemsテーブル
-	private ItemsDTO items;
 
 	private List<PurchaseDetailsDTO> list;
 
@@ -65,14 +63,6 @@ public class PurchasesDTO {
 
 	public void setCancel(boolean cancel) {
 		this.cancel = cancel;
-	}
-
-	public ItemsDTO getItems() {
-		return items;
-	}
-
-	public void setItems(ItemsDTO items) {
-		this.items = items;
 	}
 
 }

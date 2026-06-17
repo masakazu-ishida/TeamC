@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,37 +20,38 @@
 	<c:forEach var="item" items="${cart}">
 	<tr>
 	<td>
-	<c:out value="${item.name}"></c:out>
+	<c:out value="${item.items.name}"></c:out>
 	</td>
 	<td>
-	<c:out value="${item.color}"></c:out>
+	<c:out value="${item.items.color}"></c:out>
 	</td>
 	<td>
-	<c:out value="${item.manufacturer}"></c:out>
+	<c:out value="${item.items.manufacturer}"></c:out>
 	</td>
 	<td>
-	<c:out value="${item.price}"></c:out>
+	<c:out value="${item.items.price}"></c:out>
 	</td>
 	<td>
 	<c:out value="${item.amount}"></c:out>
 	</td>
 	</tr>
+	</c:forEach>
 	</table>
-	合計${userPrice }円
+	<p>合計<fmt:formatNumber value="${userPrice}" />円</p>
 	
 	<form action="" method="post">
-	清算方法
+	<p>清算方法</p>
 	<select name="destination">
 		<option value="1" selected>代金引換</option>
 	</select>
 	
-	配送先
-	<input type="button" name="haisou" value="home">ご自宅
-	<input type="button" name="haisou" value="sitei">配送先を指定
-	ご住所
-	<input type="text" name="zyuusyo">
+	<p>配送先</p>
+	<input type="radio" name="addres" value="home">ご自宅
+	<input type="radio" name="addres" value="nohome">ご配送先を指定
+	<p>ご住所</p>
+	<input type="text" name="destination">
 	
-	購入しますか？
+	<p>購入しますか？</p>
 	<input type="submit" value="購入する">
 	</form>
 	

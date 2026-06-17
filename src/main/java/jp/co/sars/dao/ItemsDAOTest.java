@@ -82,7 +82,7 @@ class ItemsDAOTest extends TestBase {
 			item.setStock(11);
 			item.setItemId(1);
 
-			int result = dao.update(item);
+			int result = dao.updateRow(item);
 
 			assertEquals(1, result);
 
@@ -94,43 +94,12 @@ class ItemsDAOTest extends TestBase {
 			assertEquals(1, item.getCategoryId());
 			assertEquals("黄色", item.getColor());
 			assertEquals(4980, item.getPrice());
-			assertEquals(11, item.getStock());
+			assertEquals(12, item.getStock());
 			assertEquals(false, item.isRecommended());
 
 		} catch (
 
 		Exception e) {
-			e.printStackTrace();
-			fail(e);
-		}
-
-	}
-
-	@Test
-	void testUpdate() {
-		try (Connection conn = ConnectionUtil.getConnection(null)) {
-			ItemsDAO dao = new ItemsDAO(conn);
-			ItemsDTO item = new ItemsDTO();
-
-			item.setStock(11);
-			item.setItemId(1);
-
-			int result = dao.update(item);
-
-			assertEquals(1, result);
-
-			item = dao.findById(1);
-			assertNotNull(item);
-			assertEquals(1, item.getItemId());
-			assertEquals("麦わら帽子", item.getName());
-			assertEquals("日本帽子製造", item.getManufacturer());
-			assertEquals(1, item.getCategoryId());
-			assertEquals("黄色", item.getColor());
-			assertEquals(4980, item.getPrice());
-			assertEquals(11, item.getStock());
-			assertEquals(false, item.isRecommended());
-
-		} catch (Exception e) {
 			e.printStackTrace();
 			fail(e);
 		}
@@ -197,6 +166,67 @@ class ItemsDAOTest extends TestBase {
 			fail(e);
 		}
 
+	}
+
+	@Test
+	void testUpdate() {
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			ItemsDAO dao = new ItemsDAO(conn);
+			ItemsDTO item = new ItemsDTO();
+
+			item.setAmount(1);
+			item.setItemId(1);
+
+			int result = dao.updateRow(item);
+
+			assertEquals(1, result);
+
+			item = dao.findById(1);
+			assertNotNull(item);
+			assertEquals(1, item.getItemId());
+			assertEquals("麦わら帽子", item.getName());
+			assertEquals("日本帽子製造", item.getManufacturer());
+			assertEquals(1, item.getCategoryId());
+			assertEquals("黄色", item.getColor());
+			assertEquals(4980, item.getPrice());
+			assertEquals(11, item.getStock());
+			assertEquals(false, item.isRecommended());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
+
+	}
+
+	@Test
+	void testUpdateSum() {
+		try (Connection conn = ConnectionUtil.getConnection(null)) {
+			ItemsDAO dao = new ItemsDAO(conn);
+			ItemsDTO item = new ItemsDTO();
+
+			item.setAmount(1);
+			item.setItemId(1);
+
+			int result = dao.updateSum(item);
+
+			assertEquals(1, result);
+
+			item = dao.findById(1);
+			assertNotNull(item);
+			assertEquals(1, item.getItemId());
+			assertEquals("麦わら帽子", item.getName());
+			assertEquals("日本帽子製造", item.getManufacturer());
+			assertEquals(1, item.getCategoryId());
+			assertEquals("黄色", item.getColor());
+			assertEquals(4980, item.getPrice());
+			assertEquals(13, item.getStock());
+			assertEquals(false, item.isRecommended());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e);
+		}
 	}
 
 }

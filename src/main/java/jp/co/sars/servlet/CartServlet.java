@@ -1,3 +1,4 @@
+
 package jp.co.sars.servlet;
 
 import java.io.IOException;
@@ -13,19 +14,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import jp.co.sars.dto.ItemsInCartDTO;
-import jp.co.sars.service.PurchaseConfirmService;
+import jp.co.sars.service.CartService;
 
 /**
- * Servlet implementation class PurchaseConfirmServlet
+ * Servlet implementation class CartServlet
  */
-@WebServlet("/purchaseConfirm")
-public class PurchaseConfirmServlet extends HttpServlet {
+@WebServlet("/cart")
+public class CartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public PurchaseConfirmServlet() {
+	public CartServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,7 +37,7 @@ public class PurchaseConfirmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
@@ -45,13 +46,18 @@ public class PurchaseConfirmServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String path = "/WEB-INF/purchaseConfirm.jsp";
+		String path = "/WEB-INF/cart.jsp";
 
+		//セッション情報の取得
 		HttpSession session = request.getSession(true);
+
+		//取得した情報をString型に変換
 		String userId = (String) session.getAttribute("userId");
+
+		//セッションしていなかったらurlを渡してログイン画面へ遷移
 		if (userId == null) {
-			path = "";//ログイン画面へ遷移
-			request.setAttribute("path", "/TeamC/purchaseConfirm");//urlをログインに渡す
+			path = "";
+			request.setAttribute("path", "/cart");
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 
@@ -59,18 +65,19 @@ public class PurchaseConfirmServlet extends HttpServlet {
 
 		}
 
-		PurchaseConfirmService pcs = new PurchaseConfirmService();
-		Map<String, Object> cart = pcs.execute(userId);
+		//サービスのインスタンス化
+		CartService cart = new CartService();
 
-		List<ItemsInCartDTO> cartList = (List<ItemsInCartDTO>) cart.get("cartList");
-		int userPrice = (int) cart.get("userPrice");
+		//ハッシュマップに格納された合計金額とリストを受け取る
+		Map<String, Object> cartMap = cart.execute(userId);
+
+		List<ItemsInCartDTO> cartList = (List<ItemsInCartDTO>) cartMap.get("cart");
+		int userPrice = (int) cartMap.get("userPrice");
 
 		request.setAttribute("cart", cartList);
 		request.setAttribute("userPrice", userPrice);
-		request.setAttribute("userId", userId);
 
 		request.getRequestDispatcher(path).forward(request, response);
 
 	}
-
 }

@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import jp.co.sars.dto.ItemsDTO;
 import jp.co.sars.service.ItemSearchService;
@@ -35,6 +36,11 @@ public class ItemSearchServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String path = "/WEB-INF/itemSearch.jsp";
+		HttpSession session = request.getSession();
+
+		Object userId = session.getAttribute("userId");
+
+		request.setAttribute("userId", userId);
 
 		ItemSearchService itemSearchService = new ItemSearchService();
 
