@@ -37,7 +37,7 @@ public class CartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class CartServlet extends HttpServlet {
 		String path = "/WEB-INF/cart.jsp";
 
 		//セッション情報の取得
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(true);
 
 		//取得した情報をString型に変換
 		String userId = (String) session.getAttribute("userId");
@@ -71,10 +71,10 @@ public class CartServlet extends HttpServlet {
 		//ハッシュマップに格納された合計金額とリストを受け取る
 		Map<String, Object> cartMap = cart.execute(userId);
 
-		List<ItemsInCartDTO> cartList = (List<ItemsInCartDTO>) cartMap.get("cartList");
+		List<ItemsInCartDTO> cartList = (List<ItemsInCartDTO>) cartMap.get("cart");
 		int userPrice = (int) cartMap.get("userPrice");
 
-		request.setAttribute("cartList", cartList);
+		request.setAttribute("cart", cartList);
 		request.setAttribute("userPrice", userPrice);
 
 		request.getRequestDispatcher(path).forward(request, response);
