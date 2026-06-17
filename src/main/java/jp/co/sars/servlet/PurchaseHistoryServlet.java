@@ -38,8 +38,6 @@ public class PurchaseHistoryServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String path = "/WEB-INF/purchaseHistory.jsp";
 
-		request.setCharacterEncoding("UTF-8");
-
 		HttpSession session = request.getSession(false);
 
 		//セッションがない場合不正アクセス

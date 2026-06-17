@@ -64,9 +64,9 @@
 			<span class="cancel-text">キャンセル済み</span>
 		</c:when>
                         
-        <%-- キャンセル可能な場合はリンクを表示 仮のサーブレット名 --%>
+        <%-- キャンセル可能な場合はリンクを表示 仮のサーブレット名 絶対パス--%>
 		<c:otherwise>
-			<a href="PurchaseCancelConfirm?purchaseId=${purchase.purchaseId}">キャンセル</a>
+			<a href="${pageContext.request.contextPath}/PurchaseCancelConfirm?purchaseId=${purchase.purchaseId}">キャンセル</a>
 		</c:otherwise>
 	</c:choose>
 </td>
@@ -74,6 +74,6 @@
 </c:forEach>
 </table>
 <br>
-    <a href="">商品検索へ</a>
+    <a href="${pageContext.request.contextPath}/main">商品検索へ</a>
 </body>
 </html>
