@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import jp.co.sars.dto.ItemsDTO;
 import jp.co.sars.service.itemDetailServic;
@@ -34,6 +35,11 @@ public class ItemDetailServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String path = "/WEB-INF/itemDetail.jsp";
+		HttpSession session = request.getSession();
+
+		Object userId = session.getAttribute("userId");
+
+		request.setAttribute("userId", userId);
 
 		String itemId = request.getParameter("id");
 		int item = Integer.parseInt(itemId);
