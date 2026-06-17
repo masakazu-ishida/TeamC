@@ -11,8 +11,9 @@ import jp.co.sars.util.ConnectionUtil;
 
 public class CartAddService {
 
-	public void addCartItem(String userId, int itemId, int amount) throws SQLException, ServletException {
+	public int addCartItem(String userId, int itemId, int amount) throws SQLException, ServletException {
 		String jndiName = "java:comp/env/jdbc/ecsite";
+		int resultCount = 0;
 
 		try (Connection conn = ConnectionUtil.getConnection(jndiName)) {
 			ItemsInCartDAO cartDAO = new ItemsInCartDAO(conn);
@@ -29,7 +30,7 @@ public class CartAddService {
 				updateCart.setItemId(itemId);
 				updateCart.setAmount(newAmount); //合計した数量をセットする
 
-				cartDAO.update(updateCart);
+				resultCount = cartDAO.update(updateCart);//成功したら1がかえってくるように
 			} else {
 				//存在しなかった場合はinsertを行う
 				ItemsInCartDTO cartDTO = new ItemsInCartDTO();
@@ -41,7 +42,9 @@ public class CartAddService {
 
 				cartDAO.insert(cartDTO);
 
+				resultCount = cartDAO.update(cartDTO);//成功したら1がかえってくるように
 			}
 		}
+		return resultCount;
 	}
 }
