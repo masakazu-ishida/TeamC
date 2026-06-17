@@ -36,7 +36,7 @@
 			<input type="submit" value='購入する' />
 		</form>
 		<br />
-		<a href="/itemSearch">商品検索</a>へ<br />
+		<a href="/TeamC/main">商品検索</a>へ<br />
 
 </body>
 </html>

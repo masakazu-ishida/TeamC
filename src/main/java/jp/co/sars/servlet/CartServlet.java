@@ -76,6 +76,7 @@ public class CartServlet extends HttpServlet {
 
 		request.setAttribute("cart", cartList);
 		request.setAttribute("userPrice", userPrice);
+		request.setAttribute("userId", userId);
 
 		request.getRequestDispatcher(path).forward(request, response);
 
