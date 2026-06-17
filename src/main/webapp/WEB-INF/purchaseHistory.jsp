@@ -61,9 +61,7 @@
 	<c:choose>
         <%-- キャンセルがtrueの場合　キャンセル済みの表示 --%>
         <c:when test="${purchase.cancel}">
-			<span class="cancel-text">キャンセル済み</span>
 		</c:when>
-                        
         <%-- キャンセル可能な場合はリンクを表示 仮のサーブレット名 絶対パス--%>
 		<c:otherwise>
 			<a href="${pageContext.request.contextPath}/PurchaseCancelConfirm?purchaseId=${purchase.purchaseId}">キャンセル</a>
