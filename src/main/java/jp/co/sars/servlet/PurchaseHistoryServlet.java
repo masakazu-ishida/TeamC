@@ -42,10 +42,8 @@ public class PurchaseHistoryServlet extends HttpServlet {
 
 		HttpSession session = request.getSession(false);
 
-		String userId = (String) session.getAttribute("userId");
-
 		//セッションがない場合不正アクセス
-		if (userId == null) {
+		if (session == null) {
 			path = "/WEB-INF/error.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
@@ -53,6 +51,8 @@ public class PurchaseHistoryServlet extends HttpServlet {
 			return;
 
 		}
+
+		String userId = (String) session.getAttribute("userId");
 		PurchaseHistoryService phs = new PurchaseHistoryService();
 		try {
 			List<PurchasesDTO> list = phs.execute(userId);
