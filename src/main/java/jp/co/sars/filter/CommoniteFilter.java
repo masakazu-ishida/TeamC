@@ -26,9 +26,8 @@ public class CommoniteFilter implements Filter {
 		} catch (ServletException e) {
 
 			//致命的エラーは全てここで捕まえて処理する
-			String jspPath = "/WEB-INF/common/error.jsp";
-			request.setAttribute("errorMessage", e.getMessage());
-			request.getRequestDispatcher(jspPath).forward(request, response);
+			e.printStackTrace();
+			throw e;
 		}
 
 	}
