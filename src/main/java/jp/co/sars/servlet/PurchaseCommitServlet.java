@@ -51,7 +51,7 @@ public class PurchaseCommitServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		String userId = (String) session.getAttribute("userId");
 		if (userId == null) {
-			path = "";//エラー画面に遷移
+			path = "/WEB-INF/error.jsp";//エラー画面に遷移
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 

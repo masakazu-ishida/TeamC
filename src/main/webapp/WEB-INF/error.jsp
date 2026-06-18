@@ -5,9 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>エラー</title>
+<link rel="stylesheet" href="<c:url value='/style.css' />">
 </head>
 <body>
-
-	<p>エラーが発生</p>
+	<h3>不正アクセスエラー</h3>
+	
+	<a href="${pageContext.request.contextPath}/Login2">ログイン</a>してください
+	
 </body>
 </html>
