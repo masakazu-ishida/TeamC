@@ -11,14 +11,14 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Iogout
  */
-@WebServlet("/Iogout")
-public class Iogout extends HttpServlet {
+@WebServlet("/logout")
+public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Iogout() {
+	public Logout() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
