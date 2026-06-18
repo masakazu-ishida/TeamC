@@ -56,8 +56,8 @@ public class CartServlet extends HttpServlet {
 
 		//セッションしていなかったらurlを渡してログイン画面へ遷移
 		if (userId == null) {
-			path = "/LoginServlet";
-			request.setAttribute("path", "/cart");
+			path = "/Login2";
+			session.setAttribute("path", "/cart");
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 

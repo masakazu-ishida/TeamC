@@ -54,16 +54,9 @@ public class CartAddServlet extends HttpServlet {
 		String itemIdStr = request.getParameter("itemId");
 		String amountStr = request.getParameter("amount");
 
-		if (itemIdStr == null) {
-			itemIdStr = (String) request.getAttribute("itemId");
-		}
-		if (amountStr == null) {
-			amountStr = (String) request.getAttribute("amount");
-		}
-
 		//セッションしていなかったらitemIdとamountをセッションで渡してログイン画面へ遷移
 		if (userId == null) {
-			path = "/Login2";
+			path = "/WEB-INF/login.jsp";
 			session.setAttribute("pendingItemId", itemIdStr);
 			session.setAttribute("pendingAmount", amountStr);
 			session.setAttribute("path", "/addCart");

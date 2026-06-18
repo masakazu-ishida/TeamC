@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import jp.co.sars.dto.UserDTO;
+import jp.co.sars.service.CartAddService;
 import jp.co.sars.service.LoginService;
 
 /**
@@ -88,22 +89,33 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("userId", dto.getUserId());
 
 			//前からの画面に戻る処理
-			//前の画面からのセッションを受け取る
 			String resultPath = (String) session.getAttribute("path");
+
 			String resultItemIdStr = (String) session.getAttribute("pendingItemId");
 			String resultAmountStr = (String) session.getAttribute("pendingAmount");
 
 			if (resultPath != null) {
-
-				request.setAttribute("itemId", resultItemIdStr);
-				request.setAttribute("amount", resultAmountStr);
-
 				session.removeAttribute("path");
 				session.removeAttribute("pendingItemId");
 				session.removeAttribute("pendingAmount");
+			}
+			if ("/addCart".equals(resultPath)) {
 
-				RequestDispatcher rd = request.getRequestDispatcher(resultPath);
-				rd.forward(request, response);
+				int itemId = Integer.parseInt(resultItemIdStr);
+				int amount = Integer.parseInt(resultAmountStr);
+
+				CartAddService cartAdd = new CartAddService();
+				cartAdd.addCartItem(dto.getUserId(), itemId, amount);
+
+				response.sendRedirect(request.getContextPath() + "/cart");
+				return;
+
+			} else if ("/cart".equals(resultPath)) {
+				response.sendRedirect(request.getContextPath() + "/cart");
+				return;
+
+			} else if ("/purchaseConfirm".equals(resultPath)) {
+				response.sendRedirect(request.getContextPath() + "/purchaseConfirm");
 				return;
 			}
 			RequestDispatcher rd = request.getRequestDispatcher(path);
