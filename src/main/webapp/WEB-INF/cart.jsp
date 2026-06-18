@@ -27,7 +27,8 @@
 				<td><c:out value="${item.items.manufacturer}"></c:out></td>
 				<td><c:out value="${item.items.price}"></c:out></td>
 				<td><c:out value="${item.amount}"></c:out></td>
-				<td><a href="">削除</a></td>
+
+				<td><a href="${pageContext.request.contextPath}/cartDelete?itemId=${item.itemId}">削除</a></td>
 			</tr>
 			</c:forEach>
 		</table>
@@ -36,7 +37,7 @@
 			<input type="submit" value='購入する' />
 		</form>
 		<br />
-		<a href="/itemSearch">商品検索</a>へ<br />
+		<a href="/TeamC/main">商品検索</a>へ<br />
 
 </body>
 </html>

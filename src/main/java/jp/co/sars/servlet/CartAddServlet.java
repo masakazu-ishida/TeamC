@@ -60,7 +60,7 @@ public class CartAddServlet extends HttpServlet {
 
 		//セッションしていなかったらitemIdとamountをセッションで渡してログイン画面へ遷移
 		if (userId == null) {
-			path = "";
+			path = "/LoginServlet";
 			session.setAttribute("pendingItemId", itemId);
 			session.setAttribute("pendingAmount", amount);
 			request.setAttribute("path", "/addCart");
