@@ -39,14 +39,14 @@
 	</table>
 	<p>合計<fmt:formatNumber value="${userPrice}" />円</p>
 	
-	<form action="" method="post">
+	<form action="/TeamC/PurchaseCommit" method="post">
 	<p>清算方法</p>
-	<select name="destination">
+	<select name="kounyuu">
 		<option value="1" selected>代金引換</option>
 	</select>
 	
 	<p>配送先</p>
-	<input type="radio" name="addres" value="home">ご自宅
+	<input type="radio" name="addres" value="home" checked>ご自宅<br>
 	<input type="radio" name="addres" value="nohome">ご配送先を指定
 	<p>ご住所</p>
 	<input type="text" name="destination">
