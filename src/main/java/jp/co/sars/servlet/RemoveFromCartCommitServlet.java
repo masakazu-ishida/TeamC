@@ -54,7 +54,7 @@ public class RemoveFromCartCommitServlet extends HttpServlet {
 
 		//セッションしていなかったらエラー画面へ遷移
 		if (userId == null) {
-			path = "";//エラー画面のパス入れる
+			path = "/WEB-INF/error.jsp";//エラー画面のパス
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 
