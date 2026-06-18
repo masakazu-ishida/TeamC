@@ -10,19 +10,15 @@
 <link rel="stylesheet" href="<c:url value='/style.css' />">
 </head>
 <body>
-
-<h3>以下の商品をショッピングカートから削除してよろしいですか？</h3>
+<h3>以下の商品をショッピングカートから削除しました。</h3>
 		<br/>
 		<c:out value="${item.items.name}"></c:out><br/>
 		<c:out value="${item.items.manufacturer}"></c:out><br/>
 		<fmt:formatNumber value="${item.items.price}" />円<br/>
 		<c:out value="${item.amount}個"></c:out><br/>
 		
-		<form action="${pageContext.request.contextPath}/cartDeleteCommit" method="post">
-			<input type="hidden" name="itemId" value="${item.itemId}" />
-			<input type="submit" value="削除する" /><br />
-		</form>
+		<a href="${pageContext.request.contextPath}/cart">カート一覧</a>へ<br />
 		<a href="${pageContext.request.contextPath}/main">商品検索</a>へ<br />
-
+		
 </body>
 </html>
