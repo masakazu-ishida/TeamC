@@ -11,19 +11,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import jp.co.sars.dto.ItemsInCartDTO;
-import jp.co.sars.service.RemoveFromCartConfirmService;
+import jp.co.sars.service.RemoveFromCartCommitService;
 
 /**
- * Servlet implementation class RemoveFromCartConfirmServlet
+ * Servlet implementation class RemoveFromCartCommitServlet
  */
-@WebServlet("/cartDelete")
-public class RemoveFromCartConfirmServlet extends HttpServlet {
+@WebServlet("/cartDeleteCommit")
+public class RemoveFromCartCommitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public RemoveFromCartConfirmServlet() {
+	public RemoveFromCartCommitServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,8 +34,17 @@ public class RemoveFromCartConfirmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
 
-		String path = "/WEB-INF/removeFromCartConfirm.jsp";
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+
+		String path = "/WEB-INF/removeFromCartCommit.jsp";
 
 		//セッション情報の取得
 		HttpSession session = request.getSession(true);
@@ -54,25 +63,16 @@ public class RemoveFromCartConfirmServlet extends HttpServlet {
 			String itemId = request.getParameter("itemId");
 			int item = Integer.parseInt(itemId);
 
-			RemoveFromCartConfirmService service = new RemoveFromCartConfirmService();
+			RemoveFromCartCommitService service = new RemoveFromCartCommitService();
 
-			ItemsInCartDTO cartDeleteItem = service.execute(userId, item);
+			ItemsInCartDTO cartDeleteItemCommit = service.execute(userId, item);
 
-			request.setAttribute("item", cartDeleteItem);
+			request.setAttribute("item", cartDeleteItemCommit);
 
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 
 		}
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
-
 }
