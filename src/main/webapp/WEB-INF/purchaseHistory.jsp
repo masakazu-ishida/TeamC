@@ -21,6 +21,9 @@
 </tr>
 <%--外ループ --%>
 <c:forEach var="purchase" items="${list}">
+
+<%--注文がキャンセルだったら非表示にする --%>
+<c:if test="${!purchase.cancel}">
 <tr>
 	<%--注文日の表示 --%>
 	<td>
@@ -56,19 +59,13 @@
 		<c:otherwise><c:out value="${purchase.destination}"></c:out></c:otherwise>
 	</c:choose>
 </td>
-                
+
 <td>
-	<c:choose>
-        <%-- キャンセルがtrueの場合　キャンセル済みの表示 --%>
-        <c:when test="${purchase.cancel}">
-		</c:when>
-        <%-- キャンセル可能な場合はリンクを表示 仮のサーブレット名 絶対パス--%>
-		<c:otherwise>
-			<a href="${pageContext.request.contextPath}/PurchaseCancelConfirm?purchaseId=${purchase.purchaseId}">キャンセル</a>
-		</c:otherwise>
-	</c:choose>
+	<%-- キャンセル確認画面へのリンク --%>
+	<a href="${pageContext.request.contextPath}/PurchaseCancelConfirm?purchaseId=${purchase.purchaseId}">キャンセル</a>
 </td>
 </tr>
+</c:if>
 </c:forEach>
 </table>
 <br>
