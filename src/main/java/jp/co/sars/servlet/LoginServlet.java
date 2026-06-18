@@ -87,6 +87,20 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("userId", dto.getUserId());
 
+			//前からの画面に戻る処理
+			//前の画面からのセッションを受け取る
+			String resultPath = (String) session.getAttribute("path");
+			int resultItemId = (int) session.getAttribute("pendingItemId");
+			int resultAmount = (int) session.getAttribute("pendingAmount");
+
+			if (resultPath != null) {
+				request.setAttribute("itemId", resultItemId);
+				request.setAttribute("amount", resultAmount);
+
+				RequestDispatcher rd = request.getRequestDispatcher(resultPath);
+				rd.forward(request, response);
+			}
+
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 
 			rd.forward(request, response);

@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class LoginTest
@@ -34,6 +35,14 @@ public class LoginTestServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 
+		HttpSession session = request.getSession(true);
+		String resultPath = (String) session.getAttribute("path");
+		int resultItemId = (int) session.getAttribute("pendingItemId");
+		int resultAmount = (int) session.getAttribute("pendingAmount");
+
+		request.setAttribute("path", resultPath);
+		request.setAttribute("itemId", resultItemId);
+		request.setAttribute("amount", resultAmount);
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 
 		rd.forward(request, response);
