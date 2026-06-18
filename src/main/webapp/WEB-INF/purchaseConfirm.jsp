@@ -29,10 +29,10 @@
 	<c:out value="${item.items.manufacturer}"></c:out>
 	</td>
 	<td>
-	<c:out value="${item.items.price}"></c:out>
+	<fmt:formatNumber value="${item.items.price}" />円
 	</td>
 	<td>
-	<c:out value="${item.amount}"></c:out>
+	<c:out value="${item.amount}個"></c:out>
 	</td>
 	</tr>
 	</c:forEach>
