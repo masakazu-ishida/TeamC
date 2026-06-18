@@ -63,7 +63,7 @@
 
 <tr>
 	<td colspan="2">
-		<form action="${pageContext.request.contextPath}/PurchaseCancelExecute" method="post">
+		<form action="${pageContext.request.contextPath}/PurchaseCancelCommit" method="post">
 			<input type="hidden" name="purchaseId" value="${purchase.purchaseId}">
 			<input type="submit" value="キャンセル">
 		</form>
