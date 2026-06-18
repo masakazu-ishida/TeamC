@@ -37,7 +37,7 @@
 	<br>
 	
 	<c:if test="${not empty userId}">
-    <a href="">会員情報の変更</a><br>
+    <a href="/TeamC/UpdateUser">会員情報の変更</a><br>
 	</c:if>
 	
 	
