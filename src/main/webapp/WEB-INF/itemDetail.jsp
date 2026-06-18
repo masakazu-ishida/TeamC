@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,10 +23,10 @@
 	<th>メーカー名</th><td>${item.manufacturer}</td>
 	</tr>
 	<tr>
-	<th>価格</th><td>${item.price}</td>
+	<th>価格</th><td><fmt:formatNumber value="${item.price}" />円</td>
 	</tr>
 	<tr>
-	<th>在庫数</th><td>${item.stock}</td>
+	<th>在庫数</th><td>${item.stock}個</td>
 	</tr>
 	</table>
 	
