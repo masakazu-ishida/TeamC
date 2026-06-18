@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,10 +27,20 @@
 	
 	<a href="/TeamC/cart">ショッピングカートを見る</a>
 	
-	<p>※ログインしていない場合には以下を表示</p>
-	<a href="">ログイン</a><br>
+	<br>
 	
-	<p>※ログイン済の場合には以下を表示</p>
-	<a href="">会員情報の変更</a>
+	
+	<c:if test="${empty userId}">
+    <a href="/TeamC/Login2">ログイン</a><br>
+	</c:if>
+	
+	<br>
+	
+	<c:if test="${not empty userId}">
+    <a href="">会員情報の変更</a><br>
+	</c:if>
+	
+	
+	
 </body>
 </html>
