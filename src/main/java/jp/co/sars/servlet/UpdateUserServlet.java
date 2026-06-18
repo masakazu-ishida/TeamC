@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class UpdateUserServlet
@@ -32,7 +33,11 @@ public class UpdateUserServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String path = "/WEB-INF/updateUser.jsp";
 
-		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+
+		Object userId = session.getAttribute("userId");
+
+		request.setAttribute("userId", userId);
 
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 
