@@ -37,8 +37,18 @@ public class LoginTestServlet extends HttpServlet {
 
 		HttpSession session = request.getSession(true);
 		String resultPath = (String) session.getAttribute("path");
-		int resultItemId = (int) session.getAttribute("pendingItemId");
-		int resultAmount = (int) session.getAttribute("pendingAmount");
+		String resultItemIdStr = (String) session.getAttribute("pendingItemId");
+		String resultAmountStr = (String) session.getAttribute("pendingAmount");
+
+		int resultItemId = 0;
+		int resultAmount = 0;
+
+		if (resultItemIdStr != null && !resultItemIdStr.isEmpty()) {
+			resultItemId = Integer.parseInt(resultItemIdStr);
+		}
+		if (resultAmountStr != null && !resultAmountStr.isEmpty()) {
+			resultAmount = Integer.parseInt(resultAmountStr);
+		}
 
 		request.setAttribute("path", resultPath);
 		request.setAttribute("itemId", resultItemId);

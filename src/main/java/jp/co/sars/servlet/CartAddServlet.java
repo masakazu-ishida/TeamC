@@ -54,16 +54,19 @@ public class CartAddServlet extends HttpServlet {
 		String itemIdStr = request.getParameter("itemId");
 		String amountStr = request.getParameter("amount");
 
-		//型変換
-		int itemId = Integer.parseInt(itemIdStr);
-		int amount = Integer.parseInt(amountStr);
+		if (itemIdStr == null) {
+			itemIdStr = (String) request.getAttribute("itemId");
+		}
+		if (amountStr == null) {
+			amountStr = (String) request.getAttribute("amount");
+		}
 
 		//セッションしていなかったらitemIdとamountをセッションで渡してログイン画面へ遷移
 		if (userId == null) {
-			path = "/LoginServlet";
-			session.setAttribute("pendingItemId", itemId);
-			session.setAttribute("pendingAmount", amount);
-			request.setAttribute("path", "/addCart");
+			path = "/Login2";
+			session.setAttribute("pendingItemId", itemIdStr);
+			session.setAttribute("pendingAmount", amountStr);
+			session.setAttribute("path", "/addCart");
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);
 
@@ -71,13 +74,15 @@ public class CartAddServlet extends HttpServlet {
 
 		}
 
+		int itemId = Integer.parseInt(itemIdStr);
+		int amount = Integer.parseInt(amountStr);
+
 		CartAddService cartAdd = new CartAddService();
 
 		try {
 			cartAdd.addCartItem(userId, itemId, amount);
 
-			RequestDispatcher rd = request.getRequestDispatcher(path);
-			rd.forward(request, response);
+			response.sendRedirect(request.getContextPath() + path);
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();

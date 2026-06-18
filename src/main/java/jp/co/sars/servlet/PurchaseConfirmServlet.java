@@ -50,7 +50,7 @@ public class PurchaseConfirmServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		String userId = (String) session.getAttribute("userId");
 		if (userId == null) {
-			path = "";//ログイン画面へ遷移
+			path = "/Login2";//ログイン画面へ遷移
 			request.setAttribute("path", "/TeamC/purchaseConfirm");//urlをログインに渡す
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);

@@ -90,17 +90,22 @@ public class LoginServlet extends HttpServlet {
 			//前からの画面に戻る処理
 			//前の画面からのセッションを受け取る
 			String resultPath = (String) session.getAttribute("path");
-			int resultItemId = (int) session.getAttribute("pendingItemId");
-			int resultAmount = (int) session.getAttribute("pendingAmount");
+			String resultItemIdStr = (String) session.getAttribute("pendingItemId");
+			String resultAmountStr = (String) session.getAttribute("pendingAmount");
 
 			if (resultPath != null) {
-				request.setAttribute("itemId", resultItemId);
-				request.setAttribute("amount", resultAmount);
+
+				request.setAttribute("itemId", resultItemIdStr);
+				request.setAttribute("amount", resultAmountStr);
+
+				session.removeAttribute("path");
+				session.removeAttribute("pendingItemId");
+				session.removeAttribute("pendingAmount");
 
 				RequestDispatcher rd = request.getRequestDispatcher(resultPath);
 				rd.forward(request, response);
+				return;
 			}
-
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 
 			rd.forward(request, response);
