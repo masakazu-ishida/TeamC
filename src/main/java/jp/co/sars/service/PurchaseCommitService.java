@@ -47,7 +47,7 @@ public class PurchaseCommitService {
 				pcDTO.setPurchasedDate(date);
 				pcDTO.setCancel(false);
 
-				int generatedPurchaseId = pcDAO.insert(pcDTO);
+				int count = pcDAO.insert(pcDTO);
 
 				ItemsInCartDAO iicDAO = new ItemsInCartDAO(conn);
 				PurchaseDetailsDAO pcdDAO = new PurchaseDetailsDAO(conn);
@@ -64,22 +64,25 @@ public class PurchaseCommitService {
 					userPrice += (price * amount);
 
 					PurchaseDetailsDTO pcdDTO = new PurchaseDetailsDTO();
-					pcdDTO.setPurchaseId(generatedPurchaseId);
+					pcdDTO.setPurchaseId(pcDTO.getPurchaseId());
 					pcdDTO.setAmount(amount);
 					pcdDTO.setItemId(itemId);
 					pcdDAO.insert(pcdDTO);
 
+					/*
 					ItemsDTO itemsDTO = new ItemsDTO();
 					itemsDTO.setAmount(amount);
 					itemsDTO.setItemId(itemId);
 					itemsDAO.updateRow(itemsDTO);
+					 */
+					ItemsDTO itemsDTO = cart.getItems();
+					itemsDTO.setAmount(amount);
+					itemsDAO.updateRow(itemsDTO);
 
-					PurchaseDetailsDTO viewDTO = new PurchaseDetailsDTO();
-					viewDTO.setAmount(amount);
-					viewDTO.setItemId(itemId);
-					viewDTO.setItems(cart.getItems());
+					//pcdDTO.setItems(cart.getItems());
+					pcdDTO.setItems(itemsDTO);
 
-					purchaseList.add(viewDTO);
+					purchaseList.add(pcdDTO);
 				}
 
 				if (pcDTO.getDestination() == null || pcDTO.getDestination().trim().isEmpty()) {

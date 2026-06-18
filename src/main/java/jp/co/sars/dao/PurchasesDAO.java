@@ -141,7 +141,8 @@ public class PurchasesDAO {
 			ps.setString(3, dto.getDestination());
 			ps.setBoolean(4, dto.isCancel());
 
-			ps.executeUpdate();
+			int result = ps.executeUpdate();
+			;
 
 			//取得した注文IDを取得する
 			ResultSet rs = ps.getGeneratedKeys();
@@ -154,7 +155,7 @@ public class PurchasesDAO {
 				dto.setPurchaseId(purchaseId);
 			}
 
-			return purchaseId;
+			return result;
 		}
 
 	}
