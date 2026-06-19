@@ -56,6 +56,10 @@ public class PurchaseCommitService {
 				List<ItemsInCartDTO> byUser = iicDAO.findByUser(userId);
 				List<PurchaseDetailsDTO> purchaseList = new ArrayList<>();
 
+				if (byUser == null || byUser.isEmpty()) {
+					throw new Exception();
+				}
+
 				for (ItemsInCartDTO cart : byUser) {
 					int amount = cart.getAmount();
 					int itemId = cart.getItemId();
