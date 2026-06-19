@@ -59,9 +59,15 @@ public class PurchaseCommitService {
 				for (ItemsInCartDTO cart : byUser) {
 					int amount = cart.getAmount();
 					int itemId = cart.getItemId();
-					int price = cart.getItems().getPrice();
 
+					ItemsDTO currentItem = itemsDAO.findById(itemId);
+					int currentStock = currentItem.getStock();
+					int price = cart.getItems().getPrice();
 					userPrice += (price * amount);
+
+					if (amount > currentStock) {
+						throw new ServletException();
+					}
 
 					PurchaseDetailsDTO pcdDTO = new PurchaseDetailsDTO();
 					pcdDTO.setPurchaseId(pcDTO.getPurchaseId());
@@ -102,6 +108,7 @@ public class PurchaseCommitService {
 			} catch (Exception e) {
 				// TODO: handle exception
 				conn.rollback();
+				throw e;
 
 			}
 

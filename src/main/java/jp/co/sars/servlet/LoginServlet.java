@@ -84,7 +84,7 @@ public class LoginServlet extends HttpServlet {
 				return;
 			}
 
-			//セッション開始
+			//セッション開始(ここから追記)
 			HttpSession session = request.getSession(true);
 			session.setAttribute("userId", dto.getUserId());
 
@@ -94,11 +94,7 @@ public class LoginServlet extends HttpServlet {
 			String resultItemIdStr = (String) session.getAttribute("pendingItemId");
 			String resultAmountStr = (String) session.getAttribute("pendingAmount");
 
-			if (resultPath != null) {
-				session.removeAttribute("path");
-				session.removeAttribute("pendingItemId");
-				session.removeAttribute("pendingAmount");
-			}
+			//ここでサービスに渡して終わったらカート一覧を呼び出す
 			if ("/addCart".equals(resultPath)) {
 
 				int itemId = Integer.parseInt(resultItemIdStr);
@@ -110,14 +106,18 @@ public class LoginServlet extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/cart");
 				return;
 
+				//カート一覧を呼び出す
 			} else if ("/cart".equals(resultPath)) {
 				response.sendRedirect(request.getContextPath() + "/cart");
 				return;
 
+				//購入確認画面を呼び出す
 			} else if ("/purchaseConfirm".equals(resultPath)) {
 				response.sendRedirect(request.getContextPath() + "/purchaseConfirm");
 				return;
 			}
+
+			//メイン画面に遷移
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 
 			rd.forward(request, response);

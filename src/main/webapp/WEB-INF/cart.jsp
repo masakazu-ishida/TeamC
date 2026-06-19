@@ -11,6 +11,11 @@
 </head>
 <body>
 <h3>ショッピングカート内の商品一覧</h3><br/>
+
+<c:if test="${not empty errorMsg}">
+   <c:out value="${errorMsg}" /></p>
+</c:if>
+
 		<table>
 			<tr>
 				<th>商品名</th>
