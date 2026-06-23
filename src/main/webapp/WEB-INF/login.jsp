@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,12 +10,15 @@
  <link rel="stylesheet" href="<c:url value='/style.css' />">
 </head>
 <body>
-<h1>ログインしてください</h1>
+<h3>ログインしてください。</h3>
 <p>${message}</p>
 <form action="/TeamC/LoginServlet" method="post">
-<p>会員ID<input type="text" name="userId"></p>
-<p>パスワード<input type="password" name="password"></p>
-<input type="submit" value="ログイン">
+<table>
+
+<tr><th>会員ID</th><td><input type="text" name="userId"></td></tr>
+<tr><th>パスワード</th><td><input type="password" name="password"></td></tr>
+<tr><td colspan="2"><input type="submit" value="ログイン"></td></tr>
+</table>
 </form>
 </body>
 </html>
