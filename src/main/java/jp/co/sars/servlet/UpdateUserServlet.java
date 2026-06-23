@@ -33,11 +33,17 @@ public class UpdateUserServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String path = "/WEB-INF/updateUser.jsp";
 
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 
-		Object userId = session.getAttribute("userId");
+		//セッションがない場合不正アクセス
+		if (session == null) {
+			path = "/WEB-INF/error.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(path);
+			rd.forward(request, response);
 
-		request.setAttribute("userId", userId);
+			return;
+
+		}
 
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 

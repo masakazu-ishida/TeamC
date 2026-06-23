@@ -66,6 +66,12 @@ public class PurchaseCancelCommitServlet extends HttpServlet {
 		try {
 			PurchasesDTO purchase = service.execute(purchaseId);
 
+			if (purchase == null) {
+				path = "/WEB-INF/error.jsp";
+				RequestDispatcher rd = request.getRequestDispatcher(path);
+				rd.forward(request, response);
+			}
+
 			request.setAttribute("purchase", purchase);
 
 			RequestDispatcher rd = request.getRequestDispatcher(path);

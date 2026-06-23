@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>会員情報(仮)</title>
+<title>会員情報</title>
 </head>
 <body>
-<h2>会員情報（ダミーページ）</h2>
+<h2>会員情報</h2>
 <a href="/TeamC/PurchaseHistory">購入履歴へ</a>
 </body>
 </html>

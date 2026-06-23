@@ -23,12 +23,18 @@ public class PurchaseCancelConfirmService {
 			//注文IDで検索
 			list = dao.findByPurchaseId(purchaseId);
 
-			PurchasesDTO purchase = new PurchasesDTO();
-
 			//listの中身がnullでなければ、purchaseに入れる//
-
 			if (list != null && !list.isEmpty()) {
-				purchase = list.get(0);
+
+				//データを取り出す
+				PurchasesDTO purchase = list.get(0);
+
+				//すでにキャンセル(true)されていたら、nullを返す
+				if (purchase.isCancel() == true) {
+					return null;
+				}
+
+				//キャンセルがfalseなら、そのままデータを返す
 				return purchase;
 			}
 

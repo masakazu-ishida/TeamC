@@ -32,6 +32,11 @@ public class PurchaseCancelCommitService {
 			if (list != null && !list.isEmpty()) {
 				purchase = list.get(0);
 
+				//キャンセル済だったらNullを返す
+				if (purchase.isCancel()) {
+					return null;
+				}
+
 				//トランザクション開始
 				conn.setAutoCommit(false);
 				try {
