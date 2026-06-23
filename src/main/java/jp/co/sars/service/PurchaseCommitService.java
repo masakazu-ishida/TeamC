@@ -57,6 +57,7 @@ public class PurchaseCommitService {
 				List<PurchaseDetailsDTO> purchaseList = new ArrayList<>();
 
 				if (byUser == null || byUser.isEmpty()) {
+					conn.rollback();
 					throw new Exception();
 				}
 
@@ -70,6 +71,7 @@ public class PurchaseCommitService {
 					userPrice += (price * amount);
 
 					if (amount > currentStock) {
+						conn.rollback();
 						throw new ServletException();
 					}
 
