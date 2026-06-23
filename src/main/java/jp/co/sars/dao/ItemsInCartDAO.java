@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.sars.dto.ItemsDTO;
 import jp.co.sars.dto.ItemsInCartDTO;
 
+//テスト完了凍結版
 public class ItemsInCartDAO {
 	private Connection con;
 
