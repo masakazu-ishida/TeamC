@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>商品検索</title>
+   <link rel="stylesheet" href="<c:url value='/style.css' />">
 </head>
 <body>
 	<h3>商品の検索を行います</h3>

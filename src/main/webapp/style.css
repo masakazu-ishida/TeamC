@@ -1,23 +1,110 @@
 @charset "UTF-8";
 
-table{
-	text-align: center;
-	border-collapse: collapse;
-	border: 1px solid;
+/* 全体設定 */
+body {
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
 }
 
-th{
-	background-color: #afb4db;
-	border: 1px solid;
+h3 {
+    color: #4a4d5e;
+    border-left: 5px solid #afb4db;
+    padding-left: 10px;
+    margin-bottom: 20px;
 }
 
-td{
-	border: 1px solid;
+a {
+    color: #5a6296;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
 }
 
-.osusume{
-	color: red;
-	vertical-align: super;
-	font-size: 0.8em;
-	
+/* フォーム・入力欄のモダン化 */
+input[type="text"],
+input[type="password"],
+select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+/* ボタンのデザイン統一 */
+input[type="submit"] {
+    background-color: #afb4db;
+    color: #333;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+input[type="submit"]:hover {
+    background-color: #9499c2;
+}
+
+/* テーブル（検索結果・カート）のモダン化 */
+table {
+    width: 100%;
+    max-width: 900px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border: none; /* 外枠の黒線を消す */
+}
+
+th {
+    background-color: #afb4db;
+    color: #333;
+    padding: 12px;
+    font-weight: bold;
+    border: none;
+    border-bottom: 2px solid #9499c2;
+}
+
+td {
+    padding: 12px;
+    border: none;
+    border-bottom: 1px solid #e9ecef; /* 薄いグレーの横線のみにする */
+}
+
+/* テーブルの交互背景色（縞々） */
+table tr:nth-child(even) {
+    background-color: #fcfcff;
+}
+
+/* オススメバッジの強化 */
+.osusume {
+    display: inline-block;
+    background-color: #ffebec;
+    color: #e63946;
+    border: 1px solid #ffccd0;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.75em;
+    font-weight: bold;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/* カート合計エリア */
+.total-box {
+    max-width: 900px;
+    text-align: right;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 15px;
+    padding-right: 10px;
 }
