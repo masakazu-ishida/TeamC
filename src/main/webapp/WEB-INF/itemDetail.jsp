@@ -43,8 +43,6 @@
 	<input type="submit" value="ショッピングカートに入れる">
 	</form>
 	
-	<p>※ログインしてない状態では、ボタンのクリック後、<a href="">ログイン画面</a>に転送される</p>
-	
 	<a href="/TeamC/main">商品検索</a>へ
 	
 
