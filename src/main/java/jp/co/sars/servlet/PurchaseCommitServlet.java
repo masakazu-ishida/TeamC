@@ -89,6 +89,7 @@ public class PurchaseCommitServlet extends HttpServlet {
 			request.setAttribute("purchase", purchase);
 			request.setAttribute("userPrice", userPrice);
 			request.setAttribute("userId", userId);
+			request.setAttribute("par", par);
 			request.setAttribute("destination", purchaseList.get(0).getDestination());
 
 			request.getRequestDispatcher(path).forward(request, response);
